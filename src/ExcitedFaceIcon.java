@@ -2,6 +2,7 @@
  * @author Mark Channer
  */
 public class ExcitedFaceIcon implements FaceIcon {
+
     @Override
     public String showEmotion() {
         return null;
