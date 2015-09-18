@@ -21,4 +21,9 @@ public class SadFaceIcon implements FaceIcon {
     public int getGridPosition() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "Sad";
+    }
 }

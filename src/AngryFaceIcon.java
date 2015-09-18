@@ -22,4 +22,9 @@ public class AngryFaceIcon implements FaceIcon {
     public int getGridPosition() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "Angry";
+    }
 }
