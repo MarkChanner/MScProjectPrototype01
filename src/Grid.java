@@ -25,7 +25,6 @@ public class Grid {
         emoticons[3] = new ConfusedFaceIcon();
         emoticons[4] = new SadFaceIcon();
         emoticons[5] = new SadFaceIcon();
-
         e1 = -1;
         e2 = -1;
     }
@@ -43,7 +42,16 @@ public class Grid {
             e1 = emoticon;
         } else {
             e2 = emoticon;
+            makeE2HigherThanE1();
             compareFirstEmoticonWithSecond();
+        }
+    }
+
+    private void makeE2HigherThanE1() {
+        if (e1 > e2) {
+            int temp = e1;
+            e1 = e2;
+            e2 = temp;
         }
     }
 
