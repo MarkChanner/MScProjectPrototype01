@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Mark Channer
  *         The grid on which the game will take place
@@ -20,11 +23,12 @@ public class Grid {
 
     private void populateGrid() {
         emoticons[0] = new AngryFaceIcon();
-        emoticons[1] = new AngryFaceIcon();
+        emoticons[1] = new ConfusedFaceIcon();
         emoticons[2] = new SadFaceIcon();
         emoticons[3] = new ConfusedFaceIcon();
         emoticons[4] = new SadFaceIcon();
         emoticons[5] = new SadFaceIcon();
+
         e1 = -1;
         e2 = -1;
     }
@@ -89,8 +93,8 @@ public class Grid {
             emoticons[e1] = emoticons[e2];
             emoticons[e2] = temp;
             System.out.println("Post-swap: Emoticon1: " + emoticons[e1] + ", Emoticon2: " + emoticons[e2]);
+            calculateConsecutiveEmotions();
         }
-        calculateConsecutiveEmotions();
         displayGrid();
     }
 
@@ -99,6 +103,22 @@ public class Grid {
     }
 
     private void calculateConsecutiveEmotions() {
+        int counter = 1;
+        System.out.println("Consecutive from left: " + checkConsecutiveLeft(e1, counter));
+        System.out.println("Consecutive from right: " + checkConsecutiveRight(e2, counter));
+    }
 
+    private Integer checkConsecutiveLeft(int gridPointer, int result) {
+        if (gridPointer >= 1 && emoticons[gridPointer].showEmotion().equals(emoticons[gridPointer - 1].showEmotion())) {
+            return (1 + checkConsecutiveLeft(gridPointer - 1, result));
+        }
+        return result;
+    }
+
+    private Integer checkConsecutiveRight(int gridPointer, int result) {
+        if (gridPointer <= (GRID_SIZE - 2) && emoticons[gridPointer].showEmotion().equals(emoticons[gridPointer + 1].showEmotion())) {
+            return (1 + checkConsecutiveRight(gridPointer + 1, result));
+        }
+        return result;
     }
 }
