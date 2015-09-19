@@ -25,6 +25,6 @@ public class ConfusedFaceIcon implements FaceIcon {
 
     @Override
     public String toString() {
-        return "Confused";
+        return "C"; // for Confused
     }
 }

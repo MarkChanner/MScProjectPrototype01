@@ -24,6 +24,6 @@ public class SadFaceIcon implements FaceIcon {
 
     @Override
     public String toString() {
-        return "Sad";
+        return "S"; // for Sad
     }
 }

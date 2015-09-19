@@ -25,6 +25,6 @@ public class HappyFaceIcon implements FaceIcon {
 
     @Override
     public String toString() {
-        return "Happy";
+        return "H"; // for Happy
     }
 }

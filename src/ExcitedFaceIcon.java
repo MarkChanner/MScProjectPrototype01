@@ -25,6 +25,6 @@ public class ExcitedFaceIcon implements FaceIcon {
 
     @Override
     public String toString() {
-        return "Excited";
+        return "E"; // for Excited
     }
 }
