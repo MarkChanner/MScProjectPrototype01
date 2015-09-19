@@ -23,12 +23,11 @@ public class Grid {
 
     private void populateGrid() {
         emoticons[0] = new AngryFaceIcon();
-        emoticons[1] = new ConfusedFaceIcon();
-        emoticons[2] = new SadFaceIcon();
-        emoticons[3] = new ConfusedFaceIcon();
-        emoticons[4] = new SadFaceIcon();
-        emoticons[5] = new SadFaceIcon();
-
+        emoticons[1] = new AngryFaceIcon();
+        emoticons[2] = new AngryFaceIcon();
+        emoticons[3] = new AngryFaceIcon();
+        emoticons[4] = new ConfusedFaceIcon();
+        emoticons[5] = new AngryFaceIcon();
         e1 = -1;
         e2 = -1;
     }
@@ -104,8 +103,12 @@ public class Grid {
 
     private void calculateConsecutiveEmotions() {
         int counter = 1;
-        System.out.println("Consecutive from left: " + checkConsecutiveLeft(e1, counter));
-        System.out.println("Consecutive from right: " + checkConsecutiveRight(e2, counter));
+        Integer consecutiveLeft = checkConsecutiveLeft(e1, counter);
+        ConsecutiveEmoticonsWrapper emoticonsLeft = new ConsecutiveEmoticonsWrapper(emoticons[e1], consecutiveLeft);
+        System.out.println("Emotion: " + emoticonsLeft.getEmoticon() + " in a row: " + emoticonsLeft.getConsecutiveEmotions());
+        Integer consecutiveRight = checkConsecutiveRight(e2, counter);
+        ConsecutiveEmoticonsWrapper emoticonsRight = new ConsecutiveEmoticonsWrapper(emoticons[e2], consecutiveRight);
+        System.out.println("Emotion: " + emoticonsRight.getEmoticon() + " in a row: " + emoticonsRight.getConsecutiveEmotions());
     }
 
     private Integer checkConsecutiveLeft(int gridPointer, int result) {
