@@ -6,8 +6,8 @@ public class Grid {
 
     private FaceIcon[] emoticons; // This will just be a single array to start with
     private boolean firstEmoticonSelected;
-    private int emoticon1;
-    private int emoticon2;
+    private int e1;
+    private int e2;
     private static final int GRID_SIZE = 6;
 
 
@@ -26,8 +26,8 @@ public class Grid {
         emoticons[4] = new SadFaceIcon();
         emoticons[5] = new SadFaceIcon();
 
-        emoticon1 = -1;
-        emoticon2 = -1;
+        e1 = -1;
+        e2 = -1;
     }
 
     private void displayGrid() {
@@ -40,9 +40,9 @@ public class Grid {
         if (!firstEmoticonSelected) {
             System.out.println("First Emoticon Pressed");
             firstEmoticonSelected = true;
-            emoticon1 = emoticon;
+            e1 = emoticon;
         } else {
-            emoticon2 = emoticon;
+            e2 = emoticon;
             compareFirstEmoticonWithSecond();
         }
     }
@@ -57,39 +57,40 @@ public class Grid {
                 System.out.println("Selected emoticons are NOT adjacent");
             }
             firstEmoticonSelected = false;
-            emoticon1 = -1;
+            e1 = -1;
+            e2 = -1;
         } else {
             System.out.println("Same emoticon button pushed twice. (Try a different one)"); // Loop input within this method later
         }
     }
 
     private boolean sameEmoticonPressedTwice() {
-        return (emoticon1 == emoticon2);
+        return (e1 == e2);
     }
 
     private boolean selectedEmoticonsAreAdjacent() {
-        return ((emoticon1 + 1) == emoticon2 || (emoticon1 - 1) == emoticon2);
+        return ((e1 + 1) == e2 || (e1 - 1) == e2);
     }
 
     private void attemptToSwap() {
+        System.out.println("Pre-swap: Emoticon1: " + emoticons[e1] + ", Emoticon2: " + emoticons[e2]);
         if (bothDisplaySameEmotion()) {
             System.out.println("Both icons same emotion. No point in swapping");
         } else {
-            FaceIcon temp = emoticons[emoticon1];
-            emoticons[emoticon1] = emoticons[emoticon2];
-            emoticons[emoticon2] = temp;
-            System.out.println("Swapped");
+            FaceIcon temp = emoticons[e1];
+            emoticons[e1] = emoticons[e2];
+            emoticons[e2] = temp;
+            System.out.println("Post-swap: Emoticon1: " + emoticons[e1] + ", Emoticon2: " + emoticons[e2]);
         }
         calculateConsecutiveEmotions();
         displayGrid();
     }
 
-    private void calculateConsecutiveEmotions() {
-
+    private boolean bothDisplaySameEmotion() {
+        return (emoticons[e1].showEmotion().equals(emoticons[e2].showEmotion()));
     }
 
-    private boolean bothDisplaySameEmotion() {
-        System.out.println("Emoticon1: " + emoticons[emoticon1] + ", Emoticon2: " + emoticons[emoticon2]);
-        return (emoticons[emoticon1].showEmotion().equals(emoticons[emoticon2].showEmotion()));
+    private void calculateConsecutiveEmotions() {
+
     }
 }
