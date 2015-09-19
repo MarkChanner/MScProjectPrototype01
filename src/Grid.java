@@ -34,10 +34,6 @@ public class Grid {
         System.out.println();
     }
 
-    public String getEmoticon(FaceIcon emoticon) {
-        return emoticon.showEmotion();
-    }
-
     public void selectEmoticon(int emoticon) {
         if (!firstEmoticonSelected) {
             System.out.println("First Emoticon Pressed");
@@ -69,8 +65,7 @@ public class Grid {
     }
 
     private boolean selectedEmoticonsAreAdjacent(int selectedEmoticon) {
-        if ((emoticon1 + 1) == selectedEmoticon || (emoticon1 - 1) == selectedEmoticon) return true;
-        return false;
+        return ((emoticon1 + 1) == selectedEmoticon || (emoticon1 - 1) == selectedEmoticon);
     }
 
     public void attemptToSwap(int emoticon2) {
@@ -87,7 +82,6 @@ public class Grid {
 
     public boolean bothDisplaySameEmotion(int emoticon2) {
         System.out.println("Emoticon1: " + emoticons[emoticon1] + ", Emoticon2: " + emoticons[emoticon2]);
-        if (emoticons[emoticon1].showEmotion().equals(emoticons[emoticon2].showEmotion())) return true;
-        else return false;
+        return (emoticons[emoticon1].showEmotion().equals(emoticons[emoticon2].showEmotion()));
     }
 }
