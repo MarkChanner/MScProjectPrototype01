@@ -7,10 +7,11 @@ public class Grid {
     private FaceIcon[] emoticons; // This will just be a single array to start with
     private boolean firstEmoticonSelected;
     private int emoticon1;
+    private static final int GRID_SIZE = 6;
 
 
     public Grid() {
-        emoticons = new FaceIcon[6];
+        emoticons = new FaceIcon[GRID_SIZE];
         firstEmoticonSelected = false;
         populateGrid();
         displayGrid();
@@ -73,10 +74,20 @@ public class Grid {
     }
 
     public void attemptToSwap(int emoticon2) {
-        FaceIcon temp = emoticons[emoticon1];
-        emoticons[emoticon1] = emoticons[emoticon2];
-        emoticons[emoticon2] = temp;
-        System.out.println("Swapped");
+        if (bothDisplaySameEmotion(emoticon2)) {
+            System.out.println("Both icons same emotion. No point in swapping");
+        } else {
+            FaceIcon temp = emoticons[emoticon1];
+            emoticons[emoticon1] = emoticons[emoticon2];
+            emoticons[emoticon2] = temp;
+            System.out.println("Swapped");
+        }
         displayGrid();
+    }
+
+    public boolean bothDisplaySameEmotion(int emoticon2) {
+        System.out.println("Emoticon1: " + emoticons[emoticon1] + ", Emoticon2: " + emoticons[emoticon2]);
+        if (emoticons[emoticon1].showEmotion().equals(emoticons[emoticon2].showEmotion())) return true;
+        else return false;
     }
 }
