@@ -37,24 +37,29 @@ public class Grid {
         return emoticon.showEmotion();
     }
 
-    public void selectEmoticon(int selectedEmoticon) {
+    public void selectEmoticon(int emoticon) {
         if (!firstEmoticonSelected) {
             System.out.println("First Emoticon Pressed");
             firstEmoticonSelected = true;
-            emoticon1 = selectedEmoticon;
+            emoticon1 = emoticon;
         } else {
-            System.out.println("Second Emoticon Pressed");
-            if (!sameEmoticonPressedTwice(selectedEmoticon)) {
-                if (selectedEmoticonsAreAdjacent(selectedEmoticon)) {
-                    System.out.println("Selected emoticons are adjacent!");
-                } else {
-                    System.out.println("Selected emoticons are NOT adjacent");
-                }
-                firstEmoticonSelected = false;
-                emoticon1 = -1;
+            compareFirstEmoticonWithSecond(emoticon);
+        }
+    }
+
+    public void compareFirstEmoticonWithSecond(int emoticon2) {
+        System.out.println("Second Emoticon Pressed");
+        if (!sameEmoticonPressedTwice(emoticon2)) {
+            if (selectedEmoticonsAreAdjacent(emoticon2)) {
+                System.out.println("Selected emoticons are adjacent");
+                attemptToSwap(emoticon2);
             } else {
-                System.out.println("Same emoticon button pushed twice. (Try a different one)"); // Loop input within this method later
+                System.out.println("Selected emoticons are NOT adjacent");
             }
+            firstEmoticonSelected = false;
+            emoticon1 = -1;
+        } else {
+            System.out.println("Same emoticon button pushed twice. (Try a different one)"); // Loop input within this method later
         }
     }
 
@@ -67,7 +72,11 @@ public class Grid {
         return false;
     }
 
-    public void swapIcons(int a, int b) {
-
+    public void attemptToSwap(int emoticon2) {
+        FaceIcon temp = emoticons[emoticon1];
+        emoticons[emoticon1] = emoticons[emoticon2];
+        emoticons[emoticon2] = temp;
+        System.out.println("Swapped");
+        displayGrid();
     }
 }
