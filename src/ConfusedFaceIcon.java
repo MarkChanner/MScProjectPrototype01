@@ -4,9 +4,7 @@
 public class ConfusedFaceIcon implements FaceIcon {
 
     @Override
-    public String showEmotion() {
-        return null;
-    }
+    public String showEmotion() { return "C"; }
 
     @Override
     public boolean iconPressed() {

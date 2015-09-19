@@ -5,7 +5,7 @@ public class HappyFaceIcon implements FaceIcon {
 
     @Override
     public String showEmotion() {
-        return null;
+        return "H";
     }
 
     @Override

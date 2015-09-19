@@ -4,7 +4,7 @@
 public class SadFaceIcon implements FaceIcon {
     @Override
     public String showEmotion() {
-        return null;
+        return "S";
     }
 
     @Override
