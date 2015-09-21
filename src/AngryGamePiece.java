@@ -1,15 +1,10 @@
 /**
  * @author Mark Channer
  */
-public class AngryGamePiece implements GamePiece {
-
-    private String face;
+public class AngryGamePiece extends AbstractGamePiece {
 
     public AngryGamePiece(String face) {
-        this.face = face;
+        super(face);
     }
 
-    public String showFace() {
-        return face;
-    }
 }

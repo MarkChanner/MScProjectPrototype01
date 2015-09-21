@@ -1,15 +1,10 @@
 /**
  * @author Mark Channer
  */
-public class HappyGamePiece implements GamePiece {
-
-    private String face;
+public class HappyGamePiece extends AbstractGamePiece {
 
     public HappyGamePiece(String face) {
-        this.face = face;
+        super(face);
     }
 
-    public String showFace() {
-        return face;
-    }
 }

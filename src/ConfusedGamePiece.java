@@ -1,15 +1,10 @@
 /**
  * @author Mark Channer
  */
-public class ConfusedGamePiece implements GamePiece {
-
-    private String face;
+public class ConfusedGamePiece extends AbstractGamePiece {
 
     public ConfusedGamePiece(String face) {
-        this.face = face;
+        super(face);
     }
 
-    public String showFace() {
-        return face;
-    }
 }

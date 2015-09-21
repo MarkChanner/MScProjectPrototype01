@@ -1,15 +1,10 @@
 /**
  * @author Mark Channer
  */
-public class ExcitedGamePiece implements GamePiece {
+public class ExcitedGamePiece extends AbstractGamePiece {
 
-    private String face;
-    
     public ExcitedGamePiece(String face) {
-        this.face = face;
+        super(face);
     }
 
-    public String showFace() {
-        return face;
-    }
 }
