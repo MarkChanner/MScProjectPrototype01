@@ -1,12 +1,9 @@
 /**
  * @author Mark Channer
- * FaceIcon to be implemented by a variety of Emotions
- * to fill the grid with
+ * GamePiece to become part of a Grid Tile
  */
-public interface FaceIcon {
+public interface GamePiece {
 
-    String showEmotion();
-
-    int[] getGridPosition();
+    String showFace();
 
 }
