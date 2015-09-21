@@ -5,7 +5,7 @@
  */
 public interface Tile {
 
-    GamePiece getFace();
+    String getFace();
 
     void setFace(GamePiece gp);
 
