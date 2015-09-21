@@ -7,10 +7,6 @@ public interface FaceIcon {
 
     String showEmotion();
 
-    boolean iconPressed();
-
-    void setGridPosition();
-
-    int getGridPosition();
+    int[] getGridPosition();
 
 }
