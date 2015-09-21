@@ -11,4 +11,6 @@ public interface Tile {
 
     void setFace(GamePiece gp);
 
+    String getEmotion();
+
 }

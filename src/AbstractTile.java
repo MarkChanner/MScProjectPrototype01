@@ -33,4 +33,9 @@ public abstract class AbstractTile implements Tile {
     public void setFace(GamePiece gp) {
         this.emoticon = gp;
     }
+
+    @Override
+    public String getEmotion() {
+        return emoticon.revealEmotion();
+    }
 }
