@@ -9,8 +9,7 @@ public abstract class AbstractGamePiece implements GamePiece {
         this.face = face;
     }
 
-    @Override
-    public String toString() {
+    public String revealEmotion() {
         return face;
     }
 }
