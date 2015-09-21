@@ -5,106 +5,99 @@
  */
 public class Grid {
 
-    private FaceIcon[][] emoticons; // This will just be a single array to start with
-    private boolean firstEmoticonSelected;
+    private static final int COL = 0;
+    private static final int ROW = 1;
+    private Tile[][] tiles;
+    private final int cols;
+    private final int rows;
+    private boolean firstTileSelected;
     private int[] e1 = new int[2];
     private int[] e2 = new int[2];
 
-    private static final int GRID_SIZE = 7;
-    private static final int COL = 0;
-    private static final int ROW = 1;
-    private static final int MAX_ROW = GRID_SIZE;
-    private static final int MAX_COL = GRID_SIZE;
-
-    public Grid() {
-        emoticons = new FaceIcon[MAX_ROW][MAX_COL];
-        firstEmoticonSelected = false;
+    public Grid(int size) {
+        this.cols = size;
+        this.rows = size;
+        this.tiles = new TileImpl[cols][rows];
+        this.firstTileSelected = false;
     }
 
     public void populateGrid() {
-        for (int i = 0; i < MAX_ROW; i++) {
-            for (int j = 0; j < MAX_COL; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 if (i % 2 == 0) {
                     if (j == 0) {
-                        emoticons[i][j] = new AngryFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new AngryGamePiece("A"));
                     } else if (j == 1) {
-                        emoticons[i][j] = new ConfusedFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new ConfusedGamePiece("C"));
                     } else if (j == 2) {
-                        emoticons[i][j] = new HappyFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
                     } else if (j == 3) {
-                        emoticons[i][j] = new ExcitedFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new ExcitedGamePiece("E"));
                     } else if (j == 4) {
-                        emoticons[i][j] = new AngryFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new AngryGamePiece("A"));
                     } else if (j == 5) {
-                        emoticons[i][j] = new HappyFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
                     } else {
-                        emoticons[i][j] = new SadFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new SadGamePiece("S"));
                     }
                 } else {
                     if (j == 6) {
-                        emoticons[i][j] = new AngryFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new AngryGamePiece("A"));
                     } else if (j == 5) {
-                        emoticons[i][j] = new ConfusedFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new ConfusedGamePiece("C"));
                     } else if (j == 4) {
-                        emoticons[i][j] = new HappyFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
                     } else if (j == 3) {
-                        emoticons[i][j] = new SadFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new SadGamePiece("S"));
                     } else if (j == 2) {
-                        emoticons[i][j] = new ExcitedFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new ExcitedGamePiece("E"));
                     } else if (j == 4) {
-                        emoticons[i][j] = new ExcitedFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new ExcitedGamePiece("E"));
                     } else {
-                        emoticons[i][j] = new HappyFaceIcon();
+                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
                     }
                 }
             }
         }
-        emoticons[3][0] = new HappyFaceIcon();
-        emoticons[3][1] = new AngryFaceIcon();
-        emoticons[3][2] = new AngryFaceIcon();
-        emoticons[3][3] = new SadFaceIcon();
-        emoticons[3][4] = new AngryFaceIcon();
-        emoticons[3][5] = new SadFaceIcon();
-        emoticons[3][6] = new SadFaceIcon();
-        emoticons[4][6] = new ConfusedFaceIcon();
-        emoticons[1][4] = new SadFaceIcon();
-        emoticons[2][4] = new SadFaceIcon();
-        emoticons[4][4] = new SadFaceIcon();
-        emoticons[5][4] = new SadFaceIcon();
-        emoticons[1][3] = new AngryFaceIcon();
-        emoticons[2][3] = new AngryFaceIcon();
-        emoticons[4][3] = new AngryFaceIcon();
-        emoticons[5][3] = new AngryFaceIcon();
+        tiles[3][0] = new TileImpl(3, 0, new HappyGamePiece("H"));
+        tiles[3][1] = new TileImpl(3, 1, new AngryGamePiece("A"));
+        tiles[3][2] = new TileImpl(3, 2, new AngryGamePiece("A"));
+        tiles[3][3] = new TileImpl(3, 3, new SadGamePiece("S"));
+        tiles[3][4] = new TileImpl(3, 4, new AngryGamePiece("A"));
+        tiles[3][5] = new TileImpl(3, 5, new SadGamePiece("S"));
+        tiles[3][6] = new TileImpl(3, 6, new SadGamePiece("S"));
+        tiles[4][6] = new TileImpl(4, 6, new ConfusedGamePiece("C"));
+        tiles[1][4] = new TileImpl(1, 4, new SadGamePiece("S"));
+        tiles[2][4] = new TileImpl(2, 4, new SadGamePiece("S"));
+        tiles[4][4] = new TileImpl(4, 4, new SadGamePiece("S"));
+        tiles[5][4] = new TileImpl(5, 4, new SadGamePiece("S"));
+        tiles[1][3] = new TileImpl(1, 3, new AngryGamePiece("A"));
+        tiles[2][3] = new TileImpl(2, 3, new AngryGamePiece("A"));
+        tiles[4][3] = new TileImpl(4, 3, new AngryGamePiece("A"));
+        tiles[5][3] = new TileImpl(5, 3, new AngryGamePiece("A"));
 
-        e1[0] = -1;
-        e1[1] = -1;
-        e2[0] = -5;
-        e2[1] = -5;
+        resetBothButtons();
     }
-
-    /*public void exchangeEmoticon(int col, int row, FaceIcon newEmoticon) {
-        emoticons[col][row] = newEmoticon;
-    }*/
 
     public void displayGrid() {
         System.out.println();
-        for (int i = 0; i < MAX_ROW; i++) {
+        for (int i = 0; i < rows; i++) {
             System.out.print("  " + i + " ");
             System.out.print("| ");
-            for (int j = 0; j < MAX_COL; j++) {
-                System.out.print(emoticons[i][j] + " | ");
+            for (int j = 0; j < cols; j++) {
+                System.out.print(tiles[i][j].getFace() + " | ");
             }
             System.out.println();
         }
         System.out.print("      ");
-        for (int k = 0; k < MAX_ROW; k++) System.out.print(k + "   ");
+        for (int k = 0; k < rows; k++) System.out.print(k + "   ");
         System.out.println();
     }
 
     public void selectEmoticon(int newCol, int newRow) {
-        if (!firstEmoticonSelected) {
+        if (!firstTileSelected) {
             System.out.println("Button1: (" + newCol + "," + newRow + ")");
-            firstEmoticonSelected = true;
+            firstTileSelected = true;
             e1[COL] = newCol;
             e1[ROW] = newRow;
         } else {
@@ -129,7 +122,7 @@ public class Grid {
             }
         } else {
             System.out.println("Same button pushed twice. Resetting.");
-            firstEmoticonSelected = false;
+            firstTileSelected = false;
             resetBothButtons();
         }
     }
@@ -154,7 +147,7 @@ public class Grid {
     }
 
     private void resetBothButtons() {
-        firstEmoticonSelected = false;
+        firstTileSelected = false;
         e1[COL] = -1;
         e1[ROW] = -1;
         e2[COL] = -5;
@@ -162,22 +155,21 @@ public class Grid {
     }
 
     private void attemptToSwap() {
-        System.out.println("Pre: First button: " + emoticons[e1[COL]][e1[ROW]] + ", Second button: " + emoticons[e2[COL]][e2[ROW]]);
+        System.out.println("Pre: First button: " + tiles[e1[COL]][e1[ROW]].getFace() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getFace());
         if (bothDisplaySameEmotion()) {
             System.out.println("Both icons same emotion. No point in swapping");
         } else {
-            FaceIcon temp = emoticons[e1[COL]][e1[ROW]];
-            emoticons[e1[COL]][e1[ROW]] = emoticons[e2[COL]][e2[ROW]];
-            emoticons[e2[COL]][e2[ROW]] = temp;
-            System.out.println("Post: First button: " + emoticons[e1[COL]][e1[ROW]] + ", Second button: " + emoticons[e2[COL]][e2[ROW]]);
+            GamePiece temp = tiles[e1[COL]][e1[ROW]].getFace();
+            tiles[e1[COL]][e1[ROW]].setFace(tiles[e2[COL]][e2[ROW]].getFace());
+            tiles[e2[COL]][e2[ROW]].setFace(temp);
+            System.out.println("Post: First button: " + tiles[e1[COL]][e1[ROW]].getFace() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getFace());
             //calculateConsecutiveEmotions();
         }
         displayGrid();
     }
 
     private boolean bothDisplaySameEmotion() {
-        if ((emoticons[e1[COL]][e1[ROW]].showEmotion().equals(emoticons[e2[COL]][e2[ROW]].showEmotion()))) return true;
-        else return false;
+        return ((tiles[e1[COL]][e1[ROW]].getFace().equals(tiles[e2[COL]][e2[ROW]].getFace())));
     }
 
     /*private void calculateConsecutiveEmotions() {
