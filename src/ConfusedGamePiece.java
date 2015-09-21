@@ -1,9 +1,15 @@
 /**
  * @author Mark Channer
  */
-public class ConfusedFaceIcon extends AbstractFaceIcon {
+public class ConfusedGamePiece implements GamePiece {
 
-    public ConfusedFaceIcon(String emotion, int col, int row) {
-        super(emotion, col, row);
+    private String face;
+
+    public ConfusedGamePiece(String face) {
+        this.face = face;
+    }
+
+    public String showFace() {
+        return face;
     }
 }

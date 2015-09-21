@@ -1,9 +1,15 @@
 /**
  * @author Mark Channer
  */
-public class AngryFaceIcon extends AbstractFaceIcon {
+public class AngryGamePiece implements GamePiece {
 
-    public AngryFaceIcon(String emotion, int col, int row) {
-        super (emotion, col, row);
+    private String face;
+
+    public AngryGamePiece(String face) {
+        this.face = face;
+    }
+
+    public String showFace() {
+        return face;
     }
 }
