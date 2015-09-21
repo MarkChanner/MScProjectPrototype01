@@ -1,13 +1,13 @@
 /**
  * @author Mark Channer
- *         <p>
- *         Tile represents each square on the grid
+ *
+ * Tile represents each square on the grid
  */
 public interface Tile {
 
     int[] getCoordinates();
 
-    String getFace();
+    GamePiece getFace();
 
     void setFace(GamePiece gp);
 

@@ -25,7 +25,7 @@ public abstract class AbstractTile implements Tile {
     }
 
     @Override
-    public String getFace() {
+    public GamePiece getFace() {
         return emoticon.showFace();
     }
 
