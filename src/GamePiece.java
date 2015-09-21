@@ -4,8 +4,8 @@
  */
 public interface GamePiece {
 
-    GamePiece showFace();
-
     String revealEmotion();
+
+    GamePiece showFace();
 
 }
