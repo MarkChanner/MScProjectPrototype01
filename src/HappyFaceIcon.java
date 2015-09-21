@@ -1,30 +1,10 @@
 /**
  * @author Mark Channer
  */
-public class HappyFaceIcon implements FaceIcon {
+public class HappyFaceIcon extends AbstractFaceIcon {
 
-    @Override
-    public String showEmotion() {
-        return "H";
+    public HappyFaceIcon(String emotion, int col, int row) {
+        super (emotion, col, row);
     }
 
-    @Override
-    public boolean iconPressed() {
-        return false;
-    }
-
-    @Override
-    public void setGridPosition() {
-
-    }
-
-    @Override
-    public int getGridPosition() {
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        return "H"; // for Happy
-    }
 }

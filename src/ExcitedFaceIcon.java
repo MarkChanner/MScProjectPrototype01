@@ -1,30 +1,9 @@
 /**
  * @author Mark Channer
  */
-public class ExcitedFaceIcon implements FaceIcon {
-
-    @Override
-    public String showEmotion() {
-        return "E";
-    }
-
-    @Override
-    public boolean iconPressed() {
-        return false;
-    }
-
-    @Override
-    public void setGridPosition() {
-
-    }
-
-    @Override
-    public int getGridPosition() {
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        return "E"; // for Excited
+public class ExcitedFaceIcon extends AbstractFaceIcon {
+    
+    public ExcitedFaceIcon(String emotion, int col, int row) {
+        super (emotion, col, row);
     }
 }

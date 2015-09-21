@@ -1,28 +1,9 @@
 /**
  * @author Mark Channer
  */
-public class ConfusedFaceIcon implements FaceIcon {
+public class ConfusedFaceIcon extends AbstractFaceIcon {
 
-    @Override
-    public String showEmotion() { return "C"; }
-
-    @Override
-    public boolean iconPressed() {
-        return false;
-    }
-
-    @Override
-    public void setGridPosition() {
-
-    }
-
-    @Override
-    public int getGridPosition() {
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        return "C"; // for Confused
+    public ConfusedFaceIcon(String emotion, int col, int row) {
+        super(emotion, col, row);
     }
 }

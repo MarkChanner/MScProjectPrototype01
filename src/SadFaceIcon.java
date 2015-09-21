@@ -1,29 +1,9 @@
 /**
  * @author Mark Channer
  */
-public class SadFaceIcon implements FaceIcon {
-    @Override
-    public String showEmotion() {
-        return "S";
-    }
+public class SadFaceIcon extends AbstractFaceIcon {
 
-    @Override
-    public boolean iconPressed() {
-        return false;
-    }
-
-    @Override
-    public void setGridPosition() {
-
-    }
-
-    @Override
-    public int getGridPosition() {
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        return "S"; // for Sad
+    public SadFaceIcon(String emotion, int col, int row) {
+        super(emotion, col, row);
     }
 }
