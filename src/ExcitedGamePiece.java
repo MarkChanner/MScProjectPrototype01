@@ -7,4 +7,9 @@ public class ExcitedGamePiece extends AbstractGamePiece {
         super(face);
     }
 
+    @Override
+    public GamePiece showFace() {
+        return this;
+    }
+
 }

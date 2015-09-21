@@ -10,12 +10,7 @@ public abstract class AbstractGamePiece implements GamePiece {
     }
 
     @Override
-    public String showFace() {
-        return this.face;
-    }
-
-    @Override
     public String toString() {
-        return showFace();
+        return face;
     }
 }

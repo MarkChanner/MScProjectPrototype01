@@ -7,4 +7,8 @@ public class ConfusedGamePiece extends AbstractGamePiece {
         super(face);
     }
 
+    @Override
+    public GamePiece showFace() {
+        return this;
+    }
 }

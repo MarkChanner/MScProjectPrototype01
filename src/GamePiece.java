@@ -4,6 +4,6 @@
  */
 public interface GamePiece {
 
-    String showFace();
+    GamePiece showFace();
 
 }

@@ -7,4 +7,9 @@ public class HappyGamePiece extends AbstractGamePiece {
         super(face);
     }
 
+    @Override
+    public GamePiece showFace() {
+        return this;
+    }
+
 }
