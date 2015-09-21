@@ -1,9 +1,11 @@
 /**
  * @author Mark Channer
- *
- * Tile represents each square on the grid
+ *         <p>
+ *         Tile represents each square on the grid
  */
 public interface Tile {
+
+    int[] getCoordinates();
 
     String getFace();
 
