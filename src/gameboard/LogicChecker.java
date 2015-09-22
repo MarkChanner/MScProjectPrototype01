@@ -7,5 +7,7 @@ import java.util.List;
  */
 public interface LogicChecker {
 
-    List<Tile> check(Board b);
+    List<Tile> checkRows();
+
+    List<Tile> checkColumns();
 }

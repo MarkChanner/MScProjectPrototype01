@@ -12,20 +12,20 @@ public class BoardImpl implements Board {
 
     private static final int ROW = 1;
     private static final int COL = 0;
+    private final int rows;
+    private final int columns;
+    private boolean firstTileSelected;
     private Tile[][] tiles;
     private LogicChecker checker;
-    private final int columns;
-    private final int rows;
-    private boolean firstTileSelected;
     private int[] t1 = new int[2];
     private int[] t2 = new int[2];
 
     public BoardImpl(int size) {
         rows = size;
         columns = size;
-        tiles = new TileImpl[rows][columns];
-        checker = new LogicCheckerImpl();
         firstTileSelected = false;
+        tiles = new TileImpl[rows][columns];
+        checker = new LogicCheckerImpl(this);
     }
 
     public void populateBoard() {
@@ -121,27 +121,40 @@ public class BoardImpl implements Board {
     }
 
     public void swap() {
-        System.out.println("Pre: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() + ", Second tile: " + tiles[t2[ROW]][t2[COL]].getPieceType());
+        System.out.println("Pre: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() + ", Second tile: " +
+                tiles[t2[ROW]][t2[COL]].getPieceType());
         if (matchingTypes()) {
             System.out.println("Both tiles contains same game piece type. Abandoning swap");
         } else {
             GamePiece tempPiece = tiles[t1[ROW]][t1[COL]].getGamePiece();
             tiles[t1[ROW]][t1[COL]].setGamePiece(tiles[t2[ROW]][t2[COL]].getGamePiece());
             tiles[t2[ROW]][t2[COL]].setGamePiece(tempPiece);
-            System.out.println("Post: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() + ", Second tile: " + tiles[t2[ROW]][t2[COL]].getPieceType());
-            //calculateConsecutiveEmotions();
-            List<Tile> matchingTiles = checker.check(this);
-            System.out.println("Received List<Tile> back");
-            for (Tile t : matchingTiles) {
-                System.out.print("Piece type: " + t.getPieceType() + " ");
-                //int[] c = t.getCoordinates();
-                System.out.println("Tile Coordinates " + t.getCoordinates()[0] + "," + t.getCoordinates()[1]);
-            }
+            System.out.println("Post: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() +
+                    ", Second tile: " + tiles[t2[ROW]][t2[COL]].getPieceType());
+            checkForMatches();
         }
-        displayBoard();
     }
 
     public boolean matchingTypes() {
         return ((tiles[t1[ROW]][t1[COL]].getGamePiece().equals(tiles[t2[ROW]][t2[COL]].getGamePiece())));
+    }
+
+    public void checkForMatches() {
+        List<Tile> matchingRows = checker.checkRows();
+        List<Tile> matchingColumns = checker.checkColumns();
+
+        System.out.println("Printing rows found");
+        testPrint(matchingRows);
+        System.out.println("Printing columns found");
+        testPrint(matchingColumns);
+
+        displayBoard();
+    }
+
+    public void testPrint(List<Tile> matching) {
+        for (Tile t1 : matching) {
+            System.out.print(t1.getPieceType() + "(" + t1.getCoordinates()[0] + "," + t1.getCoordinates()[1] + "), ");
+        }
+        System.out.println();
     }
 }

@@ -29,4 +29,6 @@ public interface Board {
     void swap();
 
     boolean matchingTypes();
+
+    void checkForMatches();
 }
