@@ -1,7 +1,6 @@
 package gameboard;
 
 import gamepieces.GamePiece;
-
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class BoardImpl implements Board {
     private LogicChecker checker;
     private final int cols;
     private final int rows;
-    private boolean firstEmoticonSelected;
+    private boolean firstTileSelected;
     private int[] e1 = new int[2];
     private int[] e2 = new int[2];
 
@@ -25,7 +24,7 @@ public class BoardImpl implements Board {
         this.rows = size;
         this.tiles = new TileImpl[cols][rows];
         this.checker = new LogicCheckerImpl();
-        this.firstEmoticonSelected = false;
+        this.firstTileSelected = false;
     }
 
     public void populateBoard() {
@@ -61,13 +60,13 @@ public class BoardImpl implements Board {
     }
 
     public void selectTile(int newCol, int newRow) {
-        if (!firstEmoticonSelected) {
-            System.out.println("Button1: (" + newCol + "," + newRow + ")");
-            firstEmoticonSelected = true;
+        if (!firstTileSelected) {
+            System.out.println("Tile 1: (" + newCol + "," + newRow + ")");
+            firstTileSelected = true;
             e1[COL] = newCol;
             e1[ROW] = newRow;
         } else {
-            System.out.println("Button2: (" + newCol + "," + newRow + ")");
+            System.out.println("Tile 2: (" + newCol + "," + newRow + ")");
             e2[COL] = newCol;
             e2[ROW] = newRow;
             compareTiles();
@@ -77,18 +76,18 @@ public class BoardImpl implements Board {
     public void compareTiles() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
-                System.out.println("Selected buttons are valid to attempt swap");
+                System.out.println("Selected tiles are valid to attempt swap");
                 swap();
             } else {
-                System.out.println("Selected buttons are NOT adjacent. Last button pressed now first button pressed");
+                System.out.println("Selected tiles are NOT adjacent. Last tile selected now first selected tile");
                 e1[COL] = e2[COL];
                 e1[ROW] = e2[ROW];
                 e2[COL] = -5;
                 e2[ROW] = -5;
             }
         } else {
-            System.out.println("Same button pushed twice. Resetting.");
-            firstEmoticonSelected = false;
+            System.out.println("Same tile selected twice. Resetting.");
+            firstTileSelected = false;
             resetBothTiles();
         }
     }
@@ -113,7 +112,7 @@ public class BoardImpl implements Board {
     }
 
     public void resetBothTiles() {
-        firstEmoticonSelected = false;
+        firstTileSelected = false;
         e1[COL] = -1;
         e1[ROW] = -1;
         e2[COL] = -5;
@@ -121,23 +120,22 @@ public class BoardImpl implements Board {
     }
 
     public void swap() {
-        System.out.println("Pre: First button: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getPieceType());
+        System.out.println("Pre: First tile: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second tile: " + tiles[e2[COL]][e2[ROW]].getPieceType());
         if (matchingTypes()) {
-            System.out.println("Both icons same emotion. No point in swapping");
+            System.out.println("Both tiles contains same game piece type. Abandoning swap");
         } else {
             GamePiece temp = tiles[e1[COL]][e1[ROW]].getGamePiece();
             tiles[e1[COL]][e1[ROW]].setGamePiece(tiles[e2[COL]][e2[ROW]].getGamePiece());
             tiles[e2[COL]][e2[ROW]].setGamePiece(temp);
-            System.out.println("Post: First button: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getPieceType());
+            System.out.println("Post: First tile: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second tile: " + tiles[e2[COL]][e2[ROW]].getPieceType());
             //calculateConsecutiveEmotions();
             List<Tile> matchingTiles = checker.check(this);
             System.out.println("Received List<Tile> back");
             for (Tile t : matchingTiles) {
-                System.out.print("Emotion: " + t.getPieceType() + " ");
+                System.out.print("Piece type: " + t.getPieceType() + " ");
                 //int[] c = t.getCoordinates();
-                System.out.println("Coordinates " + t.getCoordinates()[0] + "," + t.getCoordinates()[1]);
+                System.out.println("Tile Coordinates " + t.getCoordinates()[0] + "," + t.getCoordinates()[1]);
             }
-
         }
         displayBoard();
     }
