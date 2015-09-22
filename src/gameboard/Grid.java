@@ -1,3 +1,9 @@
+package gameboard;
+
+import gamepieces.GamePiece;
+import gamelogic.LogicChecker;
+import gamelogic.LogicCheckerImpl;
+
 import java.util.List;
 
 /**
@@ -127,7 +133,7 @@ public class Grid {
             System.out.println("Post: First button: " + tiles[e1[COL]][e1[ROW]].getEmotion() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getEmotion());
             //calculateConsecutiveEmotions();
             List<Tile> matchingTiles = checker.check(this);
-            System.out.println("Received List<Tile> back");
+            System.out.println("Received List<gameboard.Tile> back");
             for (Tile t : matchingTiles) {
                 System.out.print("Emotion: " + t.getEmotion() + " ");
                 //int[] c = t.getCoordinates();

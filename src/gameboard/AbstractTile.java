@@ -1,7 +1,11 @@
+package gameboard;
+
+import gamepieces.GamePiece;
+
 /**
  * @author Mark Channer
  *
- * AbstractTile holds a reference to a GamePiece, which
+ * gameboard.AbstractTile holds a reference to a gamepieces.GamePiece, which
  * it can call methods on
  */
 public abstract class AbstractTile implements Tile {

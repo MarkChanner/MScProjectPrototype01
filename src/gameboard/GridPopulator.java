@@ -1,6 +1,10 @@
+package gameboard;
+
+import gamepieces.*;
+
 /**
  * @author Mark Channer
- *         Populates the Grid
+ *         Populates the gameboard.Grid
  */
 public class GridPopulator {
 

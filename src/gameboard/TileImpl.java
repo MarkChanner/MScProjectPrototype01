@@ -1,6 +1,10 @@
+package gameboard;
+
+import gamepieces.GamePiece;
+
 /**
  * @author Mark Channer
- * TileImpl extends AbstractTile
+ * gameboard.TileImpl extends gameboard.AbstractTile
  */
 public class TileImpl extends AbstractTile {
 

@@ -1,7 +1,11 @@
+package gameboard;
+
+import gamepieces.GamePiece;
+
 /**
  * @author Mark Channer
  *
- * Tile represents each square on the grid
+ * gameboard.Tile represents each square on the grid
  */
 public interface Tile {
 
