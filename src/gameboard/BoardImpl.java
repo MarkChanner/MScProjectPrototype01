@@ -86,7 +86,7 @@ public class BoardImpl implements Board {
                 e2[ROW] = -5;
             }
         } else {
-            System.out.println("Same tile selected twice. Resetting.");
+            System.out.println("Same tile was selected twice. Resetting.");
             firstTileSelected = false;
             resetBothTiles();
         }
