@@ -1,15 +1,15 @@
-import gameboard.Grid;
+import gameboard.Board;
 
 /**
  * @author Mark Channer
  */
 public class Game {
 
-    private Grid grid01;
+    private Board grid01;
     public static final int SIZE = 7;
 
     public Game() {
-        this.grid01 = new Grid(SIZE);
+        this.grid01 = new Board(SIZE);
     }
 
     public static void main(String[] args) {
@@ -19,8 +19,8 @@ public class Game {
 
     public void start() {
         System.out.println();
-        grid01.populateGrid();
-        grid01.displayGrid();
+        grid01.populateBoard();
+        grid01.displayBoard();
         System.out.println();
         grid01.selectEmoticon(6,0);
         grid01.selectEmoticon(6,0);

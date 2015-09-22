@@ -4,11 +4,11 @@ import gamepieces.*;
 
 /**
  * @author Mark Channer
- *         Populates the gameboard.Grid
+ * Populates the gameboard.
  */
-public class GridPopulator {
+public class BoardPopulator {
 
-    public GridPopulator(Tile[][] tiles, int cols, int rows) {
+    public BoardPopulator(Tile[][] tiles, int cols, int rows) {
         populate(tiles, cols, rows);
     }
 

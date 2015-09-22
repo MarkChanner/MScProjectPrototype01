@@ -8,15 +8,15 @@ import java.util.List;
  */
 public class LogicCheckerImpl implements LogicChecker {
 
-    private Grid grid;
+    private Board board;
 
     /**
      * Not yet finished. Doesn't work for horizontal
      */
-    public List<Tile> check(Grid grid) {
-        int rows = grid.getRows();
-        int cols = grid.getCols();
-        Tile[][] tiles = grid.getAllTiles();
+    public List<Tile> check(Board board) {
+        int rows = board.getRows();
+        int cols = board.getCols();
+        Tile[][] tiles = board.getAllTiles();
         List<Tile> matchingRows = getMatches(tiles, rows, cols);
         List<Tile> matchingCols = getMatches(tiles, cols, rows);
         List<Tile> mergedList = new ArrayList<>();

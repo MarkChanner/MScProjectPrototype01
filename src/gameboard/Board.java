@@ -6,9 +6,9 @@ import java.util.List;
 
 /**
  * @author Mark Channer
- *         The grid on which the game will take place
+ *         The board on which the game will take place
  */
-public class Grid {
+public class Board {
 
     private static final int COL = 0;
     private static final int ROW = 1;
@@ -20,7 +20,7 @@ public class Grid {
     private int[] e1 = new int[2];
     private int[] e2 = new int[2];
 
-    public Grid(int size) {
+    public Board(int size) {
         this.cols = size;
         this.rows = size;
         this.tiles = new TileImpl[cols][rows];
@@ -28,8 +28,8 @@ public class Grid {
         this.firstTileSelected = false;
     }
 
-    public void populateGrid() {
-        new GridPopulator(tiles, cols, rows);
+    public void populateBoard() {
+        new BoardPopulator(tiles, cols, rows);
         resetBothButtons();
     }
 
@@ -45,7 +45,7 @@ public class Grid {
         return rows;
     }
 
-    public void displayGrid() {
+    public void displayBoard() {
         System.out.println();
         for (int i = 0; i < rows; i++) {
             System.out.print("  " + i + " ");
@@ -139,34 +139,10 @@ public class Grid {
             }
 
         }
-        displayGrid();
+        displayBoard();
     }
 
     private boolean bothDisplaySameEmotion() {
         return ((tiles[e1[COL]][e1[ROW]].getFace().equals(tiles[e2[COL]][e2[ROW]].getFace())));
     }
-
-    /*private void calculateConsecutiveEmotions() {
-        int counter = 1;
-        Integer consecutiveLeft = checkConsecutiveLeft(e1, counter);
-        ConsecutiveEmoticonsWrapper emoticonsLeft = new ConsecutiveEmoticonsWrapper(emoticons[e1], consecutiveLeft);
-        System.out.println("Emotion: " + emoticonsLeft.getEmoticon() + " in a row: " + emoticonsLeft.getConsecutiveEmotions());
-        Integer consecutiveRight = checkConsecutiveRight(e2, counter);
-        ConsecutiveEmoticonsWrapper emoticonsRight = new ConsecutiveEmoticonsWrapper(emoticons[e2], consecutiveRight);
-        System.out.println("Emotion: " + emoticonsRight.getEmoticon() + " in a row: " + emoticonsRight.getConsecutiveEmotions());
-    }
-
-    private Integer checkConsecutiveLeft(int gridPointer, int result) {
-        if (gridPointer >= 1 && emoticons[gridPointer].showEmotion().equals(emoticons[gridPointer - 1].showEmotion())) {
-            return (1 + checkConsecutiveLeft(gridPointer - 1, result));
-        }
-        return result;
-    }
-
-    private Integer checkConsecutiveRight(int gridPointer, int result) {
-        if (gridPointer <= (GRID_SIZE - 2) && emoticons[gridPointer].showEmotion().equals(emoticons[gridPointer + 1].showEmotion())) {
-            return (1 + checkConsecutiveRight(gridPointer + 1, result));
-        }
-        return result;
-    }*/
 }
