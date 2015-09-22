@@ -8,44 +8,44 @@ import gamepieces.*;
  */
 public class BoardPopulator {
 
-    public BoardPopulator(Tile[][] tiles, int cols, int rows) {
-        populate(tiles, cols, rows);
+    public BoardPopulator(Tile[][] tiles, int rows, int cols) {
+        populate(tiles, rows, cols);
     }
 
-    public void populate(Tile[][] tiles, int cols, int rows) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (i % 2 == 0) {
-                    if (j == 0) {
-                        tiles[i][j] = new TileImpl(i, j, new AngryGamePiece("A"));
-                    } else if (j == 1) {
-                        tiles[i][j] = new TileImpl(i, j, new ConfusedGamePiece("C"));
-                    } else if (j == 2) {
-                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
-                    } else if (j == 3) {
-                        tiles[i][j] = new TileImpl(i, j, new ExcitedGamePiece("E"));
-                    } else if (j == 4) {
-                        tiles[i][j] = new TileImpl(i, j, new AngryGamePiece("A"));
-                    } else if (j == 5) {
-                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
+    public void populate(Tile[][] tiles, int rows, int cols) {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (row % 2 == 0) {
+                    if (col == 0) {
+                        tiles[row][col] = new TileImpl(row, col, new AngryGamePiece("A"));
+                    } else if (col == 1) {
+                        tiles[row][col] = new TileImpl(row, col, new ConfusedGamePiece("C"));
+                    } else if (col == 2) {
+                        tiles[row][col] = new TileImpl(row, col, new HappyGamePiece("H"));
+                    } else if (col == 3) {
+                        tiles[row][col] = new TileImpl(row, col, new ExcitedGamePiece("E"));
+                    } else if (col == 4) {
+                        tiles[row][col] = new TileImpl(row, col, new AngryGamePiece("A"));
+                    } else if (col == 5) {
+                        tiles[row][col] = new TileImpl(row, col, new HappyGamePiece("H"));
                     } else {
-                        tiles[i][j] = new TileImpl(i, j, new SadGamePiece("S"));
+                        tiles[row][col] = new TileImpl(row, col, new SadGamePiece("S"));
                     }
                 } else {
-                    if (j == 6) {
-                        tiles[i][j] = new TileImpl(i, j, new AngryGamePiece("A"));
-                    } else if (j == 5) {
-                        tiles[i][j] = new TileImpl(i, j, new ConfusedGamePiece("C"));
-                    } else if (j == 4) {
-                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
-                    } else if (j == 3) {
-                        tiles[i][j] = new TileImpl(i, j, new SadGamePiece("S"));
-                    } else if (j == 2) {
-                        tiles[i][j] = new TileImpl(i, j, new ExcitedGamePiece("E"));
-                    } else if (j == 4) {
-                        tiles[i][j] = new TileImpl(i, j, new ExcitedGamePiece("E"));
+                    if (col == 6) {
+                        tiles[row][col] = new TileImpl(row, col, new AngryGamePiece("A"));
+                    } else if (col == 5) {
+                        tiles[row][col] = new TileImpl(row, col, new ConfusedGamePiece("C"));
+                    } else if (col == 4) {
+                        tiles[row][col] = new TileImpl(row, col, new HappyGamePiece("H"));
+                    } else if (col == 3) {
+                        tiles[row][col] = new TileImpl(row, col, new SadGamePiece("S"));
+                    } else if (col == 2) {
+                        tiles[row][col] = new TileImpl(row, col, new ExcitedGamePiece("E"));
+                    } else if (col == 4) {
+                        tiles[row][col] = new TileImpl(row, col, new ExcitedGamePiece("E"));
                     } else {
-                        tiles[i][j] = new TileImpl(i, j, new HappyGamePiece("H"));
+                        tiles[row][col] = new TileImpl(row, col, new HappyGamePiece("H"));
                     }
                 }
             }
@@ -54,7 +54,7 @@ public class BoardPopulator {
         tiles[3][1] = new TileImpl(3, 1, new AngryGamePiece("A"));
         tiles[3][2] = new TileImpl(3, 2, new AngryGamePiece("A"));
         tiles[3][3] = new TileImpl(3, 3, new SadGamePiece("S"));
-        tiles[3][4] = new TileImpl(3, 4, new AngryGamePiece("A"));
+        tiles[3][4] = new TileImpl(3, 4, new AngryGamePiece("C"));
         tiles[3][5] = new TileImpl(3, 5, new SadGamePiece("S"));
         tiles[3][6] = new TileImpl(3, 6, new SadGamePiece("S"));
         tiles[4][6] = new TileImpl(4, 6, new ConfusedGamePiece("C"));

@@ -8,7 +8,7 @@ public interface Board {
 
     void populateBoard();
 
-    int getCols();
+    int getColumns();
 
     int getRows();
 
@@ -16,7 +16,7 @@ public interface Board {
 
     void displayBoard();
 
-    void selectTile(int newCol, int newRow);
+    void selectTile(int row, int column);
 
     void compareTiles();
 

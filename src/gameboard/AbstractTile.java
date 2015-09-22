@@ -10,21 +10,22 @@ import gamepieces.GamePiece;
  */
 public abstract class AbstractTile implements Tile {
 
-    private int col;
     private int row;
+    private int col;
     private GamePiece gp;
 
-    public AbstractTile(int col, int row, GamePiece gp) {
-        this.col = col;
+    public AbstractTile(int row, int col, GamePiece gp) {
         this.row = row;
+        this.col = col;
         this.gp = gp;
     }
 
     @Override
     public int[] getCoordinates() {
+        /**DO LIKE THIS int[] test = {row, col};*/
         int[] location = new int[2];
-        location[0] = this.col;
-        location[1] = this.row;
+        location[0] = row;
+        location[1] = col;
         return location;
     }
 

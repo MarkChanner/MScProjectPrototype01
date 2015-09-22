@@ -1,3 +1,4 @@
+import gameboard.Board;
 import gameboard.BoardImpl;
 
 /**
@@ -5,7 +6,7 @@ import gameboard.BoardImpl;
  */
 public class Game {
 
-    private BoardImpl grid01;
+    private Board grid01;
     public static final int SIZE = 7;
 
     public Game() {
