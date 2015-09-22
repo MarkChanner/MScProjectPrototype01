@@ -8,7 +8,7 @@ import java.util.List;
  * @author Mark Channer
  *         The board on which the game will take place
  */
-public class Board {
+public class BoardImpl implements Board {
 
     private static final int COL = 0;
     private static final int ROW = 1;
@@ -20,7 +20,7 @@ public class Board {
     private int[] e1 = new int[2];
     private int[] e2 = new int[2];
 
-    public Board(int size) {
+    public BoardImpl(int size) {
         this.cols = size;
         this.rows = size;
         this.tiles = new TileImpl[cols][rows];
@@ -37,12 +37,12 @@ public class Board {
         return cols;
     }
 
-    public Tile[][] getAllTiles() {
-        return tiles;
-    }
-
     public int getRows() {
         return rows;
+    }
+
+    public Tile[][] getAllTiles() {
+        return tiles;
     }
 
     public void displayBoard() {
@@ -74,7 +74,7 @@ public class Board {
         }
     }
 
-    private void compareFirstEmoticonWithSecond() {
+    public void compareFirstEmoticonWithSecond() {
         if (!sameButtonPressedTwice()) {
             if (selectedEmoticonsAreAdjacent()) {
                 System.out.println("Selected buttons are valid to attempt swap");
@@ -93,11 +93,11 @@ public class Board {
         }
     }
 
-    private boolean sameButtonPressedTwice() {
+    public boolean sameButtonPressedTwice() {
         return ((e1[COL] == e2[COL]) && (e1[ROW] == e2[ROW]));
     }
 
-    private boolean selectedEmoticonsAreAdjacent() {
+    public boolean selectedEmoticonsAreAdjacent() {
         if (e1[COL] == e2[COL]) {
             if (e1[ROW] == (e2[ROW] + 1) || e1[ROW] == (e2[ROW] - 1)) {
                 return true;
@@ -112,7 +112,7 @@ public class Board {
         return false;
     }
 
-    private void resetBothButtons() {
+    public void resetBothButtons() {
         firstEmoticonSelected = false;
         e1[COL] = -1;
         e1[ROW] = -1;
@@ -120,7 +120,7 @@ public class Board {
         e2[ROW] = -5;
     }
 
-    private void attemptToSwap() {
+    public void attemptToSwap() {
         System.out.println("Pre: First button: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getPieceType());
         if (bothDisplaySameEmotion()) {
             System.out.println("Both icons same emotion. No point in swapping");
@@ -142,7 +142,7 @@ public class Board {
         displayBoard();
     }
 
-    private boolean bothDisplaySameEmotion() {
+    public boolean bothDisplaySameEmotion() {
         return ((tiles[e1[COL]][e1[ROW]].getGamePiece().equals(tiles[e2[COL]][e2[ROW]].getGamePiece())));
     }
 }
