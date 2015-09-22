@@ -11,10 +11,10 @@ public interface Tile {
 
     int[] getCoordinates();
 
-    GamePiece getFace();
+    GamePiece getGamePiece();
 
-    void setFace(GamePiece gp);
+    void setGamePiece(GamePiece gp);
 
-    String getEmotion();
+    String getPieceType();
 
 }

@@ -8,8 +8,8 @@ import gamepieces.GamePiece;
  */
 public class TileImpl extends AbstractTile {
 
-    public TileImpl(int col, int row, GamePiece emoticon) {
-        super(col, row, emoticon);
+    public TileImpl(int col, int row, GamePiece gp) {
+        super(col, row, gp);
     }
 
 }

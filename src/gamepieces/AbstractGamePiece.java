@@ -5,17 +5,17 @@ package gamepieces;
  */
 public abstract class AbstractGamePiece implements GamePiece {
 
-    private String face;
+    private String type;
 
-    public AbstractGamePiece(String face) {
-        this.face = face;
+    public AbstractGamePiece(String type) {
+        this.type = type;
     }
+
+    public abstract GamePiece retrieveGamePiece();
 
     @Override
-    public String revealEmotion() {
-        return face;
+    public String showType() {
+        return type;
     }
-
-    public abstract GamePiece showFace();
 
 }

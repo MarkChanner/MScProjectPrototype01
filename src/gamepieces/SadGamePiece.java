@@ -5,12 +5,12 @@ package gamepieces;
  */
 public class SadGamePiece extends AbstractGamePiece {
 
-    public SadGamePiece(String face) {
-        super(face);
+    public SadGamePiece(String type) {
+        super(type);
     }
 
     @Override
-    public GamePiece showFace() {
-        return this;
+    public GamePiece retrieveGamePiece() {
+        return (this);
     }
 }

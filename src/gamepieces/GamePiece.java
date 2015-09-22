@@ -6,8 +6,8 @@ package gamepieces;
  */
 public interface GamePiece {
 
-    String revealEmotion();
+    GamePiece retrieveGamePiece();
 
-    GamePiece showFace();
+    String showType();
 
 }
