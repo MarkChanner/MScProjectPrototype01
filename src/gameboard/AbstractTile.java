@@ -22,7 +22,7 @@ public abstract class AbstractTile implements Tile {
 
     @Override
     public int[] getCoordinates() {
-        /**DO LIKE THIS int[] test = {row, col};*/
+        /**DO LIKE THIS int[] test = {row, col} */
         int[] location = new int[2];
         location[0] = row;
         location[1] = col;
