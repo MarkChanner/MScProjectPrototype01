@@ -1,3 +1,8 @@
+package gamelogic;
+
+import gameboard.Grid;
+import gameboard.Tile;
+
 import java.util.List;
 
 /**
