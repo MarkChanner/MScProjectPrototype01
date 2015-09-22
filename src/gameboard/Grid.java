@@ -1,8 +1,6 @@
 package gameboard;
 
 import gamepieces.GamePiece;
-import gamelogic.LogicChecker;
-import gamelogic.LogicCheckerImpl;
 
 import java.util.List;
 
