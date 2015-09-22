@@ -76,7 +76,7 @@ public class BoardImpl implements Board {
     public void compareTiles() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
-                System.out.println("Selected tiles are valid to attempt swap");
+                System.out.println("Selected tiles are valid to try swapping");
                 swap();
             } else {
                 System.out.println("Selected tiles are NOT adjacent. Last tile selected now first selected tile");
