@@ -1,7 +1,4 @@
-package gamelogic;
-
-import gameboard.Grid;
-import gameboard.Tile;
+package gameboard;
 
 import java.util.List;
 
