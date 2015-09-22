@@ -1,9 +1,11 @@
+package gamepieces;
+
 /**
  * @author Mark Channer
  */
-public class ExcitedGamePiece extends AbstractGamePiece {
+public class HappyGamePiece extends AbstractGamePiece {
 
-    public ExcitedGamePiece(String face) {
+    public HappyGamePiece(String face) {
         super(face);
     }
 

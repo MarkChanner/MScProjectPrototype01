@@ -1,3 +1,5 @@
+package gamepieces;
+
 /**
  * @author Mark Channer
  */
