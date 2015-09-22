@@ -16,7 +16,7 @@ public class Board {
     private LogicChecker checker;
     private final int cols;
     private final int rows;
-    private boolean firstTileSelected;
+    private boolean firstEmoticonSelected;
     private int[] e1 = new int[2];
     private int[] e2 = new int[2];
 
@@ -25,7 +25,7 @@ public class Board {
         this.rows = size;
         this.tiles = new TileImpl[cols][rows];
         this.checker = new LogicCheckerImpl();
-        this.firstTileSelected = false;
+        this.firstEmoticonSelected = false;
     }
 
     public void populateBoard() {
@@ -61,9 +61,9 @@ public class Board {
     }
 
     public void selectEmoticon(int newCol, int newRow) {
-        if (!firstTileSelected) {
+        if (!firstEmoticonSelected) {
             System.out.println("Button1: (" + newCol + "," + newRow + ")");
-            firstTileSelected = true;
+            firstEmoticonSelected = true;
             e1[COL] = newCol;
             e1[ROW] = newRow;
         } else {
@@ -88,7 +88,7 @@ public class Board {
             }
         } else {
             System.out.println("Same button pushed twice. Resetting.");
-            firstTileSelected = false;
+            firstEmoticonSelected = false;
             resetBothButtons();
         }
     }
@@ -113,7 +113,7 @@ public class Board {
     }
 
     private void resetBothButtons() {
-        firstTileSelected = false;
+        firstEmoticonSelected = false;
         e1[COL] = -1;
         e1[ROW] = -1;
         e2[COL] = -5;
