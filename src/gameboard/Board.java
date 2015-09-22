@@ -51,7 +51,7 @@ public class Board {
             System.out.print("  " + i + " ");
             System.out.print("| ");
             for (int j = 0; j < cols; j++) {
-                System.out.print(tiles[i][j].getEmotion() + " | ");
+                System.out.print(tiles[i][j].getPieceType() + " | ");
             }
             System.out.println();
         }
@@ -121,19 +121,19 @@ public class Board {
     }
 
     private void attemptToSwap() {
-        System.out.println("Pre: First button: " + tiles[e1[COL]][e1[ROW]].getEmotion() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getEmotion());
+        System.out.println("Pre: First button: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getPieceType());
         if (bothDisplaySameEmotion()) {
             System.out.println("Both icons same emotion. No point in swapping");
         } else {
-            GamePiece temp = tiles[e1[COL]][e1[ROW]].getFace();
-            tiles[e1[COL]][e1[ROW]].setFace(tiles[e2[COL]][e2[ROW]].getFace());
-            tiles[e2[COL]][e2[ROW]].setFace(temp);
-            System.out.println("Post: First button: " + tiles[e1[COL]][e1[ROW]].getEmotion() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getEmotion());
+            GamePiece temp = tiles[e1[COL]][e1[ROW]].getGamePiece();
+            tiles[e1[COL]][e1[ROW]].setGamePiece(tiles[e2[COL]][e2[ROW]].getGamePiece());
+            tiles[e2[COL]][e2[ROW]].setGamePiece(temp);
+            System.out.println("Post: First button: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getPieceType());
             //calculateConsecutiveEmotions();
             List<Tile> matchingTiles = checker.check(this);
-            System.out.println("Received List<gameboard.Tile> back");
+            System.out.println("Received List<Tile> back");
             for (Tile t : matchingTiles) {
-                System.out.print("Emotion: " + t.getEmotion() + " ");
+                System.out.print("Emotion: " + t.getPieceType() + " ");
                 //int[] c = t.getCoordinates();
                 System.out.println("Coordinates " + t.getCoordinates()[0] + "," + t.getCoordinates()[1]);
             }
@@ -143,6 +143,6 @@ public class Board {
     }
 
     private boolean bothDisplaySameEmotion() {
-        return ((tiles[e1[COL]][e1[ROW]].getFace().equals(tiles[e2[COL]][e2[ROW]].getFace())));
+        return ((tiles[e1[COL]][e1[ROW]].getGamePiece().equals(tiles[e2[COL]][e2[ROW]].getGamePiece())));
     }
 }

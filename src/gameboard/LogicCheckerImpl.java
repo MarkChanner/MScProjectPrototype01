@@ -29,7 +29,7 @@ public class LogicCheckerImpl implements LogicChecker {
         List<Tile> matchingTiles = new ArrayList<>();
         for (int i = (rows - 1); (i >= 0); i--) {
             for (int j = 0; (j < cols - 1); j++) {
-                if (tiles[i][j].getEmotion().equals(tiles[i][j + 1].getEmotion())) {
+                if (tiles[i][j].getPieceType().equals(tiles[i][j + 1].getPieceType())) {
                     matchingTiles.add(tiles[i][j]);
                 }
             }
