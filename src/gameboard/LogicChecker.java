@@ -7,5 +7,5 @@ import java.util.List;
  */
 public interface LogicChecker {
 
-    List<Tile> check(Board b);
+    List<Tile> check(BoardImpl b);
 }

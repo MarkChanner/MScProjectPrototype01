@@ -8,12 +8,12 @@ import java.util.List;
  */
 public class LogicCheckerImpl implements LogicChecker {
 
-    private Board board;
+    private BoardImpl board;
 
     /**
      * Not yet finished. Doesn't work for horizontal
      */
-    public List<Tile> check(Board board) {
+    public List<Tile> check(BoardImpl board) {
         int rows = board.getRows();
         int cols = board.getCols();
         Tile[][] tiles = board.getAllTiles();
