@@ -2,7 +2,7 @@ package gamepieces;
 
 /**
  * @author Mark Channer
- * gamepieces.GamePiece to become part of a Grid Tile
+ * gamepieces.GamePiece to become part of a gameboard.Grid gameboard.Tile
  */
 public interface GamePiece {
 
