@@ -1,3 +1,5 @@
+import gameboard.Grid;
+
 /**
  * @author Mark Channer
  */
