@@ -16,17 +16,17 @@ public interface Board {
 
     void displayBoard();
 
-    void selectEmoticon(int newCol, int newRow);
+    void selectTile(int newCol, int newRow);
 
-    void compareFirstEmoticonWithSecond();
+    void compareTiles();
 
-    boolean sameButtonPressedTwice();
+    boolean sameTileSelectedTwice();
 
-    boolean selectedEmoticonsAreAdjacent();
+    boolean selectedTilesAreAdjacent();
 
-    void resetBothButtons();
+    void resetBothTiles();
 
-    void attemptToSwap();
+    void swap();
 
-    boolean bothDisplaySameEmotion();
+    boolean matchingTypes();
 }

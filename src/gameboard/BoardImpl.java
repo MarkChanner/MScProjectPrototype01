@@ -30,7 +30,7 @@ public class BoardImpl implements Board {
 
     public void populateBoard() {
         new BoardPopulator(tiles, cols, rows);
-        resetBothButtons();
+        resetBothTiles();
     }
 
     public int getCols() {
@@ -60,7 +60,7 @@ public class BoardImpl implements Board {
         System.out.println();
     }
 
-    public void selectEmoticon(int newCol, int newRow) {
+    public void selectTile(int newCol, int newRow) {
         if (!firstEmoticonSelected) {
             System.out.println("Button1: (" + newCol + "," + newRow + ")");
             firstEmoticonSelected = true;
@@ -70,15 +70,15 @@ public class BoardImpl implements Board {
             System.out.println("Button2: (" + newCol + "," + newRow + ")");
             e2[COL] = newCol;
             e2[ROW] = newRow;
-            compareFirstEmoticonWithSecond();
+            compareTiles();
         }
     }
 
-    public void compareFirstEmoticonWithSecond() {
-        if (!sameButtonPressedTwice()) {
-            if (selectedEmoticonsAreAdjacent()) {
+    public void compareTiles() {
+        if (!sameTileSelectedTwice()) {
+            if (selectedTilesAreAdjacent()) {
                 System.out.println("Selected buttons are valid to attempt swap");
-                attemptToSwap();
+                swap();
             } else {
                 System.out.println("Selected buttons are NOT adjacent. Last button pressed now first button pressed");
                 e1[COL] = e2[COL];
@@ -89,15 +89,15 @@ public class BoardImpl implements Board {
         } else {
             System.out.println("Same button pushed twice. Resetting.");
             firstEmoticonSelected = false;
-            resetBothButtons();
+            resetBothTiles();
         }
     }
 
-    public boolean sameButtonPressedTwice() {
+    public boolean sameTileSelectedTwice() {
         return ((e1[COL] == e2[COL]) && (e1[ROW] == e2[ROW]));
     }
 
-    public boolean selectedEmoticonsAreAdjacent() {
+    public boolean selectedTilesAreAdjacent() {
         if (e1[COL] == e2[COL]) {
             if (e1[ROW] == (e2[ROW] + 1) || e1[ROW] == (e2[ROW] - 1)) {
                 return true;
@@ -112,7 +112,7 @@ public class BoardImpl implements Board {
         return false;
     }
 
-    public void resetBothButtons() {
+    public void resetBothTiles() {
         firstEmoticonSelected = false;
         e1[COL] = -1;
         e1[ROW] = -1;
@@ -120,9 +120,9 @@ public class BoardImpl implements Board {
         e2[ROW] = -5;
     }
 
-    public void attemptToSwap() {
+    public void swap() {
         System.out.println("Pre: First button: " + tiles[e1[COL]][e1[ROW]].getPieceType() + ", Second button: " + tiles[e2[COL]][e2[ROW]].getPieceType());
-        if (bothDisplaySameEmotion()) {
+        if (matchingTypes()) {
             System.out.println("Both icons same emotion. No point in swapping");
         } else {
             GamePiece temp = tiles[e1[COL]][e1[ROW]].getGamePiece();
@@ -142,7 +142,7 @@ public class BoardImpl implements Board {
         displayBoard();
     }
 
-    public boolean bothDisplaySameEmotion() {
+    public boolean matchingTypes() {
         return ((tiles[e1[COL]][e1[ROW]].getGamePiece().equals(tiles[e2[COL]][e2[ROW]].getGamePiece())));
     }
 }
