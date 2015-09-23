@@ -2,7 +2,7 @@ package main.java.gamepieces;
 
 /**
  * @author Mark Channer
- * gamepieces.GamePiece to become part of a gameboard.Grid gameboard.Tile
+ * GamePiece to become part of a Tile
  */
 public interface GamePiece {
 
