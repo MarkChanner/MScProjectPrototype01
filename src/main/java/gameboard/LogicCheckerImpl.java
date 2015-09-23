@@ -1,7 +1,7 @@
 package main.java.gameboard;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author Mark Channer

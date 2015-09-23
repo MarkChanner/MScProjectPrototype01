@@ -5,7 +5,7 @@ import main.java.gamepieces.GamePiece;
 /**
  * @author Mark Channer
  *
- * gameboard.Tile represents each square on the grid
+ * Tile represents each square on the grid
  */
 public interface Tile {
 

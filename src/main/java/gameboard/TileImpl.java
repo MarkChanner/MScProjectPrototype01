@@ -4,7 +4,7 @@ import main.java.gamepieces.GamePiece;
 
 /**
  * @author Mark Channer
- * gameboard.TileImpl extends gameboard.AbstractTile
+ * ileImpl extends AbstractTile
  */
 public class TileImpl extends AbstractTile {
 
