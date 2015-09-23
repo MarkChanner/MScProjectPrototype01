@@ -1,5 +1,6 @@
-import gameboard.Board;
-import gameboard.BoardImpl;
+package main.java;
+import main.java.gameboard.Board;
+import main.java.gameboard.BoardImpl;
 
 /**
  * @author Mark Channer

@@ -1,4 +1,4 @@
-package gameboard;
+package main.java.gameboard;
 
 import java.util.List;
 
