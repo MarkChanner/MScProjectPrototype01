@@ -148,8 +148,7 @@ public class BoardImpl implements Board {
         for (LinkedList<GamePiece> list : matchingRows) {
             System.out.println();
             for (GamePiece gp : list) {
-                System.out.print(gp.showType());
-                System.out.println();
+                System.out.print(gp.showType() + "(" + gp.getCoordinates()[0] + "," + gp.getCoordinates()[1] + ") ");
             }
         }
 

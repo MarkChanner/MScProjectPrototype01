@@ -36,7 +36,8 @@ public abstract class AbstractTile implements Tile {
 
     @Override
     public void setGamePiece(GamePiece gp) {
-        this.piece = gp;
+        piece = gp;
+        piece.setCoordinates(row, column);
     }
 
     @Override
