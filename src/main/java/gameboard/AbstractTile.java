@@ -11,36 +11,36 @@ import gamepieces.GamePiece;
 public abstract class AbstractTile implements Tile {
 
     private int row;
-    private int col;
-    private GamePiece gp;
+    private int column;
+    private GamePiece piece;
 
-    public AbstractTile(int row, int col, GamePiece gp) {
-        this.row = row;
-        this.col = col;
-        this.gp = gp;
+    public AbstractTile(int r, int c, GamePiece gp) {
+        row = r;
+        column = c;
+        piece = gp;
+        piece.setCoordinates(row, column);
     }
 
     @Override
     public int[] getCoordinates() {
-        /**DO LIKE THIS int[] test = {row, col} */
         int[] location = new int[2];
         location[0] = row;
-        location[1] = col;
+        location[1] = column;
         return location;
     }
 
     @Override
     public GamePiece getGamePiece() {
-        return gp.retrieveGamePiece();
+        return piece.retrieveGamePiece();
     }
 
     @Override
     public void setGamePiece(GamePiece gp) {
-        this.gp = gp;
+        this.piece = gp;
     }
 
     @Override
     public String getPieceType() {
-        return gp.showType();
+        return piece.showType();
     }
 }
