@@ -54,8 +54,8 @@ public class BoardPopulator {
         tiles[3][0] = new TileImpl(3, 0, new HappyGamePiece("H"));
         tiles[3][1] = new TileImpl(3, 1, new AngryGamePiece("A"));
         tiles[3][2] = new TileImpl(3, 2, new AngryGamePiece("A"));
-        tiles[3][3] = new TileImpl(3, 3, new SadGamePiece("P"));
-        tiles[3][4] = new TileImpl(3, 4, new AngryGamePiece("C"));
+        tiles[3][3] = new TileImpl(3, 3, new AngryGamePiece("C"));
+        tiles[3][4] = new TileImpl(3, 4, new AngryGamePiece("A"));
         tiles[3][5] = new TileImpl(3, 5, new SadGamePiece("S"));
         tiles[3][6] = new TileImpl(3, 6, new SadGamePiece("S"));
         tiles[4][6] = new TileImpl(4, 6, new ConfusedGamePiece("C"));
@@ -72,5 +72,6 @@ public class BoardPopulator {
         tiles[5][2] = new TileImpl(5, 2, new HappyGamePiece("H"));
         tiles[1][2] = new TileImpl(1, 2, new HappyGamePiece("H"));
         tiles[1][3] = new TileImpl(1, 3, new HappyGamePiece("H"));
+        tiles[2][6] = new TileImpl(2, 6, new HappyGamePiece("X"));
     }
 }

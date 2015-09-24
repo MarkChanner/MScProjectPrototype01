@@ -142,26 +142,16 @@ public class BoardImpl implements Board {
     }
 
     public void checkForMatches() {
+        displayBoard();
         ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows();
-        //List<Tile> matchingColumns = checker.checkColumns();
 
-        System.out.println("Printing rows found");
         for (LinkedList<GamePiece> list : matchingRows) {
+            System.out.println();
             for (GamePiece gp : list) {
-                System.out.println(gp.showType());
+                System.out.print(gp.showType());
+                System.out.println();
             }
         }
 
-        //System.out.println("Printing columns found");
-        //testPrint(matchingColumns);
-
-        displayBoard();
-    }
-
-    public void testPrint(List<Tile> matching) {
-        for (Tile t1 : matching) {
-            System.out.print(t1.getPieceType() + "(" + t1.getCoordinates()[0] + "," + t1.getCoordinates()[1] + "), ");
-        }
-        System.out.println();
     }
 }

@@ -28,15 +28,19 @@ public class LogicCheckerImpl implements LogicChecker {
         LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
         ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
         GamePiece gamePiece;
+
         for (int row = (rows - 1); row >= 0; row--) {
             consecutivePieces.add(tiles[row][0].getGamePiece());
+
             for (int col = 1; col < cols; col++) {
                 gamePiece = tiles[row][col].getGamePiece();
+
                 if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
                 }
-                consecutivePieces.add(gamePiece);
+
+                if (col != cols - 1) consecutivePieces.add(gamePiece);
             }
         }
         return bigList;

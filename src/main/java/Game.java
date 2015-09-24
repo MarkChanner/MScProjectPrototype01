@@ -22,9 +22,7 @@ public class Game {
     public void start() {
         board.populateBoard();
         board.displayBoard();
-        board.selectTile(6, 0);
-        board.selectTile(6, 0);
-        board.selectTile(6, 1);
+        System.out.println();
         board.selectTile(3, 3);
         board.selectTile(3, 4);
     }
