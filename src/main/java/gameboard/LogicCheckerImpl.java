@@ -23,6 +23,7 @@ public class LogicCheckerImpl implements LogicChecker {
         cols = board.getColumns();
     }
 
+    @Override
     public ArrayList<LinkedList<GamePiece>> checkRows() {
 
         LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
@@ -46,7 +47,7 @@ public class LogicCheckerImpl implements LogicChecker {
         return bigList;
     }
 
-    public void examineList(LinkedList<GamePiece> consecutivePieces, ArrayList<LinkedList<GamePiece>> bigList) {
+    private void examineList(LinkedList<GamePiece> consecutivePieces, ArrayList<LinkedList<GamePiece>> bigList) {
         if (consecutivePieces.size() >= 3) {
             bigList.add(consecutivePieces);
         }
