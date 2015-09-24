@@ -20,19 +20,12 @@ public class Game {
     }
 
     public void start() {
-        System.out.println();
         board.populateBoard();
         board.displayBoard();
-        System.out.println();
         board.selectTile(6, 0);
         board.selectTile(6, 0);
         board.selectTile(6, 1);
         board.selectTile(3, 3);
         board.selectTile(3, 4);
-
-        //board.selectTile(4,0);
-        //board.selectTile(4,3);
-        //board.selectTile(4,4);
-
     }
 }

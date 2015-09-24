@@ -1,5 +1,9 @@
 package gameboard;
 
+import gamepieces.GamePiece;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -7,7 +11,7 @@ import java.util.List;
  */
 public interface LogicChecker {
 
-    List<Tile> checkRows();
+    ArrayList<LinkedList<GamePiece>> checkRows();
 
-    List<Tile> checkColumns();
+    //List<List<GamePiece>> checkColumns();
 }

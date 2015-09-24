@@ -1,5 +1,8 @@
 package gameboard;
 
+import gamepieces.*;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,19 +23,9 @@ public class LogicCheckerImpl implements LogicChecker {
         cols = board.getColumns();
     }
 
-    /*public List<Tile> checkRows() {
-        List<Tile> matchingTiles = new ArrayList<>();
-        for (int row = (rows - 1); row > 0; row--) {
-            for (int col = 0; col < (cols - 1); col++) {
-                if (tiles[row][col].getPieceType().equals(tiles[row][col + 1].getPieceType())) {
-                    matchingTiles.add(tiles[row][col]);
-                }
-            }
-        }
-        return matchingTiles;
-    }*/
 
-    public List<Tile> checkRows() {
+
+    /*public List<Tile> checkRows() {
         List<Tile> matchingTiles = new ArrayList<>();
         for (int row = (rows - 1); row > 0; row--) {
             for (int col = 1; col < (cols - 2); col++) {
@@ -51,10 +44,36 @@ public class LogicCheckerImpl implements LogicChecker {
             }
         }
         return matchingTiles;
+    }*/
+
+    public ArrayList<LinkedList<GamePiece>> checkRows() {
+        LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
+        ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
+        GamePiece gamePiece;
+        
+        for (int row = (rows - 1); row > 0; row--) {
+            consecutivePieces.add(tiles[row][0].getGamePiece());
+            /** DOES IT NOT AHVE TO BE JUST COLS, AND NOT -1???*/
+            for (int col = 1; col < (cols - 1); col++) {
+                gamePiece = tiles[row][col].getGamePiece();
+                if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
+                    examineList(consecutivePieces, bigList);
+                }
+                consecutivePieces.add(gamePiece);
+            }
+        }
+        return bigList;
     }
 
-    public List<Tile> checkColumns() {
-        List<Tile> matchingTiles = new ArrayList<>();
+    public void examineList(LinkedList<GamePiece> consecutivePieces, ArrayList<LinkedList<GamePiece>> bigList) {
+        if (consecutivePieces.size() >= 3) {
+            bigList.add(consecutivePieces);
+        }
+        consecutivePieces.clear();
+    }
+
+    /*public List<GamePiece> checkColumns() {
+        List<GamePiece> matchingTiles = new ArrayList<>();
         for (int col = 0; col < cols; col++) {
             for (int row = (rows - 1); row > 0; row--) {
                 if (tiles[row][col].getPieceType().equals(tiles[row - 1][col].getPieceType())) {
@@ -63,5 +82,5 @@ public class LogicCheckerImpl implements LogicChecker {
             }
         }
         return matchingTiles;
-    }
+    }*/
 }

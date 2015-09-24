@@ -1,6 +1,9 @@
 package gameboard;
 
 import gamepieces.GamePiece;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -139,13 +142,18 @@ public class BoardImpl implements Board {
     }
 
     public void checkForMatches() {
-        List<Tile> matchingRows = checker.checkRows();
-        List<Tile> matchingColumns = checker.checkColumns();
+        ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows();
+        //List<Tile> matchingColumns = checker.checkColumns();
 
         System.out.println("Printing rows found");
-        testPrint(matchingRows);
-        System.out.println("Printing columns found");
-        testPrint(matchingColumns);
+        for (LinkedList<GamePiece> list : matchingRows) {
+            for (GamePiece gp : list) {
+                System.out.println(gp.showType());
+            }
+        }
+
+        //System.out.println("Printing columns found");
+        //testPrint(matchingColumns);
 
         displayBoard();
     }
