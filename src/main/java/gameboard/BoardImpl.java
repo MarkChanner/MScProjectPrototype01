@@ -30,23 +30,28 @@ public class BoardImpl implements Board {
         checker = new LogicCheckerImpl(this);
     }
 
+    @Override
     public void populateBoard() {
         new BoardPopulator(tiles, rows, columns);
         resetBothTiles();
     }
 
+    @Override
     public int getRows() {
         return rows;
     }
 
+    @Override
     public int getColumns() {
         return columns;
     }
 
+    @Override
     public Tile[][] getAllTiles() {
         return tiles;
     }
 
+    @Override
     public void displayBoard() {
         System.out.println();
         for (int i = 0; i < rows; i++) {
@@ -62,6 +67,7 @@ public class BoardImpl implements Board {
         System.out.println();
     }
 
+    @Override
     public void selectTile(int row, int column) {
         if (!firstTileSelected) {
             System.out.println("Tile 1: (" + row + "," + column + ")");
@@ -76,6 +82,7 @@ public class BoardImpl implements Board {
         }
     }
 
+    @Override
     public void compareTiles() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
@@ -95,10 +102,12 @@ public class BoardImpl implements Board {
         }
     }
 
+    @Override
     public boolean sameTileSelectedTwice() {
         return ((t1[ROW] == t2[ROW]) && (t1[COL] == t2[COL]));
     }
 
+    @Override
     public boolean selectedTilesAreAdjacent() {
         if (t1[ROW] == t2[ROW]) {
             if (t1[COL] == (t2[COL] + 1) || t1[COL] == (t2[COL] - 1)) {
@@ -114,6 +123,7 @@ public class BoardImpl implements Board {
         return false;
     }
 
+    @Override
     public void resetBothTiles() {
         firstTileSelected = false;
         t1[ROW] = -1;
@@ -122,6 +132,7 @@ public class BoardImpl implements Board {
         t2[COL] = -5;
     }
 
+    @Override
     public void swap() {
         System.out.println("Pre: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() + ", Second tile: " +
                 tiles[t2[ROW]][t2[COL]].getPieceType());
@@ -137,10 +148,12 @@ public class BoardImpl implements Board {
         }
     }
 
+    @Override
     public boolean matchingTypes() {
         return ((tiles[t1[ROW]][t1[COL]].getGamePiece().equals(tiles[t2[ROW]][t2[COL]].getGamePiece())));
     }
 
+    @Override
     public void checkForMatches() {
         displayBoard();
         ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows();

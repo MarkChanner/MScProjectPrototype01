@@ -8,9 +8,9 @@ public interface Board {
 
     void populateBoard();
 
-    int getColumns();
-
     int getRows();
+
+    int getColumns();
 
     Tile[][] getAllTiles();
 
