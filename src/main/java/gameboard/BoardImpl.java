@@ -1,7 +1,6 @@
-package main.java.gameboard;
+package gameboard;
 
-import main.java.gamepieces.GamePiece;
-
+import gamepieces.GamePiece;
 import java.util.List;
 
 /**

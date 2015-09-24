@@ -1,4 +1,4 @@
-package main.java.gameboard;
+package gameboard;
 
 /**
  * @author Mark Channer

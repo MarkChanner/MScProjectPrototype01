@@ -1,6 +1,6 @@
-package main.java;
-import main.java.gameboard.Board;
-import main.java.gameboard.BoardImpl;
+
+import gameboard.Board;
+import gameboard.BoardImpl;
 
 /**
  * @author Mark Channer

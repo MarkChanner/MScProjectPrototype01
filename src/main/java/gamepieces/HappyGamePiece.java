@@ -1,4 +1,4 @@
-package main.java.gamepieces;
+package gamepieces;
 
 /**
  * @author Mark Channer

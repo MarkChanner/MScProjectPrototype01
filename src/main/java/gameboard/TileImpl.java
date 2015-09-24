@@ -1,6 +1,6 @@
-package main.java.gameboard;
+package gameboard;
 
-import main.java.gamepieces.GamePiece;
+import gamepieces.GamePiece;
 
 /**
  * @author Mark Channer

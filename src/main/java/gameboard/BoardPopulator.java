@@ -1,6 +1,6 @@
-package main.java.gameboard;
+package gameboard;
 
-import main.java.gamepieces.*;
+import gamepieces.*;
 
 /**
  * @author Mark Channer
@@ -70,5 +70,7 @@ public class BoardPopulator {
         tiles[6][4] = new TileImpl(6, 4, new AngryGamePiece("P"));
         tiles[6][3] = new TileImpl(6, 3, new AngryGamePiece("A"));
         tiles[5][2] = new TileImpl(5, 2, new HappyGamePiece("H"));
+        tiles[1][2] = new TileImpl(1, 2, new HappyGamePiece("H"));
+        tiles[1][3] = new TileImpl(1, 3, new HappyGamePiece("H"));
     }
 }

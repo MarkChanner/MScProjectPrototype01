@@ -1,4 +1,4 @@
-package main.java.gameboard;
+package gameboard;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -20,13 +20,34 @@ public class LogicCheckerImpl implements LogicChecker {
         cols = board.getColumns();
     }
 
-    public List<Tile> checkRows() {
+    /*public List<Tile> checkRows() {
         List<Tile> matchingTiles = new ArrayList<>();
         for (int row = (rows - 1); row > 0; row--) {
             for (int col = 0; col < (cols - 1); col++) {
                 if (tiles[row][col].getPieceType().equals(tiles[row][col + 1].getPieceType())) {
                     matchingTiles.add(tiles[row][col]);
                 }
+            }
+        }
+        return matchingTiles;
+    }*/
+
+    public List<Tile> checkRows() {
+        List<Tile> matchingTiles = new ArrayList<>();
+        for (int row = (rows - 1); row > 0; row--) {
+            for (int col = 1; col < (cols - 2); col++) {
+                if (tiles[row][col].getPieceType().equals(tiles[row][col - 1].getPieceType()) &&
+                        tiles[row][col].getPieceType().equals(tiles[row][col + 1].getPieceType())) {
+                    matchingTiles.add(tiles[row][col-1]);
+                    matchingTiles.add(tiles[row][col]);
+                    matchingTiles.add(tiles[row][col+1]);
+                    int tempCount = (col + 1);
+                    while (tiles[row][tempCount].getPieceType().equals(tiles[row][(tempCount + 1)].getPieceType())) {
+                        matchingTiles.add(tiles[row][tempCount+1]);
+                        tempCount++;
+                    }
+                }
+
             }
         }
         return matchingTiles;
