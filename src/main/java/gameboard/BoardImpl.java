@@ -157,13 +157,23 @@ public class BoardImpl implements Board {
     public void checkForMatches() {
         displayBoard();
         ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows();
+        ArrayList<LinkedList<GamePiece>> matchingColumns = checker.checkColumns();
+        System.out.println();
 
+        System.out.println("Rows with consecutive emoticons:");
         for (LinkedList<GamePiece> list : matchingRows) {
-            System.out.println();
             for (GamePiece gp : list) {
                 System.out.print(gp.showType() + "(" + gp.getCoordinates()[0] + "," + gp.getCoordinates()[1] + ") ");
             }
+            System.out.println();
         }
-
+        System.out.println();
+        System.out.println("Columns with consecutive emoticons:");
+        for (LinkedList<GamePiece> list : matchingColumns) {
+            for (GamePiece gp : list) {
+                System.out.print(gp.showType() + "(" + gp.getCoordinates()[0] + "," + gp.getCoordinates()[1] + ") ");
+            }
+            System.out.println();
+        }
     }
 }

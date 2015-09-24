@@ -13,5 +13,5 @@ public interface LogicChecker {
 
     ArrayList<LinkedList<GamePiece>> checkRows();
 
-    //List<List<GamePiece>> checkColumns();
+    ArrayList<LinkedList<GamePiece>> checkColumns();
 }

@@ -38,8 +38,8 @@ public class LogicCheckerImpl implements LogicChecker {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
                 }
-                if (col != cols - 1) consecutivePieces.add(gamePiece);
-                else {
+                consecutivePieces.add(gamePiece);
+                if (col == cols - 1) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
                 }
@@ -54,15 +54,28 @@ public class LogicCheckerImpl implements LogicChecker {
         }
     }
 
-    /*public List<GamePiece> checkColumns() {
-        List<GamePiece> matchingTiles = new ArrayList<>();
+    @Override
+    public ArrayList<LinkedList<GamePiece>> checkColumns() {
+
+        LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
+        ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
+        GamePiece gamePiece;
         for (int col = 0; col < cols; col++) {
-            for (int row = (rows - 1); row > 0; row--) {
-                if (tiles[row][col].getPieceType().equals(tiles[row - 1][col].getPieceType())) {
-                    matchingTiles.add(tiles[row][col]);
+            consecutivePieces.add(tiles[rows - 1][col].getGamePiece());
+
+            for (int row = (rows - 2); row >= 0; row--) {
+                gamePiece = tiles[row][col].getGamePiece();
+                if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
+                    examineList(consecutivePieces, bigList);
+                    consecutivePieces = new LinkedList<>();
+                }
+                consecutivePieces.add(gamePiece);
+                if (row == 0) {
+                    examineList(consecutivePieces, bigList);
+                    consecutivePieces = new LinkedList<>();
                 }
             }
         }
-        return matchingTiles;
-    }*/
+        return bigList;
+    }
 }
