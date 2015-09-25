@@ -89,8 +89,7 @@ public class BoardImpl implements Board {
         }
     }
 
-    @Override
-    public void compareTiles() {
+    private void compareTiles() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
                 System.out.println("Selected tiles are valid. Attempting swap");
@@ -109,13 +108,11 @@ public class BoardImpl implements Board {
         }
     }
 
-    @Override
-    public boolean sameTileSelectedTwice() {
+    private boolean sameTileSelectedTwice() {
         return ((t1[ROW] == t2[ROW]) && (t1[COL] == t2[COL]));
     }
 
-    @Override
-    public boolean selectedTilesAreAdjacent() {
+    private boolean selectedTilesAreAdjacent() {
         if (t1[ROW] == t2[ROW]) {
             if (t1[COL] == (t2[COL] + 1) || t1[COL] == (t2[COL] - 1)) {
                 return true;
@@ -130,8 +127,7 @@ public class BoardImpl implements Board {
         return false;
     }
 
-    @Override
-    public void resetBothTiles() {
+    private void resetBothTiles() {
         firstTileSelected = false;
         t1[ROW] = -1;
         t1[COL] = -1;
@@ -139,8 +135,7 @@ public class BoardImpl implements Board {
         t2[COL] = -5;
     }
 
-    @Override
-    public void swap() {
+    private void swap() {
         System.out.println("Pre: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() + ", Second tile: " +
                 tiles[t2[ROW]][t2[COL]].getPieceType());
         if (matchingTypes()) {
@@ -155,13 +150,11 @@ public class BoardImpl implements Board {
         }
     }
 
-    @Override
-    public boolean matchingTypes() {
+    private boolean matchingTypes() {
         return ((tiles[t1[ROW]][t1[COL]].getPieceType().equals(tiles[t2[ROW]][t2[COL]].getPieceType())));
     }
 
-    @Override
-    public void checkForMatches() {
+    private void checkForMatches() {
         displayBoard();
         ArrayList<LinkedList<Tile>> matchingRows = checker.checkRows(this);
         ArrayList<LinkedList<Tile>> matchingColumns = checker.checkColumns(this);
@@ -182,9 +175,7 @@ public class BoardImpl implements Board {
             }
             System.out.println();
         }
-        //System.out.println();
         printList("rowList", matchingRows);
-        //System.out.println();
         printList("colList", matchingColumns);
 
         /** Remove Duplicates */
@@ -198,7 +189,7 @@ public class BoardImpl implements Board {
         }
     }
 
-    public void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
+    private void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
         System.out.println();
         System.out.println(title);
         for (List<Tile> colList : bigList) {
