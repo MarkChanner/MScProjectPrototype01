@@ -19,7 +19,7 @@ public class BoardImpl implements Board {
     private final int columns;
     private boolean firstTileSelected;
     private Tile[][] tiles;
-    private LogicChecker checker;
+    private BoardController controller;
     private int[] t1 = new int[2];
     private int[] t2 = new int[2];
 
@@ -29,7 +29,7 @@ public class BoardImpl implements Board {
         columns = size;
         firstTileSelected = false;
         tiles = new TileImpl[rows][columns];
-        checker = new LogicCheckerImpl();
+        controller = new BoardControllerImpl();
     }
 
     @Override
@@ -156,8 +156,8 @@ public class BoardImpl implements Board {
 
     private void checkForMatches() {
         displayBoard();
-        ArrayList<LinkedList<Tile>> matchingRows = checker.checkRows(this);
-        ArrayList<LinkedList<Tile>> matchingColumns = checker.checkColumns(this);
+        ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
+        ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
         System.out.println();
 
         System.out.println("Rows with consecutive emoticons:");

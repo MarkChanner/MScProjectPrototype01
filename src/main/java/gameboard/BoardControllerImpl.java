@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * @author Mark Channer
  */
-public class LogicCheckerImpl implements LogicChecker {
+public class BoardControllerImpl implements BoardController {
 
     @Override
     public ArrayList<LinkedList<Tile>> checkRows(Board board) {

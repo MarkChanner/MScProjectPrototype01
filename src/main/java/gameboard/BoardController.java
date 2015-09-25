@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Mark Channer
  */
-public interface LogicChecker {
+public interface BoardController {
 
     ArrayList<LinkedList<Tile>> checkRows(Board b);
 
