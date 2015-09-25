@@ -157,7 +157,7 @@ public class BoardImpl implements Board {
 
     @Override
     public boolean matchingTypes() {
-        return ((tiles[t1[ROW]][t1[COL]].getGamePiece().equals(tiles[t2[ROW]][t2[COL]].getGamePiece())));
+        return ((tiles[t1[ROW]][t1[COL]].getPieceType().equals(tiles[t2[ROW]][t2[COL]].getPieceType())));
     }
 
     @Override
