@@ -1,6 +1,6 @@
 package gameboard;
 
-import gamepieces.GamePiece;
+import gamepieces.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -181,6 +181,8 @@ public class BoardImpl implements Board {
         /** Remove Duplicates */
         removeDuplicates(matchingRows, matchingColumns);
         printList("rowList without duplicates", matchingRows);
+        shiftColumnIconsDown(matchingColumns);
+        displayBoard();
     }
 
     private void removeDuplicates(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
@@ -188,14 +190,30 @@ public class BoardImpl implements Board {
             columns.forEach(rowList::removeAll);
         }
     }
-    
-    private void removeIconsAndShiftDown(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
-        int adjustment = 0;
+
+    private void shiftColumnIconsDown(ArrayList<LinkedList<Tile>> columns) {
+        int adjustment;
+        int row = 0;
+        int col = 0;
         for (List<Tile> list : columns) {
             adjustment = list.size();
-            for (Tile emptyTile : list) {
-                int emptyRow = emptyTile.getRow();
-                int emptyColumn = emptyTile.getColumn();
+            for (Tile tile : list) {
+                row = tile.getRow();
+                col = tile.getColumn();
+                if ((row - adjustment) < 0) {
+                    tiles[row][col].setGamePiece(new HappyGamePiece("69"));
+                } else {
+                    tiles[row][col].setGamePiece(tiles[(row - adjustment)][col].getGamePiece());
+                }
+            }
+            row--;
+            while (row >= 0) {
+                if ((row - adjustment) < 0) {
+                    tiles[row][col].setGamePiece(new HappyGamePiece("69"));
+                } else {
+                    tiles[row][col].setGamePiece(tiles[(row - adjustment)][col].getGamePiece());
+                }
+                row--;
             }
         }
     }

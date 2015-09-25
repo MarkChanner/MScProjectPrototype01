@@ -25,11 +25,16 @@ public class BoardPopulator {
         tiles[5][1] = new TileImpl(5, 1, new HappyGamePiece("00"));
         tiles[4][1] = new TileImpl(4, 1, new HappyGamePiece("00"));
         tiles[3][1] = new TileImpl(3, 1, new HappyGamePiece("00"));
+        tiles[2][1] = new TileImpl(2, 1, new HappyGamePiece("00"));
 
         tiles[5][0] = new TileImpl(5, 0, new HappyGamePiece("00"));
         tiles[5][1] = new TileImpl(5, 1, new HappyGamePiece("00"));
         tiles[5][2] = new TileImpl(5, 2, new HappyGamePiece("00"));
+        tiles[4][2] = new TileImpl(4, 2, new HappyGamePiece("00"));
 
+        tiles[0][6] = new TileImpl(0, 6, new HappyGamePiece("00"));
+        tiles[1][6] = new TileImpl(1, 6, new HappyGamePiece("00"));
+        tiles[2][6] = new TileImpl(2, 6, new HappyGamePiece("00"));
     }
 }
                /* if (row % 2 == 0) {
