@@ -23,7 +23,7 @@ public class Game {
         board.populateBoard();
         board.displayBoard();
         System.out.println();
-        board.selectTile(3, 3);
-        board.selectTile(3, 4);
+        board.selectTile(6, 1);
+        board.selectTile(6, 2);
     }
 }

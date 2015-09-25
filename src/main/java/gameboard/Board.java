@@ -1,5 +1,8 @@
 package gameboard;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  * @author Mark Channer
  *         The Board on which the game will take place
@@ -33,4 +36,5 @@ public interface Board {
     boolean matchingTypes();
 
     void checkForMatches();
+
 }

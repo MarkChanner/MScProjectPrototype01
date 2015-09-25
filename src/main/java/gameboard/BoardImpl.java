@@ -182,31 +182,30 @@ public class BoardImpl implements Board {
             }
             System.out.println();
         }
-        printList("colList", matchingColumns);
+        //System.out.println();
         printList("rowList", matchingRows);
+        //System.out.println();
+        printList("colList", matchingColumns);
+
         /** Remove Duplicates */
-        for (List<Tile> rowList : matchingRows) {
-            for (List<Tile> colList : matchingColumns) {
-                rowList.removeAll(colList);
-            }
-        }
+        removeDuplicates(matchingRows, matchingColumns);
         printList("rowList without duplicates", matchingRows);
+    }
 
-
+    private void removeDuplicates(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
+        for (List<Tile> rowList : rows) {
+            columns.forEach(rowList::removeAll);
+        }
     }
 
     public void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
+        System.out.println();
         System.out.println(title);
         for (List<Tile> colList : bigList) {
             for (Tile t : colList) {
-                System.out.print(t.getPieceType() + " ");
+                System.out.print(t.getPieceType() + "(" + t.getCoordinates()[0] + "," + t.getCoordinates()[1] + ") ");
             }
             System.out.println();
         }
-
     }
-
-    /*public void removeDuplicates() {
-
-    }*/
 }

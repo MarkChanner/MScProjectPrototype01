@@ -4,7 +4,7 @@ import gamepieces.*;
 
 /**
  * @author Mark Channer
- * Populates the gameboard.
+ *         Populates the gameboard.
  */
 public class BoardPopulator {
 
@@ -13,9 +13,26 @@ public class BoardPopulator {
     }
 
     public void populate(Tile[][] tiles, int rows, int cols) {
+        int counter = 10;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                if (row % 2 == 0) {
+                /** Populates the board with X for testing visual output */
+                tiles[row][col] = new TileImpl(row, col, new HappyGamePiece("" + counter));
+                counter++;
+            }
+        }
+        tiles[6][1] = new TileImpl(6, 1, new HappyGamePiece("00"));
+        tiles[5][1] = new TileImpl(5, 1, new HappyGamePiece("00"));
+        tiles[4][1] = new TileImpl(4, 1, new HappyGamePiece("00"));
+        tiles[3][1] = new TileImpl(3, 1, new HappyGamePiece("00"));
+
+        tiles[5][0] = new TileImpl(5, 0, new HappyGamePiece("00"));
+        tiles[5][1] = new TileImpl(5, 1, new HappyGamePiece("00"));
+        tiles[5][2] = new TileImpl(5, 2, new HappyGamePiece("00"));
+
+    }
+}
+               /* if (row % 2 == 0) {
                     if (col == 0) {
                         tiles[row][col] = new TileImpl(row, col, new AngryGamePiece("A"));
                     } else if (col == 1) {
@@ -49,7 +66,6 @@ public class BoardPopulator {
                     }
                 }
             }
-        }
         tiles[0][0] = new TileImpl(0, 0, new AngryGamePiece("H"));
         tiles[1][0] = new TileImpl(1, 0, new AngryGamePiece("H"));
         tiles[1][1] = new TileImpl(1, 1, new AngryGamePiece("H"));
@@ -79,6 +95,4 @@ public class BoardPopulator {
         tiles[1][2] = new TileImpl(1, 2, new HappyGamePiece("H"));
         tiles[1][3] = new TileImpl(1, 3, new HappyGamePiece("H"));
         tiles[2][6] = new TileImpl(2, 6, new HappyGamePiece("X"));
-        tiles[5][6] = new TileImpl(5, 6, new AngryGamePiece("C"));
-    }
-}
+        tiles[5][6] = new TileImpl(5, 6, new AngryGamePiece("C"));*/
