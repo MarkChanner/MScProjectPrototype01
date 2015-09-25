@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface LogicChecker {
 
-    ArrayList<LinkedList<GamePiece>> checkRows();
+    ArrayList<LinkedList<GamePiece>> checkRows(Board b);
 
-    ArrayList<LinkedList<GamePiece>> checkColumns();
+    ArrayList<LinkedList<GamePiece>> checkColumns(Board b);
 }

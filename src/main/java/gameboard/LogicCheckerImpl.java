@@ -3,7 +3,6 @@ package gameboard;
 import gamepieces.*;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -11,35 +10,25 @@ import java.util.ArrayList;
  */
 public class LogicCheckerImpl implements LogicChecker {
 
-    private Board board;
-    private Tile[][] tiles;
-    private int rows;
-    private int cols;
-
-    public LogicCheckerImpl(Board b) {
-        board = b;
-        tiles = board.getAllTiles();
-        rows = board.getRows();
-        cols = board.getColumns();
-    }
-
     @Override
-    public ArrayList<LinkedList<GamePiece>> checkRows() {
+    public ArrayList<LinkedList<GamePiece>> checkRows(Board board) {
+        Tile[][] tiles = board.getAllTiles();
+        int boardSize = board.getSize();
 
         LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
         ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
         GamePiece gamePiece;
-        for (int row = (rows - 1); row >= 0; row--) {
+        for (int row = (boardSize - 1); row >= 0; row--) {
             consecutivePieces.add(tiles[row][0].getGamePiece());
 
-            for (int col = 1; col < cols; col++) {
+            for (int col = 1; col < boardSize; col++) {
                 gamePiece = tiles[row][col].getGamePiece();
                 if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
                 }
                 consecutivePieces.add(gamePiece);
-                if (col == cols - 1) {
+                if (col == boardSize - 1) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
                 }
@@ -48,22 +37,18 @@ public class LogicCheckerImpl implements LogicChecker {
         return bigList;
     }
 
-    private void examineList(LinkedList<GamePiece> consecutivePieces, ArrayList<LinkedList<GamePiece>> bigList) {
-        if (consecutivePieces.size() >= 3) {
-            bigList.add(consecutivePieces);
-        }
-    }
-
     @Override
-    public ArrayList<LinkedList<GamePiece>> checkColumns() {
+    public ArrayList<LinkedList<GamePiece>> checkColumns(Board board) {
+        Tile[][] tiles = board.getAllTiles();
+        int boardSize = board.getSize();
 
         LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
         ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
         GamePiece gamePiece;
-        for (int col = 0; col < cols; col++) {
-            consecutivePieces.add(tiles[rows - 1][col].getGamePiece());
+        for (int col = 0; col < boardSize; col++) {
+            consecutivePieces.add(tiles[boardSize - 1][col].getGamePiece());
 
-            for (int row = (rows - 2); row >= 0; row--) {
+            for (int row = (boardSize - 2); row >= 0; row--) {
                 gamePiece = tiles[row][col].getGamePiece();
                 if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
                     examineList(consecutivePieces, bigList);
@@ -77,5 +62,11 @@ public class LogicCheckerImpl implements LogicChecker {
             }
         }
         return bigList;
+    }
+
+    private void examineList(LinkedList<GamePiece> consecutivePieces, ArrayList<LinkedList<GamePiece>> bigList) {
+        if (consecutivePieces.size() >= 3) {
+            bigList.add(consecutivePieces);
+        }
     }
 }

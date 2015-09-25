@@ -12,6 +12,8 @@ public interface Board {
 
     int getColumns();
 
+    int getSize();
+
     Tile[][] getAllTiles();
 
     void displayBoard();

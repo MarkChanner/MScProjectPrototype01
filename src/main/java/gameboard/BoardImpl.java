@@ -14,6 +14,7 @@ public class BoardImpl implements Board {
 
     private static final int ROW = 1;
     private static final int COL = 0;
+    private final int size;
     private final int rows;
     private final int columns;
     private boolean firstTileSelected;
@@ -22,18 +23,24 @@ public class BoardImpl implements Board {
     private int[] t1 = new int[2];
     private int[] t2 = new int[2];
 
-    public BoardImpl(int size) {
+    public BoardImpl(int boardSize) {
+        size = boardSize;
         rows = size;
         columns = size;
         firstTileSelected = false;
         tiles = new TileImpl[rows][columns];
-        checker = new LogicCheckerImpl(this);
+        checker = new LogicCheckerImpl();
     }
 
     @Override
     public void populateBoard() {
         new BoardPopulator(tiles, rows, columns);
         resetBothTiles();
+    }
+
+    @Override
+    public int getSize() {
+        return size;
     }
 
     @Override
@@ -156,8 +163,8 @@ public class BoardImpl implements Board {
     @Override
     public void checkForMatches() {
         displayBoard();
-        ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows();
-        ArrayList<LinkedList<GamePiece>> matchingColumns = checker.checkColumns();
+        ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows(this);
+        ArrayList<LinkedList<GamePiece>> matchingColumns = checker.checkColumns(this);
         System.out.println();
 
         System.out.println("Rows with consecutive emoticons:");
