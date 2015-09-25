@@ -163,24 +163,50 @@ public class BoardImpl implements Board {
     @Override
     public void checkForMatches() {
         displayBoard();
-        ArrayList<LinkedList<GamePiece>> matchingRows = checker.checkRows(this);
-        ArrayList<LinkedList<GamePiece>> matchingColumns = checker.checkColumns(this);
+        ArrayList<LinkedList<Tile>> matchingRows = checker.checkRows(this);
+        ArrayList<LinkedList<Tile>> matchingColumns = checker.checkColumns(this);
         System.out.println();
 
         System.out.println("Rows with consecutive emoticons:");
-        for (LinkedList<GamePiece> list : matchingRows) {
-            for (GamePiece gp : list) {
-                System.out.print(gp.showType() + "(" + gp.getCoordinates()[0] + "," + gp.getCoordinates()[1] + ") ");
+        for (LinkedList<Tile> list : matchingRows) {
+            for (Tile t : list) {
+                System.out.print(t.getPieceType() + "(" + t.getCoordinates()[0] + "," + t.getCoordinates()[1] + ") ");
             }
             System.out.println();
         }
         System.out.println();
         System.out.println("Columns with consecutive emoticons:");
-        for (LinkedList<GamePiece> list : matchingColumns) {
-            for (GamePiece gp : list) {
-                System.out.print(gp.showType() + "(" + gp.getCoordinates()[0] + "," + gp.getCoordinates()[1] + ") ");
+        for (LinkedList<Tile> list : matchingColumns) {
+            for (Tile t : list) {
+                System.out.print(t.getPieceType() + "(" + t.getCoordinates()[0] + "," + t.getCoordinates()[1] + ") ");
             }
             System.out.println();
         }
+        printList("colList", matchingColumns);
+        printList("rowList", matchingRows);
+        /** Remove Duplicates */
+        for (List<Tile> rowList : matchingRows) {
+            for (List<Tile> colList : matchingColumns) {
+                rowList.removeAll(colList);
+            }
+        }
+        printList("rowList without duplicates", matchingRows);
+
+
     }
+
+    public void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
+        System.out.println(title);
+        for (List<Tile> colList : bigList) {
+            for (Tile t : colList) {
+                System.out.print(t.getPieceType() + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    /*public void removeDuplicates() {
+
+    }*/
 }

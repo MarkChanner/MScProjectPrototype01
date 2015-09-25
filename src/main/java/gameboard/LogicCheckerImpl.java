@@ -1,7 +1,5 @@
 package gameboard;
 
-import gamepieces.*;
-
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -11,26 +9,26 @@ import java.util.ArrayList;
 public class LogicCheckerImpl implements LogicChecker {
 
     @Override
-    public ArrayList<LinkedList<GamePiece>> checkRows(Board board) {
+    public ArrayList<LinkedList<Tile>> checkRows(Board board) {
         Tile[][] tiles = board.getAllTiles();
         int boardSize = board.getSize();
+        LinkedList<Tile> consecutiveTiles = new LinkedList<>();
+        ArrayList<LinkedList<Tile>> bigList = new ArrayList<>();
+        Tile tile;
 
-        LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
-        ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
-        GamePiece gamePiece;
         for (int row = (boardSize - 1); row >= 0; row--) {
-            consecutivePieces.add(tiles[row][0].getGamePiece());
+            consecutiveTiles.add(tiles[row][0]);
 
             for (int col = 1; col < boardSize; col++) {
-                gamePiece = tiles[row][col].getGamePiece();
-                if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
-                    examineList(consecutivePieces, bigList);
-                    consecutivePieces = new LinkedList<>();
+                tile = tiles[row][col];
+                if (!tile.getPieceType().equals(consecutiveTiles.getLast().getPieceType())) {
+                    examineList(consecutiveTiles, bigList);
+                    consecutiveTiles = new LinkedList<>();
                 }
-                consecutivePieces.add(gamePiece);
+                consecutiveTiles.add(tile);
                 if (col == boardSize - 1) {
-                    examineList(consecutivePieces, bigList);
-                    consecutivePieces = new LinkedList<>();
+                    examineList(consecutiveTiles, bigList);
+                    consecutiveTiles = new LinkedList<>();
                 }
             }
         }
@@ -38,23 +36,23 @@ public class LogicCheckerImpl implements LogicChecker {
     }
 
     @Override
-    public ArrayList<LinkedList<GamePiece>> checkColumns(Board board) {
+    public ArrayList<LinkedList<Tile>> checkColumns(Board board) {
         Tile[][] tiles = board.getAllTiles();
         int boardSize = board.getSize();
 
-        LinkedList<GamePiece> consecutivePieces = new LinkedList<>();
-        ArrayList<LinkedList<GamePiece>> bigList = new ArrayList<>();
-        GamePiece gamePiece;
+        LinkedList<Tile> consecutivePieces = new LinkedList<>();
+        ArrayList<LinkedList<Tile>> bigList = new ArrayList<>();
+        Tile tile;
         for (int col = 0; col < boardSize; col++) {
-            consecutivePieces.add(tiles[boardSize - 1][col].getGamePiece());
+            consecutivePieces.add(tiles[boardSize - 1][col]);
 
             for (int row = (boardSize - 2); row >= 0; row--) {
-                gamePiece = tiles[row][col].getGamePiece();
-                if (!gamePiece.showType().equals(consecutivePieces.getLast().showType())) {
+                tile = tiles[row][col];
+                if (!tile.getPieceType().equals(consecutivePieces.getLast().getPieceType())) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
                 }
-                consecutivePieces.add(gamePiece);
+                consecutivePieces.add(tile);
                 if (row == 0) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
@@ -64,7 +62,7 @@ public class LogicCheckerImpl implements LogicChecker {
         return bigList;
     }
 
-    private void examineList(LinkedList<GamePiece> consecutivePieces, ArrayList<LinkedList<GamePiece>> bigList) {
+    private void examineList(LinkedList<Tile> consecutivePieces, ArrayList<LinkedList<Tile>> bigList) {
         if (consecutivePieces.size() >= 3) {
             bigList.add(consecutivePieces);
         }
