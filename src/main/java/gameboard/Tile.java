@@ -9,7 +9,9 @@ import gamepieces.GamePiece;
  */
 public interface Tile {
 
-    int[] getCoordinates();
+    int getRow();
+
+    int getColumn();
 
     GamePiece getGamePiece();
 

@@ -34,10 +34,10 @@ public class TileImplTest {
 
     @Test
     public void testGetCoordinates() {
-        int[] output = tile.getCoordinates();
+        int output = tile.getRow();
         int expected = 7;
-        assertEquals(expected, output[0]);
-        assertEquals(expected, output[1]);
+        assertEquals(expected, output);
+        assertEquals(expected, output);
     }
 
     @Test

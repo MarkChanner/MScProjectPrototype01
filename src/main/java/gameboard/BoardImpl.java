@@ -163,7 +163,7 @@ public class BoardImpl implements Board {
         System.out.println("Rows with consecutive emoticons:");
         for (LinkedList<Tile> list : matchingRows) {
             for (Tile t : list) {
-                System.out.print(t.getPieceType() + "(" + t.getCoordinates()[0] + "," + t.getCoordinates()[1] + ") ");
+                System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
             }
             System.out.println();
         }
@@ -171,7 +171,7 @@ public class BoardImpl implements Board {
         System.out.println("Columns with consecutive emoticons:");
         for (LinkedList<Tile> list : matchingColumns) {
             for (Tile t : list) {
-                System.out.print(t.getPieceType() + "(" + t.getCoordinates()[0] + "," + t.getCoordinates()[1] + ") ");
+                System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
             }
             System.out.println();
         }
@@ -188,13 +188,24 @@ public class BoardImpl implements Board {
             columns.forEach(rowList::removeAll);
         }
     }
+    
+    private void removeIconsAndShiftDown(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
+        int adjustment = 0;
+        for (List<Tile> list : columns) {
+            adjustment = list.size();
+            for (Tile emptyTile : list) {
+                int emptyRow = emptyTile.getRow();
+                int emptyColumn = emptyTile.getColumn();
+            }
+        }
+    }
 
     private void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
         System.out.println();
         System.out.println(title);
         for (List<Tile> colList : bigList) {
             for (Tile t : colList) {
-                System.out.print(t.getPieceType() + "(" + t.getCoordinates()[0] + "," + t.getCoordinates()[1] + ") ");
+                System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
             }
             System.out.println();
         }

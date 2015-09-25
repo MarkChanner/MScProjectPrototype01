@@ -4,13 +4,9 @@ import gamepieces.GamePiece;
 
 /**
  * @author Mark Channer
- * ileImpl extends AbstractTile
+ *
  */
 public class TileImpl implements Tile {
-
-    /*public TileImpl(int row, int col, GamePiece gp) {
-        super(row, col, gp);
-    }*/
 
     private int row;
     private int column;
@@ -24,11 +20,13 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public int[] getCoordinates() {
-        int[] location = new int[2];
-        location[0] = row;
-        location[1] = column;
-        return location;
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public int getColumn() {
+        return column;
     }
 
     @Override
@@ -46,5 +44,4 @@ public class TileImpl implements Tile {
     public String getPieceType() {
         return piece.showType();
     }
-
 }
