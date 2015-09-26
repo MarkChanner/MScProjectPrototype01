@@ -20,8 +20,8 @@ public class BoardImpl implements Board {
     private boolean firstTileSelected;
     private Tile[][] tiles;
     private BoardController controller;
-    private int[] t1 = new int[2];
-    private int[] t2 = new int[2];
+    private int[] tile1 = new int[2];
+    private int[] tile2 = new int[2];
 
     public BoardImpl(int boardSize) {
         size = boardSize;
@@ -79,12 +79,12 @@ public class BoardImpl implements Board {
         if (!firstTileSelected) {
             System.out.println("Tile 1: (" + row + "," + column + ")");
             firstTileSelected = true;
-            t1[ROW] = row;
-            t1[COL] = column;
+            tile1[ROW] = row;
+            tile1[COL] = column;
         } else {
             System.out.println("Tile 2: (" + row + "," + column + ")");
-            t2[ROW] = row;
-            t2[COL] = column;
+            tile2[ROW] = row;
+            tile2[COL] = column;
             compareTiles();
         }
     }
@@ -96,10 +96,10 @@ public class BoardImpl implements Board {
                 swap();
             } else {
                 System.out.println("Selected tiles are NOT adjacent. Last tile selected now first selected tile");
-                t1[ROW] = t2[ROW];
-                t1[COL] = t2[COL];
-                t2[ROW] = -5;
-                t2[COL] = -5;
+                tile1[ROW] = tile2[ROW];
+                tile1[COL] = tile2[COL];
+                tile2[ROW] = -5;
+                tile2[COL] = -5;
             }
         } else {
             System.out.println("Same tile selected twice. Resetting.");
@@ -109,17 +109,17 @@ public class BoardImpl implements Board {
     }
 
     private boolean sameTileSelectedTwice() {
-        return ((t1[ROW] == t2[ROW]) && (t1[COL] == t2[COL]));
+        return ((tile1[ROW] == tile2[ROW]) && (tile1[COL] == tile2[COL]));
     }
 
     private boolean selectedTilesAreAdjacent() {
-        if (t1[ROW] == t2[ROW]) {
-            if (t1[COL] == (t2[COL] + 1) || t1[COL] == (t2[COL] - 1)) {
+        if (tile1[ROW] == tile2[ROW]) {
+            if (tile1[COL] == (tile2[COL] + 1) || tile1[COL] == (tile2[COL] - 1)) {
                 return true;
             }
         } else {
-            if (t1[COL] == t2[COL]) {
-                if (t1[ROW] == (t2[ROW] + 1) || t1[ROW] == (t2[ROW] - 1)) {
+            if (tile1[COL] == tile2[COL]) {
+                if (tile1[ROW] == (tile2[ROW] + 1) || tile1[ROW] == (tile2[ROW] - 1)) {
                     return true;
                 }
             }
@@ -129,29 +129,29 @@ public class BoardImpl implements Board {
 
     private void resetBothTiles() {
         firstTileSelected = false;
-        t1[ROW] = -1;
-        t1[COL] = -1;
-        t2[ROW] = -5;
-        t2[COL] = -5;
+        tile1[ROW] = -1;
+        tile1[COL] = -1;
+        tile2[ROW] = -5;
+        tile2[COL] = -5;
     }
 
     private void swap() {
-        System.out.println("Pre: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() + ", Second tile: " +
-                tiles[t2[ROW]][t2[COL]].getPieceType());
+        System.out.println("Pre: First tile: " + tiles[tile1[ROW]][tile1[COL]].getPieceType() + ", Second tile: " +
+                tiles[tile2[ROW]][tile2[COL]].getPieceType());
         if (matchingTypes()) {
             System.out.println("Both tiles contains same game piece type. Abandoning swap");
         } else {
-            GamePiece tempPiece = tiles[t1[ROW]][t1[COL]].getGamePiece();
-            tiles[t1[ROW]][t1[COL]].setGamePiece(tiles[t2[ROW]][t2[COL]].getGamePiece());
-            tiles[t2[ROW]][t2[COL]].setGamePiece(tempPiece);
-            System.out.println("Post: First tile: " + tiles[t1[ROW]][t1[COL]].getPieceType() +
-                    ", Second tile: " + tiles[t2[ROW]][t2[COL]].getPieceType());
+            GamePiece tempPiece = tiles[tile1[ROW]][tile1[COL]].getGamePiece();
+            tiles[tile1[ROW]][tile1[COL]].setGamePiece(tiles[tile2[ROW]][tile2[COL]].getGamePiece());
+            tiles[tile2[ROW]][tile2[COL]].setGamePiece(tempPiece);
+            System.out.println("Post: First tile: " + tiles[tile1[ROW]][tile1[COL]].getPieceType() +
+                    ", Second tile: " + tiles[tile2[ROW]][tile2[COL]].getPieceType());
             checkForMatches();
         }
     }
 
     private boolean matchingTypes() {
-        return ((tiles[t1[ROW]][t1[COL]].getPieceType().equals(tiles[t2[ROW]][t2[COL]].getPieceType())));
+        return ((tiles[tile1[ROW]][tile1[COL]].getPieceType().equals(tiles[tile2[ROW]][tile2[COL]].getPieceType())));
     }
 
     private void checkForMatches() {
