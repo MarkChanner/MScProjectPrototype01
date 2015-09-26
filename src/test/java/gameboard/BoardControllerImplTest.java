@@ -3,7 +3,6 @@ package gameboard;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
-import gamepieces.GamePiece;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * @author Mark Channer
  */
-public class LogicCheckerImplTest {
+public class BoardControllerImplTest {
 
     @Test
     public void testCheckRows() throws Exception {
@@ -37,10 +36,6 @@ public class LogicCheckerImplTest {
                 consecutivePieces.add(gamePiece); // add "A" to the list and loop
             }
         }
-
-        //assertEquals(3, bigList.size());
-
-
     }
 
     @Test
