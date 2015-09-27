@@ -93,5 +93,21 @@ public class BoardImplTest {
 
         assertEquals("58", tiles[6][5].getPieceType());
         assertEquals("57", tiles[6][6].getPieceType());
+
+    }
+
+    @Test
+    public void testShiftRowIconsDown() throws Exception {
+        Tile[][] tiles = board.getAllTiles();
+        assertEquals("--", tiles[5][0].getPieceType());
+        assertEquals("--", tiles[5][1].getPieceType());
+        assertEquals("--", tiles[5][2].getPieceType());
+
+        board.selectTile(6, 5);
+        board.selectTile(6, 6);
+
+        assertEquals("38", tiles[5][0].getPieceType());
+        assertEquals("11", tiles[5][1].getPieceType());
+        assertEquals("40", tiles[5][2].getPieceType());
     }
 }
