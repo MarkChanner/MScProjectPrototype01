@@ -11,36 +11,87 @@ import static org.junit.Assert.*;
  */
 public class BoardImplTest {
 
-    private Board board;
-    private int[] t1;
-    private int[] t2;
+    private int rows = 7;
+    private int cols = 7;
+    private BoardImpl board;
 
     @Before
     public void setUp() throws Exception {
-        t1 = new int[2];
-        t2 = new int[2];
-        int size = 7;
-        board = new BoardImpl(size);
+        rows = 7;
+        cols = 7;
+        board = new BoardImpl(rows);
+        board.populateBoard();
     }
 
     @After
     public void tearDown() throws Exception {
         board = null;
-        t1 = null;
-        t2 = null;
     }
 
     @Test
     public void testGetRows() throws Exception {
-        int output =  board.getRows();
-        int expected = 7;
-        assertEquals(output, expected);
+        assertEquals(7, board.getRows());
     }
 
     @Test
     public void testGetColumns() throws Exception {
-        int output = board.getRows();
-        int expected = 7;
-        assertEquals(output, expected);
+        assertEquals(7, board.getColumns());
+    }
+
+    @Test
+    public void testGetAllTiles() throws Exception {
+        Tile[][] tiles = board.getAllTiles();
+        assertEquals(7, tiles.length);
+        assertEquals(7, tiles[0].length);
+    }
+
+    @Test
+    public void testSwap() throws Exception {
+        Tile[][] tiles = board.getAllTiles();
+        assertEquals("35", tiles[3][4].getPieceType());
+        assertEquals("36", tiles[3][5].getPieceType());
+        board.selectTile(3, 4);
+        board.selectTile(3, 5);
+        assertEquals("36", tiles[3][4].getPieceType());
+        assertEquals("35", tiles[3][5].getPieceType());
+    }
+
+    @Test
+    public void testShiftColumnIconsDown() throws Exception {
+        Tile[][] tiles = board.getAllTiles();
+        assertEquals("--", tiles[6][1].getPieceType());
+        assertEquals("--", tiles[5][1].getPieceType());
+        assertEquals("--", tiles[4][1].getPieceType());
+        assertEquals("--", tiles[3][1].getPieceType());
+        assertEquals("--", tiles[2][1].getPieceType());
+        assertEquals("18", tiles[1][1].getPieceType());
+        assertEquals("11", tiles[0][1].getPieceType());
+
+        assertEquals("--", tiles[0][6].getPieceType());
+        assertEquals("--", tiles[1][6].getPieceType());
+        assertEquals("--", tiles[2][6].getPieceType());
+        assertEquals("37", tiles[3][6].getPieceType());
+
+        assertEquals("57", tiles[6][5].getPieceType());
+        assertEquals("58", tiles[6][6].getPieceType());
+
+        board.selectTile(6, 5);
+        board.selectTile(6, 6);
+
+        assertEquals("18", tiles[6][1].getPieceType());
+        assertEquals("11", tiles[5][1].getPieceType());
+        assertEquals("NP", tiles[4][1].getPieceType());
+        assertEquals("NP", tiles[3][1].getPieceType());
+        assertEquals("NP", tiles[2][1].getPieceType());
+        assertEquals("NP", tiles[1][1].getPieceType());
+        assertEquals("NP", tiles[0][1].getPieceType());
+
+        assertEquals("NP", tiles[0][6].getPieceType());
+        assertEquals("NP", tiles[1][6].getPieceType());
+        assertEquals("NP", tiles[2][6].getPieceType());
+        assertEquals("37", tiles[3][6].getPieceType());
+
+        assertEquals("58", tiles[6][5].getPieceType());
+        assertEquals("57", tiles[6][6].getPieceType());
     }
 }
