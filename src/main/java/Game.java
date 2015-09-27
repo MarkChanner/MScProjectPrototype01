@@ -2,6 +2,9 @@
 import gameboard.Board;
 import gameboard.BoardImpl;
 
+import java.util.Scanner;
+
+
 /**
  * @author Mark Channer
  */
@@ -16,14 +19,34 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game();
-        game.start();
+        game.takeCommands();
+       // game.start();
     }
 
-    public void start() {
+    private void start() {
         board.populateBoard();
         board.displayBoard();
         System.out.println();
-        board.selectTile(6, 1);
-        board.selectTile(6, 2);
+        board.selectTile(3, 4);
+        board.selectTile(3, 5);
+    }
+
+    private void takeCommands() {
+        board.populateBoard();
+        board.displayBoard();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter coordintes of tile on board (q to quit)");
+        String command;
+        String[] coordinates;
+        do {
+            command = input.nextLine();
+            coordinates = command.split(",");
+            if (!coordinates[0].equals("q")) {
+                Integer x = Integer.parseInt(coordinates[0]);
+                Integer y = Integer.parseInt(coordinates[1]);
+                board.selectTile(x, y);
+            }
+
+        } while (!command.toString().equals("q")); // toString() redundant
     }
 }
