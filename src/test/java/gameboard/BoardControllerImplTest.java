@@ -3,6 +3,7 @@ package gameboard;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,34 +13,50 @@ import static org.junit.Assert.*;
  */
 public class BoardControllerImplTest {
 
-    @Test
-    public void testCheckRows() throws Exception {
-        LinkedList<String> consecutivePieces = new LinkedList<>();
-        ArrayList<LinkedList<String>> bigList = new ArrayList<>();
-        String gamePiece;
-        String[] tiles = {"H", "A", "C", "C", "C", "S", "E"};
-        assertEquals(tiles[0], "H");
-        assertEquals(tiles[6], "E");
+    private int size = 7;
+    private Board board;
+    BoardController controller;
 
-        gamePiece = tiles[0]; // gamePiece is "H"
-        consecutivePieces.add(gamePiece);// adds "H" to the List
-        for (int col = 1; col < 7; col++) {
-            gamePiece = tiles[col]; // gamePiece is "A"
-            /* if "A" is not equal to "H" */
-            if (!gamePiece.equals(consecutivePieces.getLast())) {
-                /* if List is 3 or more, add the List to bigList*/
-                if (consecutivePieces.size() >= 3) {
-                    bigList.add(consecutivePieces);
-                    assertEquals(1, bigList.size());
-                }
-                consecutivePieces.clear();// wipe the list regardless
-                consecutivePieces.add(gamePiece); // add "A" to the list and loop
-            }
-        }
+    @Before
+    public void setUp() throws Exception {
+        board = new BoardImpl(size);
+        board.populateBoard();
+        controller = new BoardControllerImpl();
     }
 
     @Test
-    public void testExamineList() throws Exception {
+    public void testCheckRows() throws Exception {
+        ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(board);
+        LinkedList<Tile> list = matchingRows.get(0);
+        assertEquals(list.get(0).getRow(), 5);
+        assertEquals(list.get(0).getColumn(), 0);
+        assertEquals(list.get(1).getRow(), 5);
+        assertEquals(list.get(1).getColumn(), 1);
+        assertEquals(list.get(2).getRow(), 5);
+        assertEquals(list.get(2).getColumn(), 2);
+    }
 
+    @Test
+    public void testCheckColumns() throws Exception {
+        ArrayList<LinkedList<Tile>> matchingCols = controller.checkRows(board);
+        LinkedList<Tile> list = matchingCols.get(0);
+        assertEquals(list.get(0).getRow(), 6);
+        assertEquals(list.get(0).getColumn(), 1);
+        assertEquals(list.get(1).getRow(), 5);
+        assertEquals(list.get(1).getColumn(), 1);
+        assertEquals(list.get(2).getRow(), 4);
+        assertEquals(list.get(2).getColumn(), 1);
+        assertEquals(list.get(3).getRow(), 3);
+        assertEquals(list.get(3).getColumn(), 1);
+        assertEquals(list.get(4).getRow(), 2);
+        assertEquals(list.get(4).getColumn(), 1);
+
+        list = matchingCols.get(1);
+        assertEquals(list.get(0).getRow(), 2);
+        assertEquals(list.get(0).getColumn(), 6);
+        assertEquals(list.get(1).getRow(), 1);
+        assertEquals(list.get(1).getColumn(), 6);
+        assertEquals(list.get(2).getRow(), 0);
+        assertEquals(list.get(2).getColumn(), 6);
     }
 }
