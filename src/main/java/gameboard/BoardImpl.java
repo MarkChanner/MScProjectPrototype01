@@ -35,7 +35,7 @@ public class BoardImpl implements Board {
     @Override
     public void populateBoard() {
         new BoardPopulator(tiles, rows, columns);
-        resetBothTiles();
+        resetSelections();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class BoardImpl implements Board {
     private void compareTiles() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
-                swap();
+                attemptSwap();
             } else {
                 System.out.println("Selected tiles are NOT adjacent. Last tile selected now first selected tile");
                 selection01[X] = selection02[X];
@@ -102,8 +102,7 @@ public class BoardImpl implements Board {
             }
         } else {
             System.out.println("Same tile selected twice. Resetting.");
-            firstSelectionMade = false;
-            resetBothTiles();
+            resetSelections();
         }
     }
 
@@ -126,7 +125,7 @@ public class BoardImpl implements Board {
         return false;
     }
 
-    private void resetBothTiles() {
+    private void resetSelections() {
         firstSelectionMade = false;
         selection01[X] = -1;
         selection01[Y] = -1;
@@ -134,11 +133,11 @@ public class BoardImpl implements Board {
         selection02[Y] = -5;
     }
 
-    private void swap() {
+    private void attemptSwap() {
         System.out.println("Pre: First tile: " + tiles[selection01[X]][selection01[Y]].getPieceType()
                 + ", Second tile: " + tiles[selection02[X]][selection02[Y]].getPieceType());
         if (matchingTypes()) {
-            System.out.println("Both tiles contains same game piece type. Abandoning swap");
+            System.out.println("Both tiles contains same game piece type. Abandoning attemptSwap");
         } else {
             GamePiece tempPiece = tiles[selection01[X]][selection01[Y]].getGamePiece();
             tiles[selection01[X]][selection01[Y]].setGamePiece(tiles[selection02[X]][selection02[Y]].getGamePiece());
@@ -157,35 +156,44 @@ public class BoardImpl implements Board {
         displayBoard();
         ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
         ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
-        System.out.println();
 
-        System.out.println("Rows with consecutive emoticons:");
-        for (LinkedList<Tile> list : matchingRows) {
-            for (Tile t : list) {
-                System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
+        if (matchingRows.isEmpty() && matchingColumns.isEmpty()) {
+            System.out.println("That operation does not lead to 3 or more consecutive emoticons. Aborting operation");
+            GamePiece tempPiece = tiles[selection01[X]][selection01[Y]].getGamePiece();
+            tiles[selection01[X]][selection01[Y]].setGamePiece(tiles[selection02[X]][selection02[Y]].getGamePiece());
+            tiles[selection02[X]][selection02[Y]].setGamePiece(tempPiece);
+            resetSelections();
+        } else {
+            System.out.println("Rows with consecutive emoticons:");
+            for (LinkedList<Tile> list : matchingRows) {
+                for (Tile t : list) {
+                    System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
+                }
+                System.out.println();
             }
-            System.out.println();
-        }
-        printList("rowList", matchingRows);
+            printList("rowList", matchingRows);
 
-        System.out.println();
-        System.out.println("Columns with consecutive emoticons:");
-        for (LinkedList<Tile> list : matchingColumns) {
-            for (Tile t : list) {
-                System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
+            System.out.println();
+            System.out.println("Columns with consecutive emoticons:");
+            for (LinkedList<Tile> list : matchingColumns) {
+                for (Tile t : list) {
+                    System.out.print(t.getPieceType() + "(" + t.getRow() + "," + t.getColumn() + ") ");
+                }
+                System.out.println();
             }
-            System.out.println();
+            printList("colList", matchingColumns);
+
+            /** Remove Duplicates */
+            removeDuplicates(matchingRows, matchingColumns);
+            printList("rowList without duplicates", matchingRows);
+            shiftColumnIconsDown(matchingColumns);
+            shiftRowIconsDown(matchingRows);
+
+            System.out.println("Board after consecutive icons in row and columns are removed");
+            displayBoard();
+            resetSelections();
         }
-        printList("colList", matchingColumns);
 
-        /** Remove Duplicates */
-        removeDuplicates(matchingRows, matchingColumns);
-        printList("rowList without duplicates", matchingRows);
-        shiftColumnIconsDown(matchingColumns);
-        shiftRowIconsDown(matchingRows);
-
-        System.out.println("Board after consecutive icons in row and columns are removed");
-        displayBoard();
     }
 
     private void removeDuplicates(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
@@ -218,21 +226,22 @@ public class BoardImpl implements Board {
             for (Tile tile : list) {
                 row = tile.getRow();
                 col = tile.getColumn();
-                if ((row - adjustment) < 0) {
-                    tiles[row][col].setGamePiece(new HappyGamePiece("NP"));
+                if ((row - adjustment) >= 0) {
+                    GamePiece replacement = tiles[(row - adjustment)][col].getGamePiece();
+                    tiles[row][col].setGamePiece(replacement);
                 } else {
-                    tiles[row][col].setGamePiece(tiles[(row - adjustment)][col].getGamePiece());
+                    tiles[row][col].setGamePiece(new HappyGamePiece("NP"));
                 }
             }
-            row--;
-            while (row >= 0) {
+
+            do {
                 if ((row - adjustment) < 0) {
                     tiles[row][col].setGamePiece(new HappyGamePiece("NP"));
                 } else {
                     tiles[row][col].setGamePiece(tiles[(row - adjustment)][col].getGamePiece());
                 }
                 row--;
-            }
+            } while (row >= 0);
         }
     }
 
