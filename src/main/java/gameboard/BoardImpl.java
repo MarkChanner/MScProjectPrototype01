@@ -14,7 +14,6 @@ public class BoardImpl implements Board {
 
     private static final int X = 0;
     private static final int Y = 1;
-    //private final int boardSize;
     private final int rows;
     private final int cols;
     private boolean firstSelectionMade;
@@ -36,11 +35,6 @@ public class BoardImpl implements Board {
         new TemporaryBoardPopulator(tiles, rows, cols);
         resetSelections();
     }
-
-    /*@Override
-    public int getBoardSize() {
-        return boardSize;
-    }*/
 
     @Override
     public int getRows() {
