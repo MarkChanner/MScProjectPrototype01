@@ -14,34 +14,33 @@ public class BoardImpl implements Board {
 
     private static final int X = 0;
     private static final int Y = 1;
-    private final int size;
+    //private final int boardSize;
     private final int rows;
-    private final int columns;
+    private final int cols;
     private boolean firstSelectionMade;
     private Tile[][] tiles;
     private BoardController controller;
     private int[] selection01 = new int[2];
     private int[] selection02 = new int[2];
 
-    public BoardImpl(int boardSize) {
-        size = boardSize;
-        rows = size;
-        columns = size;
+    public BoardImpl(int numberOfRows, int numberOfColumns) {
+        rows = numberOfRows;
+        cols = numberOfColumns;
         firstSelectionMade = false;
-        tiles = new TileImpl[rows][columns];
+        tiles = new TileImpl[rows][cols];
         controller = new BoardControllerImpl();
     }
 
     @Override
     public void populateBoard() {
-        new BoardPopulator(tiles, rows, columns);
+        new TemporaryBoardPopulator(tiles, rows, cols);
         resetSelections();
     }
 
-    @Override
-    public int getSize() {
-        return size;
-    }
+    /*@Override
+    public int getBoardSize() {
+        return boardSize;
+    }*/
 
     @Override
     public int getRows() {
@@ -49,8 +48,8 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public int getColumns() {
-        return columns;
+    public int getCols() {
+        return cols;
     }
 
     @Override
@@ -63,7 +62,7 @@ public class BoardImpl implements Board {
         for (int i = 0; i < rows; i++) {
             System.out.print("  " + i + " ");
             System.out.print("| ");
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < cols; j++) {
                 System.out.print(tiles[i][j].getPieceType() + " | ");
             }
             System.out.println();
@@ -76,7 +75,8 @@ public class BoardImpl implements Board {
 
     @Override
     public void selectTile(int row, int column) {
-        if (!firstSelectionMade) {
+        if ((row >= this.rows || column >= this.cols) || (row < 0 || column < 0)) { System.out.println("Selection out of board range"); }
+        else if (!firstSelectionMade) {
             System.out.println("Tile 1: (" + row + "," + column + ")");
             firstSelectionMade = true;
             selection01[X] = row;
@@ -189,7 +189,7 @@ public class BoardImpl implements Board {
             shiftColumnIconsDown(matchingColumns);
             shiftRowIconsDown(matchingRows);
 
-            System.out.println("Board after consecutive icons in row and columns are removed");
+            System.out.println("Board after consecutive icons in row and cols are removed");
             displayBoard();
             resetSelections();
         }

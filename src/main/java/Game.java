@@ -11,10 +11,11 @@ import java.util.Scanner;
 public class Game {
 
     private Board board;
-    public static final int SIZE = 7;
+    public static final int ROWS = 7;
+    public static final int COLS = 7;
 
     public Game() {
-        this.board = new BoardImpl(SIZE);
+        this.board = new BoardImpl(ROWS, COLS);
     }
 
     public static void main(String[] args) {
@@ -47,6 +48,6 @@ public class Game {
                 board.selectTile(x, y);
             }
 
-        } while (!command.toString().equals("q")); // toString() redundant
+        } while (!command.equals("q")); // toString() redundant
     }
 }

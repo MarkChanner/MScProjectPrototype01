@@ -19,7 +19,7 @@ public class BoardImplTest {
     public void setUp() throws Exception {
         rows = 7;
         cols = 7;
-        board = new BoardImpl(rows);
+        board = new BoardImpl(rows, cols);
         board.populateBoard();
     }
 
@@ -35,7 +35,7 @@ public class BoardImplTest {
 
     @Test
     public void testGetColumns() throws Exception {
-        assertEquals(7, board.getColumns());
+        assertEquals(7, board.getCols());
     }
 
     @Test

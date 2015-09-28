@@ -13,13 +13,14 @@ import static org.junit.Assert.*;
  */
 public class BoardControllerImplTest {
 
-    private int size = 7;
+    private final int rows = 7;
+    private final int cols = 7;
     private Board board;
     BoardController controller;
 
     @Before
     public void setUp() throws Exception {
-        board = new BoardImpl(size);
+        board = new BoardImpl(rows, cols);
         board.populateBoard();
         controller = new BoardControllerImpl();
     }

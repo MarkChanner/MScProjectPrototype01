@@ -10,9 +10,9 @@ public interface Board {
 
     int getRows();
 
-    int getColumns();
+    int getCols();
 
-    int getSize();
+    //int getBoardSize();
 
     Tile[][] getAllTiles();
 
