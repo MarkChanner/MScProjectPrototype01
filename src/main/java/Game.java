@@ -14,7 +14,7 @@ public class Game {
     private Board board;
 
     public Game() {
-        board = new BoardImpl(ROWS, COLS, new BoardPopulatorImpl());
+        board = new BoardImpl(ROWS, COLS, new BoardPopulatorCrossMatch());
     }
 
     public static void main(String[] args) {
