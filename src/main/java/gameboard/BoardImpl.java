@@ -126,8 +126,6 @@ public class BoardImpl implements Board {
         if (differentPieceTypes()) {
             System.out.println("Swapping Pieces");
             swapGamePieces();
-            /** need to separate getMatches() code from the else statement within it that mentions swapping back */
-            /** this will enable getMatches() to be called multiple times even if not after a player has done a swap */
             ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
             ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
             if (matchesFound(matchingColumns, matchingRows)) {
