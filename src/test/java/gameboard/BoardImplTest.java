@@ -13,14 +13,13 @@ public class BoardImplTest {
 
     private int rows = 7;
     private int cols = 7;
-    private BoardImpl board;
+    private Board board;
 
     @Before
     public void setUp() throws Exception {
         rows = 7;
         cols = 7;
-        board = new BoardImpl(rows, cols);
-        board.populateBoard();
+        board = new BoardImpl(rows, cols, new BoardPopulatorManyMatches());
     }
 
     @After

@@ -20,8 +20,7 @@ public class BoardControllerImplTest {
 
     @Before
     public void setUp() throws Exception {
-        board = new BoardImpl(rows, cols);
-        board.populateBoard();
+        board = new BoardImpl(rows, cols, new BoardPopulatorManyMatches());
         controller = new BoardControllerImpl();
     }
 
@@ -39,7 +38,7 @@ public class BoardControllerImplTest {
 
     @Test
     public void testCheckColumns() throws Exception {
-        ArrayList<LinkedList<Tile>> matchingCols = controller.checkRows(board);
+        ArrayList<LinkedList<Tile>> matchingCols = controller.checkColumns(board);
         LinkedList<Tile> list = matchingCols.get(0);
         assertEquals(6, list.get(0).getRow());
         assertEquals(1, list.get(0).getColumn());
