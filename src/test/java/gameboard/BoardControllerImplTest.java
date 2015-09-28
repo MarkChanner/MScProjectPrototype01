@@ -13,27 +13,15 @@ import static org.junit.Assert.*;
  */
 public class BoardControllerImplTest {
 
-    private final int rows = 7;
-    private final int cols = 7;
     private Board board;
-    BoardController controller;
+    private BoardController controller;
 
     @Before
     public void setUp() throws Exception {
+        final int rows = 7;
+        final int cols = 7;
         board = new BoardImpl(rows, cols, new BoardPopulatorManyMatches());
         controller = new BoardControllerImpl();
-    }
-
-    @Test
-    public void testCheckRows() throws Exception {
-        ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(board);
-        LinkedList<Tile> list = matchingRows.get(0);
-        assertEquals(5, list.get(0).getRow());
-        assertEquals(0, list.get(0).getColumn());
-        assertEquals(5, list.get(1).getRow());
-        assertEquals(1, list.get(1).getColumn());
-        assertEquals(5, list.get(2).getRow());
-        assertEquals(2, list.get(2).getColumn());
     }
 
     @Test
@@ -48,8 +36,6 @@ public class BoardControllerImplTest {
         assertEquals(1, list.get(2).getColumn());
         assertEquals(3, list.get(3).getRow());
         assertEquals(1, list.get(3).getColumn());
-        assertEquals(2, list.get(4).getRow());
-        assertEquals(1, list.get(4).getColumn());
 
         list = matchingCols.get(1);
         assertEquals(2, list.get(0).getRow());
@@ -58,5 +44,17 @@ public class BoardControllerImplTest {
         assertEquals(6, list.get(1).getColumn());
         assertEquals(0, list.get(2).getRow());
         assertEquals(6, list.get(2).getColumn());
+    }
+
+    @Test
+    public void testCheckRows() throws Exception {
+        ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(board);
+        LinkedList<Tile> list = matchingRows.get(0);
+        assertEquals(5, list.get(0).getRow());
+        assertEquals(0, list.get(0).getColumn());
+        assertEquals(5, list.get(1).getRow());
+        assertEquals(1, list.get(1).getColumn());
+        assertEquals(5, list.get(2).getRow());
+        assertEquals(2, list.get(2).getColumn());
     }
 }
