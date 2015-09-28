@@ -14,4 +14,8 @@ public class ExcitedGamePiece extends AbstractGamePiece {
         return (this);
     }
 
+    public String toString() {
+        return "WEEEEEE! IT'S AN EXCITED FACE!!!!!";
+    }
+
 }

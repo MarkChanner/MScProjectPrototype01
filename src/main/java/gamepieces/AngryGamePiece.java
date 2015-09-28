@@ -14,4 +14,8 @@ public class AngryGamePiece extends AbstractGamePiece {
         return (this);
     }
 
+    public String toString() {
+        return "OOOOH, IT'S AN ANGRY FACE!";
+    }
+
 }

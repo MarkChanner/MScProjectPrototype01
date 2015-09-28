@@ -14,4 +14,8 @@ public class HappyGamePiece extends AbstractGamePiece {
         return (this);
     }
 
+    public String toString() {
+        return "HEY HEY! IT'S A HAPPY FACE!!!!!!";
+    }
+
 }

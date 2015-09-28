@@ -13,4 +13,8 @@ public class SadGamePiece extends AbstractGamePiece {
     public GamePiece retrieveGamePiece() {
         return (this);
     }
+
+    public String toString() {
+        return "OH, IT'S A SAD FACE!!!!!";
+    }
 }
