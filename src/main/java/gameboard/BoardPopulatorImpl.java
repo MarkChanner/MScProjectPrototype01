@@ -9,6 +9,13 @@ import java.util.Random;
  */
 public class BoardPopulatorImpl implements BoardPopulator {
 
+    public final static String ANGRY_FACE = "AN";
+    public final static String CONFUSED_FACE = "CO";
+    public final static String EXCITED_FACE = "EX";
+    public final static String HAPPY_FACE = "HA";
+    public final static String SAD_FACE = "SA";
+
+
     @Override
     public void populate(Board board) {
         int rows = board.getRows();
@@ -37,22 +44,23 @@ public class BoardPopulatorImpl implements BoardPopulator {
         int value = random.nextInt(5);
         switch (value) {
             case 0:
-                gp = new AngryGamePiece("AA");
+                gp = new AngryGamePiece(ANGRY_FACE);
                 break;
             case 1:
-                gp = new ConfusedGamePiece("CC");
+                gp = new ConfusedGamePiece(CONFUSED_FACE);
                 break;
             case 2:
-                gp = new ExcitedGamePiece("EE");
+                gp = new ExcitedGamePiece(EXCITED_FACE);
                 break;
             case 3:
-                gp = new HappyGamePiece("HH");
+                gp = new HappyGamePiece(HAPPY_FACE);
                 break;
             case 4:
-                gp = new SadGamePiece("SS");
+                gp = new SadGamePiece(SAD_FACE);
                 break;
             default:
                 System.out.println("Error in BoardPopulatorImpl, generateGamePiece()");
+                break;
         }
         return gp;
     }
