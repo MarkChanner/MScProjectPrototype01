@@ -8,7 +8,7 @@ import gamepieces.HappyGamePiece;
  * Populates the board with no matches, but there is the possibility to
  * create 3 consecutive tiles at location if 1,2 and 1,3 are swapped
  */
-public class BoardPopulatorNoMatches implements BoardPopulator {
+public class BoardPopulatorCrossMatch implements BoardPopulator {
 
     @Override
     public void populate(Tile[][] tiles, int rows, int cols) {
