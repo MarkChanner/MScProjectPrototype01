@@ -1,6 +1,5 @@
 
-import gameboard.Board;
-import gameboard.BoardImpl;
+import gameboard.*;
 
 import java.util.Scanner;
 
@@ -10,33 +9,31 @@ import java.util.Scanner;
  */
 public class Game {
 
-    private Board board;
     public static final int ROWS = 7;
     public static final int COLS = 7;
+    private Board board;
 
     public Game() {
-        this.board = new BoardImpl(ROWS, COLS);
+        board = new BoardImpl(ROWS, COLS, new BoardPopulatorImpl());
     }
 
     public static void main(String[] args) {
         Game game = new Game();
         game.takeCommands();
-       // game.start();
+        //game.start();
     }
 
     private void start() {
-        board.populateBoard();
         board.displayBoard();
         System.out.println();
-        board.selectTile(3, 4);
-        board.selectTile(3, 5);
+        board.selectTile(5, 2);
+        board.selectTile(5, 3);
     }
 
     private void takeCommands() {
-        board.populateBoard();
         board.displayBoard();
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter coordintes of tile on board (q to quit)");
+        System.out.println("Enter board coordinates (q to quit):");
         String command;
         String[] coordinates;
         do {

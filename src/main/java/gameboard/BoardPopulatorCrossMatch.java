@@ -11,7 +11,10 @@ import gamepieces.HappyGamePiece;
 public class BoardPopulatorCrossMatch implements BoardPopulator {
 
     @Override
-    public void populate(Tile[][] tiles, int rows, int cols) {
+    public void populate(Board board) {
+        int rows = board.getRows();
+        int cols = board.getCols();
+        Tile[][] tiles = board.getAllTiles();
         int counter = 10;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
@@ -20,8 +23,13 @@ public class BoardPopulatorCrossMatch implements BoardPopulator {
                 counter++;
             }
         }
-        tiles[1][1] = new TileImpl(1, 1, new HappyGamePiece("17"));
-        tiles[1][3] = new TileImpl(1, 3, new HappyGamePiece("17"));
+        tiles[4][2] = new TileImpl(4, 2, new HappyGamePiece("XX"));
+        tiles[3][2] = new TileImpl(3, 2, new HappyGamePiece("XX"));
+
+        tiles[5][0] = new TileImpl(5, 0, new HappyGamePiece("XX"));
+        tiles[5][1] = new TileImpl(5, 1, new HappyGamePiece("XX"));
+        tiles[5][3] = new TileImpl(5, 3, new HappyGamePiece("XX"));
+
     }
 
     @Override

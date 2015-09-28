@@ -1,7 +1,6 @@
 package gameboard;
 
 import gamepieces.*;
-
 import java.util.Random;
 
 /**
@@ -11,7 +10,10 @@ import java.util.Random;
 public class BoardPopulatorImpl implements BoardPopulator {
 
     @Override
-    public void populate(Tile[][] tiles, int rows, int cols) {
+    public void populate(Board board) {
+        int rows = board.getRows();
+        int cols = board.getCols();
+        Tile[][] tiles = board.getAllTiles();
         GamePiece newGamePiece;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
@@ -50,7 +52,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
                 gp = new SadGamePiece("SS");
                 break;
             default:
-                System.out.println("Error");
+                System.out.println("Error in BoardPopulatorImpl, generateGamePiece()");
         }
         return gp;
     }

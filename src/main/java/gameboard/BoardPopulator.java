@@ -1,7 +1,16 @@
 package gameboard;
 
+import gamepieces.GamePiece;
+
 /**
- * Created by Mark on 28/09/2015.
+ * @author Mark Channer
+ * BoardPopulator interface allows different game pieces to populate the Board.
+ * Useful for creating a non-randomly generated board for testing
  */
 public interface BoardPopulator {
+
+    void populate(Board board);
+
+    GamePiece generateGamePiece();
+
 }
