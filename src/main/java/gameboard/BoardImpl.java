@@ -125,38 +125,49 @@ public class BoardImpl implements Board {
     private void attemptSwap() {
         if (differentPieceTypes()) {
             System.out.println("Swapping Pieces");
-            GamePiece tempPiece = tiles[selection01[X]][selection01[Y]].getGamePiece();
-            tiles[selection01[X]][selection01[Y]].setGamePiece(tiles[selection02[X]][selection02[Y]].getGamePiece());
-            tiles[selection02[X]][selection02[Y]].setGamePiece(tempPiece);
-            displayBoard();
-            checkForMatches();
+            swapGamePieces();
+            /** need to separate getMatches() code from the else statement within it that mentions swapping back */
+            /** this will enable getMatches() to be called multiple times even if not after a player has done a swap */
+            ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
+            ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
+            if (matchesFound(matchingColumns, matchingRows)) {
+                manipulateBoard(matchingColumns, matchingRows);
+            } else {
+                System.out.println("No matching Lines. Swapping pieces back to previous position");
+                swapGamePieces();
+            }
         } else {
             System.out.println("Both selections are the same game piece type. Aborting operation");
         }
+        resetSelections();
     }
 
     private boolean differentPieceTypes() {
         return (!(tiles[selection01[X]][selection01[Y]].getPieceType().equals(tiles[selection02[X]][selection02[Y]].getPieceType())));
     }
 
-    private void checkForMatches() {
-        ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
-        ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
+    private void swapGamePieces() {
+        GamePiece tempPiece = tiles[selection01[X]][selection01[Y]].getGamePiece();
+        tiles[selection01[X]][selection01[Y]].setGamePiece(tiles[selection02[X]][selection02[Y]].getGamePiece());
+        tiles[selection02[X]][selection02[Y]].setGamePiece(tempPiece);
+        displayBoard();
+    }
 
-        if (matchingRows.isEmpty() && matchingColumns.isEmpty()) {
-            System.out.println("No matching Lines. Swapping pieces back to previous position");
-            GamePiece tempPiece = tiles[selection01[X]][selection01[Y]].getGamePiece();
-            tiles[selection01[X]][selection01[Y]].setGamePiece(tiles[selection02[X]][selection02[Y]].getGamePiece());
-            tiles[selection02[X]][selection02[Y]].setGamePiece(tempPiece);
-        } else {
+    private boolean matchesFound(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
+        return (!(matchingColumns.isEmpty() && matchingRows.isEmpty()));
+    }
+
+    public void manipulateBoard(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
+        do {
             printList("Matching columns:", matchingColumns);
             printList("Matching rows:", matchingRows);
             removeDuplicates(matchingRows, matchingColumns);
             shiftColumnIconsDown(matchingColumns);
             shiftRowIconsDown(matchingRows);
-        }
-        displayBoard();
-        resetSelections();
+            displayBoard();
+            matchingColumns = controller.checkColumns(this);
+            matchingRows = controller.checkRows(this);
+        } while (matchesFound(matchingColumns, matchingRows));
     }
 
     private void removeDuplicates(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
@@ -206,7 +217,6 @@ public class BoardImpl implements Board {
             }
         }
     }
-
 
     private void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
         System.out.print(title + " ");
