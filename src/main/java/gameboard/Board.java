@@ -6,13 +6,9 @@ package gameboard;
  */
 public interface Board {
 
-    void populateBoard();
-
     int getRows();
 
     int getCols();
-
-    //int getBoardSize();
 
     Tile[][] getAllTiles();
 
