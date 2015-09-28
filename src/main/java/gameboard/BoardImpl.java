@@ -1,7 +1,6 @@
 package gameboard;
 
 import gamepieces.*;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -128,12 +127,14 @@ public class BoardImpl implements Board {
             swapGamePieces();
             ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
             ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
+
             if (matchesFound(matchingColumns, matchingRows)) {
                 manipulateBoard(matchingColumns, matchingRows);
             } else {
                 System.out.println("No matching Lines. Swapping pieces back to previous position");
                 swapGamePieces();
             }
+
         } else {
             System.out.println("Both selections are the same game piece type. Aborting operation");
         }
@@ -155,8 +156,9 @@ public class BoardImpl implements Board {
         return (!(matchingColumns.isEmpty() && matchingRows.isEmpty()));
     }
 
-    public void manipulateBoard(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
+    private void manipulateBoard(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
         do {
+            giveReward(matchingColumns, matchingRows);
             printList("Matching columns:", matchingColumns);
             printList("Matching rows:", matchingRows);
             removeDuplicates(matchingRows, matchingColumns);
@@ -166,6 +168,15 @@ public class BoardImpl implements Board {
             matchingColumns = controller.checkColumns(this);
             matchingRows = controller.checkRows(this);
         } while (matchesFound(matchingColumns, matchingRows));
+    }
+
+    private void giveReward(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
+        for (int i = 0; i < matchingColumns.size(); i++) {
+            System.out.println(matchingColumns.get(i).getFirst().getGamePiece());
+        }
+        for (int i = 0; i < matchingRows.size(); i++) {
+            System.out.println(matchingRows.get(i).getFirst().getGamePiece());
+        }
     }
 
     private void removeDuplicates(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
@@ -216,13 +227,15 @@ public class BoardImpl implements Board {
         }
     }
 
-    private void printList(String title, ArrayList<LinkedList<Tile>> bigList) {
-        System.out.print(title + " ");
-        for (List<Tile> list : bigList) {
-            for (Tile t : list) {
-                System.out.print("(" + t.getRow() + "," + t.getColumn() + ") ");
+    private void printList(String title, ArrayList<LinkedList<Tile>> matchingLine) {
+        if (!(matchingLine.isEmpty())) {
+            System.out.print(title + " ");
+            for (List<Tile> list : matchingLine) {
+                for (Tile t : list) {
+                    System.out.print("(" + t.getRow() + "," + t.getColumn() + ") ");
+                }
             }
+            System.out.println();
         }
-        System.out.println();
     }
 }
