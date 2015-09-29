@@ -5,6 +5,8 @@ package gamepieces;
  */
 public abstract class AbstractGamePiece implements GamePiece {
 
+    /* Consider making type a variable that is automatically set */
+
     private String type;
     private int[] coordinates;
 

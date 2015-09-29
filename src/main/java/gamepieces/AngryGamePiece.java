@@ -5,6 +5,8 @@ package gamepieces;
  */
 public class AngryGamePiece extends AbstractGamePiece {
 
+    /* Consider making type a variable that is automatically set */
+
     public AngryGamePiece(String type) {
         super(type);
     }
