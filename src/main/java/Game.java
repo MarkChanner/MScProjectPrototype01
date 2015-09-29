@@ -1,8 +1,6 @@
-
 import gameboard.*;
 
 import java.util.Scanner;
-
 
 /**
  * @author Mark Channer
