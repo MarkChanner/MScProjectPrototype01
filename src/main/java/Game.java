@@ -45,6 +45,6 @@ public class Game {
                 board.selectTile(x, y);
             }
 
-        } while (!command.equals("q")); // toString() redundant
+        } while (!command.equals("q"));
     }
 }
