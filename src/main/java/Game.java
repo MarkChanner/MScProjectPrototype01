@@ -1,3 +1,4 @@
+
 import gameboard.*;
 
 import java.util.Scanner;
@@ -35,14 +36,28 @@ public class Game {
         String command;
         String[] coordinates;
         do {
+            System.out.print("Coordinates: ");
             command = input.nextLine();
-            coordinates = command.split(",");
-            if (!coordinates[0].equals("q")) {
-                Integer x = Integer.parseInt(coordinates[0]);
-                Integer y = Integer.parseInt(coordinates[1]);
-                board.selectTile(x, y);
+            if (!(command.equals("q"))) {
+                coordinates = command.split(",");
+                if (isValid(coordinates)) {
+                    Integer x = Integer.parseInt(coordinates[0]);
+                    Integer y = Integer.parseInt(coordinates[1]);
+                    board.selectTile(x, y);
+                } else {
+                    System.out.println("Invalid input. Please enter again");
+                }
             }
-
         } while (!command.equals("q"));
+    }
+
+    private boolean isValid(String[] coordinates) {
+        if (coordinates.length != 2) return false;
+
+        for (String coordinate : coordinates) {
+            char c = coordinate.charAt(0);
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
     }
 }
