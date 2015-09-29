@@ -5,8 +5,7 @@ import java.util.Random;
 
 /**
  * @author Mark Channer
- *         Populates the board with no matches, but there is the possibility to
- *         create 3 consecutive tiles at location if 1,2 and 1,3 are swapped
+ *
  */
 public class BoardPopulatorCrossMatch implements BoardPopulator {
 
@@ -39,7 +38,7 @@ public class BoardPopulatorCrossMatch implements BoardPopulator {
 
         tiles[0][1] = new TileImpl(0, 1, new ConfusedGamePiece("CO"));
         tiles[1][1] = new TileImpl(1, 1, new AngryGamePiece("AN"));
-        tiles[2][1] = new TileImpl(2, 1, new ExcitedGamePiece("EX"));
+        tiles[2][1] = new TileImpl(2, 1, new SadGamePiece("SA"));
         tiles[3][1] = new TileImpl(3, 1, new ExcitedGamePiece("EX"));
         tiles[4][1] = new TileImpl(4, 1, new HappyGamePiece("HA"));
         tiles[5][1] = new TileImpl(5, 1, new HappyGamePiece("HA"));
@@ -47,7 +46,7 @@ public class BoardPopulatorCrossMatch implements BoardPopulator {
 
         tiles[0][2] = new TileImpl(0, 2, new ExcitedGamePiece("EX"));
         tiles[1][2] = new TileImpl(1, 2, new ConfusedGamePiece("CO"));
-        tiles[2][2] = new TileImpl(2, 2, new ExcitedGamePiece("EX"));
+        tiles[2][2] = new TileImpl(2, 2, new HappyGamePiece("HA"));
         tiles[3][2] = new TileImpl(3, 2, new ExcitedGamePiece("EX"));
         tiles[4][2] = new TileImpl(4, 2, new SadGamePiece("SA"));
         tiles[5][2] = new TileImpl(5, 2, new SadGamePiece("SA"));
