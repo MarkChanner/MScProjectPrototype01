@@ -1,7 +1,6 @@
 package gameboard;
 
 import gamepieces.*;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -160,8 +159,9 @@ public class BoardImpl implements Board {
     private void manipulateBoard(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
         do {
             giveReward(matchingColumns, matchingRows);
-            printList("Matching columns:", matchingColumns);
-            printList("Matching rows:", matchingRows);
+
+            printList("Matching columns:", matchingColumns); // to be removed
+            printList("Matching rows:", matchingRows); // to be removed
             removeMatches(matchingColumns, matchingRows);
             shiftIconsDown();
             insertNewIcons();
@@ -222,7 +222,7 @@ public class BoardImpl implements Board {
         }
     }
 
-    public void insertNewIcons() {
+    private void insertNewIcons() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 if (tiles[row][col].getPieceType().equals("XX")) {
@@ -233,6 +233,7 @@ public class BoardImpl implements Board {
         }
     }
 
+    /* temporary method for printing output of matching rows and matching columns */
     private void printList(String title, ArrayList<LinkedList<Tile>> matchingLine) {
         if (!(matchingLine.isEmpty())) {
             System.out.print(title + " ");

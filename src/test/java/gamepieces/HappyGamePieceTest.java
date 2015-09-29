@@ -11,7 +11,7 @@ public class HappyGamePieceTest {
 
     @Test
     public void testRetrieveGamePieceAndShowType() throws Exception {
-        GamePiece gp = new HappyGamePiece("H");
+        GamePiece gp = new HappyGamePiece();
         GamePiece retrievedPiece = gp.retrieveGamePiece();
         assertEquals("H", retrievedPiece.showType());
     }
