@@ -15,6 +15,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
     public final static String HAPPY_FACE = "HA";
     public final static String SAD_FACE = "SA";
 
+
     @Override
     public void populate(Board board) {
         int rows = board.getRows();

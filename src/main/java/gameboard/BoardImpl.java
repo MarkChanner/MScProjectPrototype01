@@ -161,7 +161,8 @@ public class BoardImpl implements Board {
             giveReward(matchingColumns, matchingRows);
             printList("Matching columns:", matchingColumns);
             printList("Matching rows:", matchingRows);
-            removeDuplicates(matchingRows, matchingColumns);
+            //removeDuplicates(matchingRows, matchingColumns);
+            removeMatches(matchingColumns, matchingRows);
             shiftColumnIconsDown(matchingColumns);
             shiftRowIconsDown(matchingRows);
             displayBoard();
@@ -179,9 +180,27 @@ public class BoardImpl implements Board {
         }
     }
 
-    private void removeDuplicates(ArrayList<LinkedList<Tile>> rows, ArrayList<LinkedList<Tile>> columns) {
-        for (List<Tile> rowList : rows) {
-            columns.forEach(rowList::removeAll);
+    /*private void removeDuplicates(ArrayList<LinkedList<Tile>> matchingRows, ArrayList<LinkedList<Tile>> matchingColumns) {
+        for (List<Tile> rowList : matchingRows) {
+            matchingColumns.forEach(rowList::removeAll);
+        }
+    }*/
+
+    private void removeMatches(ArrayList<LinkedList<Tile>> matchingRows, ArrayList<LinkedList<Tile>> matchingColumns) {
+        for (List<Tile> rowList : matchingRows) {
+            for (Tile t : rowList) {
+                int row = t.getRow();
+                int col = t.getColumn();
+                if (tiles[row][col] != null) tiles[row][col] = null;
+            }
+        }
+
+        for (List<Tile> colList : matchingColumns) {
+            for (Tile t : colList) {
+                int row = t.getRow();
+                int col = t.getColumn();
+                if (tiles[row][col] != null) tiles[row][col] = null;
+            }
         }
     }
 
