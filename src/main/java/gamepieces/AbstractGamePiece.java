@@ -23,11 +23,6 @@ public abstract class AbstractGamePiece implements GamePiece {
         coordinates[1] = column;
     }
 
-    @Override
-    public int[] getCoordinates() {
-        return coordinates;
-    }
-
     public abstract GamePiece retrieveGamePiece();
 
     @Override

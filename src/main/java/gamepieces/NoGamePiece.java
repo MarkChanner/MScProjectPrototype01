@@ -5,8 +5,8 @@ package gamepieces;
  */
 public class NoGamePiece extends AbstractGamePiece {
 
-    public NoGamePiece(String type) {
-        super(type);
+    public NoGamePiece() {
+        super("XX");
     }
 
     @Override
