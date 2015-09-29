@@ -187,7 +187,7 @@ public class BoardImpl implements Board {
                 int row = t.getRow();
                 int col = t.getColumn();
                 if (!(tiles[row][col].getPieceType().equals("XX"))) {
-                    tiles[row][col].setGamePiece(new NoGamePiece("XX"));
+                    tiles[row][col].setGamePiece(new NoGamePiece());
                 }
             }
         }
@@ -196,7 +196,7 @@ public class BoardImpl implements Board {
                 int row = t.getRow();
                 int col = t.getColumn();
                 if (!(tiles[row][col].getPieceType().equals("XX"))) {
-                    tiles[row][col].setGamePiece(new NoGamePiece("XX"));
+                    tiles[row][col].setGamePiece(new NoGamePiece());
                 }
             }
         }
@@ -215,7 +215,7 @@ public class BoardImpl implements Board {
                         GamePiece gp = tiles[tempRow][col].getGamePiece();
                         tiles[row][col].setGamePiece(gp);
                         /** sets previous tile to be empty */
-                        tiles[tempRow][col].setGamePiece(new NoGamePiece("XX"));
+                        tiles[tempRow][col].setGamePiece(new NoGamePiece());
                     }
                 }
             }
