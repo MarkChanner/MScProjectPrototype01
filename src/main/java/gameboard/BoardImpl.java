@@ -1,6 +1,7 @@
 package gameboard;
 
 import gamepieces.*;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -161,10 +162,9 @@ public class BoardImpl implements Board {
             giveReward(matchingColumns, matchingRows);
             printList("Matching columns:", matchingColumns);
             printList("Matching rows:", matchingRows);
-            //removeDuplicates(matchingRows, matchingColumns);
             removeMatches(matchingColumns, matchingRows);
-            shiftColumnIconsDown(matchingColumns);
-            shiftRowIconsDown(matchingRows);
+            shiftIconsDown();
+            insertNewIcons();
             displayBoard();
             matchingColumns = controller.checkColumns(this);
             matchingRows = controller.checkRows(this);
@@ -172,76 +172,63 @@ public class BoardImpl implements Board {
     }
 
     private void giveReward(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
-        for (int i = 0; i < matchingColumns.size(); i++) {
-            System.out.println(matchingColumns.get(i).getFirst().getGamePiece());
+        for (LinkedList<Tile> matchingColumn : matchingColumns) {
+            System.out.println(matchingColumn.getFirst().getGamePiece());
         }
-        for (int i = 0; i < matchingRows.size(); i++) {
-            System.out.println(matchingRows.get(i).getFirst().getGamePiece());
+        for (LinkedList<Tile> matchingRow : matchingRows) {
+            System.out.println(matchingRow.getFirst().getGamePiece());
         }
     }
 
-    /*private void removeDuplicates(ArrayList<LinkedList<Tile>> matchingRows, ArrayList<LinkedList<Tile>> matchingColumns) {
-        for (List<Tile> rowList : matchingRows) {
-            matchingColumns.forEach(rowList::removeAll);
-        }
-    }*/
-
+    /* !!! Extract the duplicate code into a separate method !!! */
     private void removeMatches(ArrayList<LinkedList<Tile>> matchingRows, ArrayList<LinkedList<Tile>> matchingColumns) {
         for (List<Tile> rowList : matchingRows) {
             for (Tile t : rowList) {
                 int row = t.getRow();
                 int col = t.getColumn();
-                if (tiles[row][col] != null) tiles[row][col] = null;
+                if (!(tiles[row][col].getPieceType().equals("XX"))) {
+                    tiles[row][col].setGamePiece(new NoGamePiece("XX"));
+                }
             }
         }
-
         for (List<Tile> colList : matchingColumns) {
             for (Tile t : colList) {
                 int row = t.getRow();
                 int col = t.getColumn();
-                if (tiles[row][col] != null) tiles[row][col] = null;
+                if (!(tiles[row][col].getPieceType().equals("XX"))) {
+                    tiles[row][col].setGamePiece(new NoGamePiece("XX"));
+                }
             }
         }
     }
 
-    private void shiftColumnIconsDown(ArrayList<LinkedList<Tile>> columns) {
-        int adjustment;
-        int row = 0;
-        int col = 0;
-        for (List<Tile> list : columns) {
-            adjustment = list.size();
-            for (Tile tile : list) {
-                row = tile.getRow();
-                col = tile.getColumn();
-                if ((row - adjustment) >= 0) {
-                    GamePiece replacement = tiles[(row - adjustment)][col].getGamePiece();
-                    tiles[row][col].setGamePiece(replacement);
-                } else {
-                    tiles[row][col].setGamePiece(populator.generateGamePiece());
+    private void shiftIconsDown() {
+        for (int col = 0; col < cols; col++) {
+            for (int row = (rows - 1); row >= 0; row--) {
+                if (tiles[row][col].getPieceType().equals("XX")) {
+                    /** get any pieces higher up the column and, if found, plug hole with it */
+                    int tempRow = row;
+                    while ((tempRow >= 0) && (tiles[tempRow][col].getPieceType().equals("XX"))) {
+                        tempRow--;
+                    }
+                    if (tempRow >= 0) {
+                        GamePiece gp = tiles[tempRow][col].getGamePiece();
+                        tiles[row][col].setGamePiece(gp);
+                        /** sets previous tile to be empty */
+                        tiles[tempRow][col].setGamePiece(new NoGamePiece("XX"));
+                    }
                 }
             }
-            do {
-                if ((row - adjustment) < 0) {
-                    tiles[row][col].setGamePiece(populator.generateGamePiece());
-                } else {
-                    tiles[row][col].setGamePiece(tiles[(row - adjustment)][col].getGamePiece());
-                }
-                row--;
-            } while (row >= 0);
         }
     }
 
-    private void shiftRowIconsDown(ArrayList<LinkedList<Tile>> columns) {
-        for (List<Tile> list : columns) {
-            for (Tile tile : list) {
-                int row = tile.getRow();
-                int col = tile.getColumn();
-                while (row != 0) {
-                    GamePiece replacement = tiles[row - 1][col].getGamePiece();
-                    tiles[row][col].setGamePiece(replacement);
-                    row--;
+    public void insertNewIcons() {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (tiles[row][col].getPieceType().equals("XX")) {
+                    GamePiece gp = populator.generateGamePiece();
+                    tiles[row][col].setGamePiece(gp);
                 }
-                tiles[row][col].setGamePiece(populator.generateGamePiece());
             }
         }
     }
