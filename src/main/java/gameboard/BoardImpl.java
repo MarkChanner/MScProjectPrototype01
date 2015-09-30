@@ -98,8 +98,8 @@ public class BoardImpl implements Board {
                 System.out.println("Selections are NOT adjacent. Last selection is now first selection");
                 userSelection01[X] = userSelection02[X];
                 userSelection01[Y] = userSelection02[Y];
-                userSelection02[X] = -2;
-                userSelection02[Y] = -2;
+                userSelection02[X] = -1;
+                userSelection02[Y] = -1;
             }
         } else {
             System.out.println("Same selection made twice. Resetting.");
@@ -199,7 +199,7 @@ public class BoardImpl implements Board {
         for (int col = 0; col < cols; col++) {
             for (int row = (rows - 1); row >= 0; row--) {
                 if (tiles[row][col].getPieceType().equals("XX")) {
-                    /** get any pieces higher up the column and, if found, plug hole with it */
+                    /* get any pieces higher up the column and, if found, plug hole with it */
                     int tempRow = row;
                     while ((tempRow >= 0) && (tiles[tempRow][col].getPieceType().equals("XX"))) {
                         tempRow--;
@@ -207,7 +207,7 @@ public class BoardImpl implements Board {
                     if (tempRow >= 0) {
                         GamePiece gp = tiles[tempRow][col].getGamePiece();
                         tiles[row][col].setGamePiece(gp);
-                        /** sets previous tile to be empty */
+                        /* sets previous tile to be empty */
                         tiles[tempRow][col].setGamePiece(new NoGamePiece());
                     }
                 }

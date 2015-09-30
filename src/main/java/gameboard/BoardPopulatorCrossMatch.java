@@ -27,6 +27,7 @@ public class BoardPopulatorCrossMatch implements BoardPopulator {
                 tiles[row][col] = new TileImpl(row, col, newGamePiece);
             }
         }
+        /** Note that adding the below may cause 3 of the same piece in a row */
         tiles[4][0] = new TileImpl(4, 0, new SadGamePiece());
         tiles[5][0] = new TileImpl(5, 0, new ConfusedGamePiece());
         tiles[6][0] = new TileImpl(6, 0, new ConfusedGamePiece());
