@@ -39,7 +39,7 @@ public class BoardPopulatorMock01 implements BoardPopulator {
             for (int col = 0; col < cols; col++) {
                 if (tiles[row][col] == null) {
                     String str = counter <= 9 ? "0" + counter : "" + counter;
-                    tiles[row][col] = new TileImpl(row, col, new TestGamePiece(str));
+                    tiles[row][col] = new TileImpl(row, col, new MockGamePiece(str));
                     counter++;
                 }
             }

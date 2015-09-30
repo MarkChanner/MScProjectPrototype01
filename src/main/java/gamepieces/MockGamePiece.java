@@ -3,9 +3,9 @@ package gamepieces;
 /**
  * @author Mark Channer
  */
-public class TestGamePiece extends AbstractGamePiece {
+public class MockGamePiece extends AbstractGamePiece {
 
-    public TestGamePiece(String value) {
+    public MockGamePiece(String value) {
         super(value);
     }
 
