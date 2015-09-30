@@ -12,7 +12,7 @@ public class Game {
     private Board board;
 
     public Game() {
-        board = new BoardImpl(ROWS, COLS, new BoardControllerImpl(), new BoardPopulatorCrossMatch());
+        board = new BoardImpl(ROWS, COLS, new BoardControllerImpl(), new BoardPopulatorMock01());
     }
 
     public static void main(String[] args) {
