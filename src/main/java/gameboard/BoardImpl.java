@@ -27,7 +27,7 @@ public class BoardImpl implements Board {
         cols = numberOfColumns;
         firstSelectionMade = false;
         tiles = new TileImpl[rows][cols];
-        controller = new BoardControllerImpl();
+        controller = boardController;
         populator = boardPopulator;
         populator.populate(this);
         resetSelections();
