@@ -16,13 +16,13 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         Tile[][] tiles = board.getTiles();
 
         /* First Test set up */
-        tiles[3][0] = new TileImpl(3, 0, new HappyGamePiece());
-        tiles[2][0] = new TileImpl(2, 0, new ExcitedGamePiece());
+        tiles[4][0] = new TileImpl(4, 0, new HappyGamePiece());
+        tiles[3][0] = new TileImpl(3, 0, new ExcitedGamePiece());
+        tiles[2][0] = new TileImpl(2, 0, new HappyGamePiece());
         tiles[1][0] = new TileImpl(1, 0, new HappyGamePiece());
-        tiles[0][0] = new TileImpl(0, 0, new HappyGamePiece());
 
-        tiles[3][1] = new TileImpl(3, 1, new ExcitedGamePiece());
-        tiles[3][2] = new TileImpl(3, 2, new ExcitedGamePiece());
+        tiles[4][1] = new TileImpl(4, 1, new ExcitedGamePiece());
+        tiles[4][2] = new TileImpl(4, 2, new ExcitedGamePiece());
 
         /* Second test set up */
         tiles[3][3] = new TileImpl(3, 3, new SadGamePiece());
@@ -38,27 +38,9 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 if (tiles[row][col] == null) {
-                    tiles[row][col] = new TileImpl(row, col, new TestGamePiece(counter));
+                    String str = counter <= 9 ? "0" + counter : "" + counter;
+                    tiles[row][col] = new TileImpl(row, col, new TestGamePiece(str));
                     counter++;
-                }
-            }
-        }
-
-        GamePiece newGamePiece;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (tiles[row][col] == null) {
-
-                    do {
-                        newGamePiece = generateGamePiece();
-                    } while ((row >= 2 &&
-                            (newGamePiece.showType().equals(tiles[row - 1][col].getPieceType()) &&
-                                    newGamePiece.showType().equals(tiles[row - 2][col].getPieceType()))) ||
-                            (col >= 2 &&
-                                    (newGamePiece.showType().equals(tiles[row][col - 1].getPieceType()) &&
-                                            newGamePiece.showType().equals(tiles[row][col - 2].getPieceType()))));
-
-                    tiles[row][col] = new TileImpl(row, col, newGamePiece);
                 }
             }
         }
