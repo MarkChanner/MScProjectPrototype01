@@ -13,9 +13,9 @@ public class BoardImpl implements Board {
 
     private static final int X = 0;
     private static final int Y = 1;
+    private boolean firstSelectionMade;
     private final int rows;
     private final int cols;
-    private boolean firstSelectionMade;
     private Tile[][] tiles;
     private BoardController controller;
     private BoardPopulator populator;
@@ -23,9 +23,9 @@ public class BoardImpl implements Board {
     private int[] selection02 = new int[2];
 
     public BoardImpl(int numberOfRows, int numberOfColumns, BoardController boardController, BoardPopulator boardPopulator) {
+        firstSelectionMade = false;
         rows = numberOfRows;
         cols = numberOfColumns;
-        firstSelectionMade = false;
         tiles = new TileImpl[rows][cols];
         controller = boardController;
         populator = boardPopulator;
