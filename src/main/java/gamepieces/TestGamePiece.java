@@ -5,8 +5,8 @@ package gamepieces;
  */
 public class TestGamePiece extends AbstractGamePiece {
 
-    public TestGamePiece(int value) {
-        super("" + value);
+    public TestGamePiece(String value) {
+        super(value);
     }
 
     @Override
