@@ -4,10 +4,10 @@ import gamepieces.GamePiece;
 
 /**
  * Each Tile represents a square on the board. It provides methods for
- * accessing the location of the Tile on the board, and for retrieving
- * both the type of GamePiece occupying it and the type GamePiece it is
+ * accessing the location of the Tile's position, and for retrieving
+ * both the type of GamePiece occupying it and what type GamePiece it is
  *
- * @author Mark Channer
+ * @author Mark Channer for Birkbeck MSc Computer Science project
  */
 public interface Tile {
 
@@ -29,6 +29,7 @@ public interface Tile {
      * Returns the Game Piece occupying the Tile
      *
      * @return the Game Piece occupying the Tile
+     * @throws NullPointerException if the GamePiece has not been set
      */
     GamePiece getGamePiece();
 
@@ -43,6 +44,7 @@ public interface Tile {
      * Returns a String representing the type of the game piece
      *
      * @return the game piece type
+     * @throws NullPointerException
      */
     String getPieceType();
 
