@@ -10,7 +10,7 @@ public interface Board {
 
     int getCols();
 
-    Tile[][] getAllTiles();
+    Tile[][] getTiles();
 
     void displayBoard();
 

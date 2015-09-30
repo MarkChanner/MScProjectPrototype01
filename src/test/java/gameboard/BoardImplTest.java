@@ -39,14 +39,14 @@ public class BoardImplTest {
 
     @Test
     public void testGetAllTiles() throws Exception {
-        Tile[][] tiles = board.getAllTiles();
+        Tile[][] tiles = board.getTiles();
         assertEquals(7, tiles.length);
         assertEquals(7, tiles[0].length);
     }
 
     @Test
     public void testSwap() throws Exception {
-        Tile[][] tiles = board.getAllTiles();
+        Tile[][] tiles = board.getTiles();
         assertEquals("35", tiles[3][4].getPieceType());
         assertEquals("36", tiles[3][5].getPieceType());
         board.selectTile(3, 4);
@@ -57,7 +57,7 @@ public class BoardImplTest {
 
     @Test
     public void testShiftColumnIconsDown() throws Exception {
-        Tile[][] tiles = board.getAllTiles();
+        Tile[][] tiles = board.getTiles();
         assertEquals("--", tiles[6][1].getPieceType());
         assertEquals("--", tiles[5][1].getPieceType());
         assertEquals("--", tiles[4][1].getPieceType());
@@ -97,7 +97,7 @@ public class BoardImplTest {
 
     @Test
     public void testShiftRowIconsDown() throws Exception {
-        Tile[][] tiles = board.getAllTiles();
+        Tile[][] tiles = board.getTiles();
         assertEquals("--", tiles[5][0].getPieceType());
         assertEquals("--", tiles[5][1].getPieceType());
         assertEquals("--", tiles[5][2].getPieceType());

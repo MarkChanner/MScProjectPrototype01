@@ -9,36 +9,8 @@ import java.util.ArrayList;
 public class BoardControllerImpl implements BoardController {
 
     @Override
-    public ArrayList<LinkedList<Tile>> checkRows(Board board) {
-        Tile[][] tiles = board.getAllTiles();
-        int rowSize = board.getRows();
-        int colSize = board.getCols();
-        LinkedList<Tile> consecutiveTiles = new LinkedList<>();
-        ArrayList<LinkedList<Tile>> bigList = new ArrayList<>();
-        Tile tile;
-
-        for (int row = (rowSize - 1); row >= 0; row--) {
-            consecutiveTiles.add(tiles[row][0]);
-
-            for (int col = 1; col < colSize; col++) {
-                tile = tiles[row][col];
-                if (!tile.getPieceType().equals(consecutiveTiles.getLast().getPieceType())) {
-                    examineList(consecutiveTiles, bigList);
-                    consecutiveTiles = new LinkedList<>();
-                }
-                consecutiveTiles.add(tile);
-                if (col == colSize - 1) {
-                    examineList(consecutiveTiles, bigList);
-                    consecutiveTiles = new LinkedList<>();
-                }
-            }
-        }
-        return bigList;
-    }
-
-    @Override
-    public ArrayList<LinkedList<Tile>> checkColumns(Board board) {
-        Tile[][] tiles = board.getAllTiles();
+    public ArrayList<LinkedList<Tile>> findMatchingColumns(Board board) {
+        Tile[][] tiles = board.getTiles();
         int rowSize = board.getRows();
         int colSize = board.getCols();
 
@@ -58,6 +30,34 @@ public class BoardControllerImpl implements BoardController {
                 if (row == 0) {
                     examineList(consecutivePieces, bigList);
                     consecutivePieces = new LinkedList<>();
+                }
+            }
+        }
+        return bigList;
+    }
+
+    @Override
+    public ArrayList<LinkedList<Tile>> findMatchingRows(Board board) {
+        Tile[][] tiles = board.getTiles();
+        int rowSize = board.getRows();
+        int colSize = board.getCols();
+        LinkedList<Tile> consecutiveTiles = new LinkedList<>();
+        ArrayList<LinkedList<Tile>> bigList = new ArrayList<>();
+        Tile tile;
+
+        for (int row = (rowSize - 1); row >= 0; row--) {
+            consecutiveTiles.add(tiles[row][0]);
+
+            for (int col = 1; col < colSize; col++) {
+                tile = tiles[row][col];
+                if (!tile.getPieceType().equals(consecutiveTiles.getLast().getPieceType())) {
+                    examineList(consecutiveTiles, bigList);
+                    consecutiveTiles = new LinkedList<>();
+                }
+                consecutiveTiles.add(tile);
+                if (col == colSize - 1) {
+                    examineList(consecutiveTiles, bigList);
+                    consecutiveTiles = new LinkedList<>();
                 }
             }
         }

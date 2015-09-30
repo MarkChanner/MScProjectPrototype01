@@ -19,18 +19,18 @@ public class BoardImpl implements Board {
     private Tile[][] tiles;
     private BoardController controller;
     private BoardPopulator populator;
-    private int[] selection01 = new int[2];
-    private int[] selection02 = new int[2];
+    private int[] userSelection01 = new int[2];
+    private int[] userSelection02 = new int[2];
 
-    public BoardImpl(int numberOfRows, int numberOfColumns, BoardController boardController, BoardPopulator boardPopulator) {
+    public BoardImpl(int r, int c, BoardController bc, BoardPopulator bp) {
         firstSelectionMade = false;
-        rows = numberOfRows;
-        cols = numberOfColumns;
+        rows = r;
+        cols = c;
         tiles = new TileImpl[rows][cols];
-        controller = boardController;
-        populator = boardPopulator;
+        controller = bc;
+        populator = bp;
         populator.populate(this);
-        resetSelections();
+        resetUserSelections();
     }
 
     @Override
@@ -44,16 +44,16 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public Tile[][] getAllTiles() {
+    public Tile[][] getTiles() {
         return tiles;
     }
 
-    private void resetSelections() {
+    private void resetUserSelections() {
         firstSelectionMade = false;
-        selection01[X] = -1;
-        selection01[Y] = -1;
-        selection02[X] = -5;
-        selection02[Y] = -5;
+        userSelection01[X] = -1;
+        userSelection01[Y] = -1;
+        userSelection02[X] = -1;
+        userSelection02[Y] = -1;
     }
 
     @Override
@@ -76,79 +76,79 @@ public class BoardImpl implements Board {
     public void selectTile(int row, int column) {
         if ((row >= rows || column >= cols) || (row < 0 || column < 0)) {
             System.out.println("Selection out of board range");
-        } else if (!firstSelectionMade) {
+        } else if (!(firstSelectionMade)) {
             System.out.println("Selection 1: (" + tiles[row][column].getPieceType() + ")");
             firstSelectionMade = true;
-            selection01[X] = row;
-            selection01[Y] = column;
+            userSelection01[X] = row;
+            userSelection01[Y] = column;
         } else {
             System.out.println("Selection 2: (" + tiles[row][column].getPieceType() + ")");
-            selection02[X] = row;
-            selection02[Y] = column;
-            compareTiles();
+            userSelection02[X] = row;
+            userSelection02[Y] = column;
+            compareTileContents();
         }
     }
 
-    private void compareTiles() {
+    private void compareTileContents() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
-                attemptSwap();
+                swapTileContents();
             } else {
                 System.out.println("Selections are NOT adjacent. Last selection is now first selection");
-                selection01[X] = selection02[X];
-                selection01[Y] = selection02[Y];
-                selection02[X] = -5;
-                selection02[Y] = -5;
+                userSelection01[X] = userSelection02[X];
+                userSelection01[Y] = userSelection02[Y];
+                userSelection02[X] = -2;
+                userSelection02[Y] = -2;
             }
         } else {
             System.out.println("Same selection made twice. Resetting.");
-            resetSelections();
+            resetUserSelections();
         }
     }
 
     private boolean sameTileSelectedTwice() {
-        return ((selection01[X] == selection02[X]) && (selection01[Y] == selection02[Y]));
+        return ((userSelection01[X] == userSelection02[X]) && (userSelection01[Y] == userSelection02[Y]));
     }
 
     private boolean selectedTilesAreAdjacent() {
-        if ((selection01[X] == selection02[X]) &&
-                (selection01[Y] == (selection02[Y] + 1) || selection01[Y] == (selection02[Y] - 1))) {
+        if ((userSelection01[X] == userSelection02[X]) &&
+                (userSelection01[Y] == (userSelection02[Y] + 1) || userSelection01[Y] == (userSelection02[Y] - 1))) {
             return true;
-        } else if ((selection01[Y] == selection02[Y]) &&
-                (selection01[X] == (selection02[X] + 1) || selection01[X] == (selection02[X] - 1))) {
+        } else if ((userSelection01[Y] == userSelection02[Y]) &&
+                (userSelection01[X] == (userSelection02[X] + 1) || userSelection01[X] == (userSelection02[X] - 1))) {
             return true;
         }
         return false;
     }
 
-    private void attemptSwap() {
+    private void swapTileContents() {
         if (differentPieceTypes()) {
             System.out.println("Swapping Pieces");
-            swapGamePieces();
-            ArrayList<LinkedList<Tile>> matchingColumns = controller.checkColumns(this);
-            ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(this);
+            swap();
+            ArrayList<LinkedList<Tile>> matchingColumns = controller.findMatchingColumns(this);
+            ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(this);
 
             if (matchesFound(matchingColumns, matchingRows)) {
                 manipulateBoard(matchingColumns, matchingRows);
             } else {
                 System.out.println("No matching Lines. Swapping pieces back to previous position");
-                swapGamePieces();
+                swap();
             }
 
         } else {
             System.out.println("Both selections are the same game piece type. Aborting operation");
         }
-        resetSelections();
+        resetUserSelections();
     }
 
     private boolean differentPieceTypes() {
-        return (!(tiles[selection01[X]][selection01[Y]].getPieceType().equals(tiles[selection02[X]][selection02[Y]].getPieceType())));
+        return (!(tiles[userSelection01[X]][userSelection01[Y]].getPieceType().equals(tiles[userSelection02[X]][userSelection02[Y]].getPieceType())));
     }
 
-    private void swapGamePieces() {
-        GamePiece tempPiece = tiles[selection01[X]][selection01[Y]].getGamePiece();
-        tiles[selection01[X]][selection01[Y]].setGamePiece(tiles[selection02[X]][selection02[Y]].getGamePiece());
-        tiles[selection02[X]][selection02[Y]].setGamePiece(tempPiece);
+    private void swap() {
+        GamePiece tempPiece = tiles[userSelection01[X]][userSelection01[Y]].getGamePiece();
+        tiles[userSelection01[X]][userSelection01[Y]].setGamePiece(tiles[userSelection02[X]][userSelection02[Y]].getGamePiece());
+        tiles[userSelection02[X]][userSelection02[Y]].setGamePiece(tempPiece);
         displayBoard();
     }
 
@@ -166,8 +166,8 @@ public class BoardImpl implements Board {
             shiftIconsDown();
             insertNewIcons();
             displayBoard();
-            matchingColumns = controller.checkColumns(this);
-            matchingRows = controller.checkRows(this);
+            matchingColumns = controller.findMatchingColumns(this);
+            matchingRows = controller.findMatchingRows(this);
         } while (matchesFound(matchingColumns, matchingRows));
     }
 

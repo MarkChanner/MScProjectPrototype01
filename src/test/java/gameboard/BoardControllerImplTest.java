@@ -27,7 +27,7 @@ public class BoardControllerImplTest {
     public void testCheckColumns() throws Exception {
         board.selectTile(3, 0);
         board.selectTile(4, 0);
-        ArrayList<LinkedList<Tile>> matchingCols = controller.checkColumns(board);
+        ArrayList<LinkedList<Tile>> matchingCols = controller.findMatchingColumns(board);
         LinkedList<Tile> list = matchingCols.get(0);
 
         /** Needs sorting out */
@@ -51,7 +51,7 @@ public class BoardControllerImplTest {
 
     @Test
     public void testCheckRows() throws Exception {
-        ArrayList<LinkedList<Tile>> matchingRows = controller.checkRows(board);
+        ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(board);
         LinkedList<Tile> list = matchingRows.get(0);
         assertEquals(5, list.get(0).getRow());
         assertEquals(0, list.get(0).getColumn());

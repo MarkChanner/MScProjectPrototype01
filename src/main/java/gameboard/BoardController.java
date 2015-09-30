@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface BoardController {
 
-    ArrayList<LinkedList<Tile>> checkRows(Board b);
+    ArrayList<LinkedList<Tile>> findMatchingRows(Board b);
 
-    ArrayList<LinkedList<Tile>> checkColumns(Board b);
+    ArrayList<LinkedList<Tile>> findMatchingColumns(Board b);
 }

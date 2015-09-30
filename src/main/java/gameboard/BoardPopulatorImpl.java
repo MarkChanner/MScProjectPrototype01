@@ -13,7 +13,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
     public void populate(Board board) {
         int rows = board.getRows();
         int cols = board.getCols();
-        Tile[][] tiles = board.getAllTiles();
+        Tile[][] tiles = board.getTiles();
         GamePiece newGamePiece;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
