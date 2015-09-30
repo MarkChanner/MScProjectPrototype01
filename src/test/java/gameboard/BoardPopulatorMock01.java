@@ -1,7 +1,6 @@
 package gameboard;
 
 import gamepieces.*;
-
 import java.util.Random;
 
 /**
@@ -14,6 +13,17 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         int rows = board.getRows();
         int cols = board.getCols();
         Tile[][] tiles = board.getTiles();
+
+        int counter = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (tiles[row][col] == null) {
+                    String str = counter <= 9 ? "0" + counter : "" + counter;
+                    tiles[row][col] = new TileImpl(row, col, new MockGamePiece(str));
+                    counter++;
+                }
+            }
+        }
 
         /* First Test set up */
         tiles[4][0] = new TileImpl(4, 0, new HappyGamePiece());
@@ -34,16 +44,7 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         tiles[5][4] = new TileImpl(5, 4, new SadGamePiece());
 
 
-        int counter = 0;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (tiles[row][col] == null) {
-                    String str = counter <= 9 ? "0" + counter : "" + counter;
-                    tiles[row][col] = new TileImpl(row, col, new MockGamePiece(str));
-                    counter++;
-                }
-            }
-        }
+
     }
 
     @Override

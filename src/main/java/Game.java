@@ -1,5 +1,4 @@
-
-import gameboard.*;
+package gameboard;
 import java.util.Scanner;
 
 /**
