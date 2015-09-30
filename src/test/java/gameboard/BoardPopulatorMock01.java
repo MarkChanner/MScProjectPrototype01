@@ -14,6 +14,7 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         int cols = board.getCols();
         Tile[][] tiles = board.getTiles();
 
+        // Initialize board with numbers
         int counter = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
@@ -26,10 +27,11 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         }
 
         /* First Test set up */
-        tiles[4][0] = new TileImpl(4, 0, new HappyGamePiece());
-        tiles[3][0] = new TileImpl(3, 0, new ExcitedGamePiece());
-        tiles[2][0] = new TileImpl(2, 0, new HappyGamePiece());
         tiles[1][0] = new TileImpl(1, 0, new HappyGamePiece());
+        tiles[2][0] = new TileImpl(2, 0, new HappyGamePiece());
+        tiles[3][0] = new TileImpl(3, 0, new ExcitedGamePiece());
+        tiles[4][0] = new TileImpl(4, 0, new HappyGamePiece());
+
 
         tiles[4][1] = new TileImpl(4, 1, new ExcitedGamePiece());
         tiles[4][2] = new TileImpl(4, 2, new ExcitedGamePiece());
@@ -42,9 +44,6 @@ public class BoardPopulatorMock01 implements BoardPopulator {
 
         tiles[4][4] = new TileImpl(4, 4, new SadGamePiece());
         tiles[5][4] = new TileImpl(5, 4, new SadGamePiece());
-
-
-
     }
 
     @Override
