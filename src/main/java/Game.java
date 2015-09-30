@@ -12,20 +12,12 @@ public class Game {
     private Board board;
 
     public Game() {
-        board = new BoardImpl(ROWS, COLS, new BoardControllerImpl(), new BoardPopulatorMock01());
+        board = new BoardImpl(ROWS, COLS, new BoardControllerImpl(), new BoardPopulatorImpl());
     }
 
     public static void main(String[] args) {
         Game game = new Game();
         game.takeCommands();
-        //game.start();
-    }
-
-    private void start() {
-        board.displayBoard();
-        System.out.println();
-        board.selectTile(2, 0);
-        board.selectTile(3, 0);
     }
 
     private void takeCommands() {
