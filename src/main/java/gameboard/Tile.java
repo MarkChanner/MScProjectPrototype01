@@ -3,11 +3,11 @@ package gameboard;
 import gamepieces.GamePiece;
 
 /**
- * @author Mark Channer
- *
  * Each Tile represents a square on the board. It provides methods for
  * accessing the location of the Tile on the board, and for retrieving
  * both the type of GamePiece occupying it and the type GamePiece it is
+ *
+ * @author Mark Channer
  */
 public interface Tile {
 
