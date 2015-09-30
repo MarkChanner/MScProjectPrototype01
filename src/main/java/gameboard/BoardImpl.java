@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * @author Mark Channer
- *         The board on which the game will take place
+ * This class implements the methods of Board and also has many private methods that are
+ * called once two valid selections are made.
+ *
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class BoardImpl implements Board {
 
@@ -34,21 +36,39 @@ public class BoardImpl implements Board {
         resetUserSelections();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getRows() {
         return rows;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCols() {
         return cols;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Tile[][] getTiles() {
-        return tiles;
+        if (tiles == null) {
+            throw new NullPointerException();
+        } else {
+            return tiles;
+        }
     }
 
+    /**
+     * Private method to reset the user selections
+     * This is important as whether or not a selected icon
+     * should be compared yet or not is based on this
+     */
     private void resetUserSelections() {
         firstSelectionMade = false;
         userSelection01[X] = -1;
@@ -57,6 +77,9 @@ public class BoardImpl implements Board {
         userSelection02[Y] = -1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void displayBoard() {
         System.out.println();
@@ -73,6 +96,9 @@ public class BoardImpl implements Board {
         System.out.println();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void selectTile(int row, int column) {
         if ((row >= rows || column >= cols) || (row < 0 || column < 0)) {
@@ -90,6 +116,9 @@ public class BoardImpl implements Board {
         }
     }
 
+    /**
+     * This private method one of the methods called from the SelectTile class
+     */
     private void checkValidSelections() {
         if (!sameTileSelectedTwice()) {
             if (selectedTilesAreAdjacent()) {
@@ -107,6 +136,12 @@ public class BoardImpl implements Board {
         }
     }
 
+    /**
+     * A private method determines if the two selected tiles are the same or not
+     *
+     * @return A boolean that determines if the selected tiles were in fact
+     * the same or not
+     */
     private boolean sameTileSelectedTwice() {
         return ((userSelection01[X] == userSelection02[X]) && (userSelection01[Y] == userSelection02[Y]));
     }
@@ -122,6 +157,10 @@ public class BoardImpl implements Board {
         return false;
     }
 
+    /**
+     * A private method that checks that the two game pieces are not of the same type,
+     * and then calls the swap method on the tiles
+     */
     private void compareTileContents() {
         if (differentPieceTypes()) {
             System.out.println("Swapping Pieces");
@@ -133,10 +172,18 @@ public class BoardImpl implements Board {
         resetUserSelections();
     }
 
+    /**
+     * Privete method that determines if the two piece types are different or not.
+     *
+     * @return A boolean which will state the result
+     */
     private boolean differentPieceTypes() {
         return (!(tiles[userSelection01[X]][userSelection01[Y]].getPieceType().equals(tiles[userSelection02[X]][userSelection02[Y]].getPieceType())));
     }
 
+    /**
+     * Private method that simply switches the game pieces of the two icons selected
+     */
     private void swapPieces() {
         GamePiece tempPiece = tiles[userSelection01[X]][userSelection01[Y]].getGamePiece();
         tiles[userSelection01[X]][userSelection01[Y]].setGamePiece(tiles[userSelection02[X]][userSelection02[Y]].getGamePiece());
@@ -144,6 +191,9 @@ public class BoardImpl implements Board {
         displayBoard();
     }
 
+    /**
+     * A private method that examines the board and returns any matches
+     */
     private void findMatches() {
         ArrayList<LinkedList<Tile>> matchingColumns = controller.findMatchingColumns(this);
         ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(this);
@@ -155,10 +205,25 @@ public class BoardImpl implements Board {
         }
     }
 
+    /**
+     * A private method that indicates if the board has matches or not
+     *
+     * @param matchingColumns the list of columns that will contain matches if they are present
+     * @param matchingRows    the list of rows that will contain matches if they are present
+     * @return a boolean indicating if matches are present or not
+     */
     private boolean matchesFound(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
         return (!(matchingColumns.isEmpty() && matchingRows.isEmpty()));
     }
 
+    /**
+     * A private method that rewards the player with a message when a set of matches is made.
+     * This will be improved to show an animation, play a jingle, increase the score, and
+     * maybe make a tablet vibrate, if it has that functionality
+     *
+     * @param matchingColumns the list of Tiles that may contain matches
+     * @param matchingRows    the list of Tiles that may contain matches
+     */
     private void giveReward(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
         for (LinkedList<Tile> matchingColumn : matchingColumns) {
             System.out.println(matchingColumn.getFirst().getGamePiece());
@@ -170,6 +235,14 @@ public class BoardImpl implements Board {
         printList("Matching rows:", matchingRows); // to be removed
     }
 
+    /**
+     * A private method that updates the board once a match has been found. It calls a succession of methods
+     * in this class, that remove matches, and then bring above rows down to filly the slots, and introduce
+     * newly random-generated pieces
+     *
+     * @param matchingColumns the list of Tiles that may contain matches
+     * @param matchingRows    the list of Tiles that may contain matches
+     */
     private void updateBoard(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
         do {
             giveReward(matchingColumns, matchingRows);
@@ -183,6 +256,11 @@ public class BoardImpl implements Board {
         } while (matchesFound(matchingColumns, matchingRows));
     }
 
+    /**
+     * A private method to remove matches from that board
+     *
+     * @param matches a list of matches
+     */
     private void removeFromBoard(ArrayList<LinkedList<Tile>> matches) {
         for (List<Tile> rowList : matches) {
             for (Tile t : rowList) {
@@ -195,6 +273,10 @@ public class BoardImpl implements Board {
         }
     }
 
+    /**
+     * A private method that brings game pieces down from above rows to fill
+     * any empty spaces on the board
+     */
     private void shiftIconsDown() {
         for (int col = 0; col < cols; col++) {
             for (int row = (rows - 1); row >= 0; row--) {
@@ -215,6 +297,10 @@ public class BoardImpl implements Board {
         }
     }
 
+    /**
+     * A private method that generates new game pieces and places them
+     * in vacant places on the board
+     */
     private void insertNewIcons() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
