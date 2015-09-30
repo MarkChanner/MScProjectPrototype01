@@ -25,22 +25,22 @@ public class Game {
     private void start() {
         board.displayBoard();
         System.out.println();
-        board.selectTile(5, 2);
-        board.selectTile(5, 3);
+        board.selectTile(2, 0);
+        board.selectTile(3, 0);
     }
 
     private void takeCommands() {
         board.displayBoard();
         Scanner input = new Scanner(System.in);
         System.out.println("Enter board coordinates (q to quit):");
-        String command;
+        String userInput;
         String[] coordinates;
         do {
-            System.out.print("Coordinates: ");
-            command = input.nextLine();
-            if (!(command.equals("q"))) {
-                coordinates = command.split(",");
-                if (isValid(coordinates)) {
+            System.out.println("Coordinates: ");
+            userInput = input.nextLine();
+            if (notQuitting(userInput)) {
+                coordinates = userInput.split(",");
+                if (validInput(coordinates)) {
                     Integer x = Integer.parseInt(coordinates[0]);
                     Integer y = Integer.parseInt(coordinates[1]);
                     board.selectTile(x, y);
@@ -48,10 +48,10 @@ public class Game {
                     System.out.println("Invalid input. Please enter again");
                 }
             }
-        } while (!command.equals("q"));
+        } while (notQuitting(userInput));
     }
 
-    private boolean isValid(String[] coordinates) {
+    private boolean validInput(String[] coordinates) {
         if (coordinates.length != 2) return false;
 
         for (String coordinate : coordinates) {
@@ -59,5 +59,9 @@ public class Game {
             if (!Character.isDigit(c)) return false;
         }
         return true;
+    }
+
+    public boolean notQuitting(String userInput) {
+        return (!userInput.equals("q"));
     }
 }
