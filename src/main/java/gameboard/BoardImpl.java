@@ -148,7 +148,6 @@ public class BoardImpl implements Board {
         ArrayList<LinkedList<Tile>> matchingColumns = controller.findMatchingColumns(this);
         ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(this);
         if (matchesFound(matchingColumns, matchingRows)) {
-            giveReward(matchingColumns, matchingRows);
             updateBoard(matchingColumns, matchingRows);
         } else {
             System.out.println("No matching Lines. Swapping pieces back to previous position");
@@ -173,6 +172,7 @@ public class BoardImpl implements Board {
 
     private void updateBoard(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
         do {
+            giveReward(matchingColumns, matchingRows);
             removeFromBoard(matchingColumns);
             removeFromBoard(matchingRows);
             shiftIconsDown();

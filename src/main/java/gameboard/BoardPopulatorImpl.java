@@ -17,6 +17,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
         GamePiece newGamePiece;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
+
                 do {
                     newGamePiece = generateGamePiece();
                 } while ((row >= 2 &&
@@ -25,6 +26,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
                         (col >= 2 &&
                                 (newGamePiece.showType().equals(tiles[row][col - 1].getPieceType()) &&
                                         newGamePiece.showType().equals(tiles[row][col - 2].getPieceType()))));
+
                 tiles[row][col] = new TileImpl(row, col, newGamePiece);
             }
         }

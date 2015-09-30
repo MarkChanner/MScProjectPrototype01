@@ -19,7 +19,7 @@ public class BoardImplTest {
     public void setUp() throws Exception {
         rows = 7;
         cols = 7;
-        board = new BoardImpl(rows, cols, new BoardControllerImpl(), new BoardPopulatorCrossMatch());
+        board = new BoardImpl(rows, cols, new BoardControllerImpl(), new BoardPopulatorMock01());
     }
 
     @After
