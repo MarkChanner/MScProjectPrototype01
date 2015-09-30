@@ -22,7 +22,7 @@ public class BoardImpl implements Board {
     private int[] selection01 = new int[2];
     private int[] selection02 = new int[2];
 
-    public BoardImpl(int numberOfRows, int numberOfColumns, BoardPopulator boardPopulator) {
+    public BoardImpl(int numberOfRows, int numberOfColumns, BoardController boardController, BoardPopulator boardPopulator) {
         rows = numberOfRows;
         cols = numberOfColumns;
         firstSelectionMade = false;
