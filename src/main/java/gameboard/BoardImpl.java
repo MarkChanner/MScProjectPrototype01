@@ -78,21 +78,20 @@ public class BoardImpl implements Board {
             System.out.println("Selection out of board range");
         } else if (!(firstSelectionMade)) {
             System.out.println("Selection 1: (" + tiles[row][column].getPieceType() + ")");
+            firstSelectionMade = true;
             userSelection01[X] = row;
             userSelection01[Y] = column;
-            firstSelectionMade = true;
         } else {
             System.out.println("Selection 2: (" + tiles[row][column].getPieceType() + ")");
             userSelection02[X] = row;
             userSelection02[Y] = column;
-            firstSelectionMade = false;
             compareTileContents();
         }
     }
 
     private void compareTileContents() {
         if (!sameTileSelectedTwice()) {
-            if (selectedTilesAdjacent()) {
+            if (selectedTilesAreAdjacent()) {
                 swapTileContents();
             } else {
                 System.out.println("Selections are NOT adjacent. Last selection is now first selection");
@@ -111,7 +110,7 @@ public class BoardImpl implements Board {
         return ((userSelection01[X] == userSelection02[X]) && (userSelection01[Y] == userSelection02[Y]));
     }
 
-    private boolean selectedTilesAdjacent() {
+    private boolean selectedTilesAreAdjacent() {
         if ((userSelection01[X] == userSelection02[X]) &&
                 (userSelection01[Y] == (userSelection02[Y] + 1) || userSelection01[Y] == (userSelection02[Y] - 1))) {
             return true;
@@ -123,17 +122,26 @@ public class BoardImpl implements Board {
     }
 
     private void swapTileContents() {
-        if (()) {
+        if (differentPieceTypes()) {
             System.out.println("Swapping Pieces");
             swap();
-            checkForMatches();
+            ArrayList<LinkedList<Tile>> matchingColumns = controller.findMatchingColumns(this);
+            ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(this);
+
+            if (matchesFound(matchingColumns, matchingRows)) {
+                manipulateBoard(matchingColumns, matchingRows);
+            } else {
+                System.out.println("No matching Lines. Swapping pieces back to previous position");
+                swap();
+            }
+
         } else {
             System.out.println("Both selections are the same game piece type. Aborting operation");
-            resetUserSelections();
         }
+        resetUserSelections();
     }
 
-    private boolean () {
+    private boolean differentPieceTypes() {
         return (!(tiles[userSelection01[X]][userSelection01[Y]].getPieceType().equals(tiles[userSelection02[X]][userSelection02[Y]].getPieceType())));
     }
 
@@ -142,18 +150,6 @@ public class BoardImpl implements Board {
         tiles[userSelection01[X]][userSelection01[Y]].setGamePiece(tiles[userSelection02[X]][userSelection02[Y]].getGamePiece());
         tiles[userSelection02[X]][userSelection02[Y]].setGamePiece(tempPiece);
         displayBoard();
-    }
-
-    private void checkForMatches() {
-        ArrayList<LinkedList<Tile>> matchingColumns = controller.findMatchingColumns(this);
-        ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(this);
-        if (matchesFound(matchingColumns, matchingRows)) {
-            manipulateBoard(matchingColumns, matchingRows);
-        } else {
-            System.out.println("No matching Lines. Swapping pieces back to previous position");
-            swap();
-            resetUserSelections();
-        }
     }
 
     private boolean matchesFound(ArrayList<LinkedList<Tile>> matchingColumns, ArrayList<LinkedList<Tile>> matchingRows) {
