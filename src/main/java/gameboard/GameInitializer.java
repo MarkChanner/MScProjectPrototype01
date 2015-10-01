@@ -22,7 +22,7 @@ public class GameInitializer {
     private void takeCommands() {
         board.displayBoard();
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter board coordinates (q to quit):");
+        System.out.println("Enter board coordinates by row and column in the form 3,4 (q to quit):");
         String userInput;
         String[] coordinates;
         do {
