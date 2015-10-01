@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * This class implements the methods of Board and also has many private methods that are
- * called once two valid selections are made.
+ * This class implements the methods of Board and also has private
+ * methods that are called once two valid selections are made.
  *
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
@@ -16,21 +16,21 @@ public class BoardImpl implements Board {
 
     private static final int X = 0;
     private static final int Y = 1;
-    private boolean firstSelectionMade;
+
     private final int rows;
     private final int cols;
-    private Tile[][] tiles;
-    private BoardController controller;
+    private MatchFinder matchFinder;
     private BoardPopulator populator;
+    private Tile[][] tiles;
     private int[] userSelection01 = new int[2];
     private int[] userSelection02 = new int[2];
+    private boolean firstSelectionMade;
 
-    public BoardImpl(int r, int c, BoardController bc, BoardPopulator bp) {
-        firstSelectionMade = false;
+    public BoardImpl(int r, int c, BoardPopulator bp, MatchFinder mf) {
         rows = r;
         cols = c;
         tiles = new TileImpl[rows][cols];
-        controller = bc;
+        matchFinder = mf;
         populator = bp;
         populator.populate(this);
         resetUserSelections();
@@ -192,11 +192,12 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * A private method that examines the board and returns any matches
+     * A private method that examines the board and returns any matches.
+     * It does this by calling methods within the MatchFinder class
      */
     private void findMatches() {
-        ArrayList<LinkedList<Tile>> matchingColumns = controller.findMatchingColumns(this);
-        ArrayList<LinkedList<Tile>> matchingRows = controller.findMatchingRows(this);
+        ArrayList<LinkedList<Tile>> matchingColumns = matchFinder.findMatchingColumns(this);
+        ArrayList<LinkedList<Tile>> matchingRows = matchFinder.findMatchingRows(this);
         if (matchesFound(matchingColumns, matchingRows)) {
             updateBoard(matchingColumns, matchingRows);
         } else {
@@ -251,8 +252,8 @@ public class BoardImpl implements Board {
             shiftIconsDown();
             insertNewIcons();
             displayBoard();
-            matchingColumns = controller.findMatchingColumns(this);
-            matchingRows = controller.findMatchingRows(this);
+            matchingColumns = matchFinder.findMatchingColumns(this);
+            matchingRows = matchFinder.findMatchingRows(this);
         } while (matchesFound(matchingColumns, matchingRows));
     }
 

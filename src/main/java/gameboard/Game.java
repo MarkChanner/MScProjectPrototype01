@@ -11,7 +11,7 @@ public class Game {
     private Board board;
 
     public Game() {
-        board = new BoardImpl(ROWS, COLS, new BoardControllerImpl(), new BoardPopulatorImpl());
+        board = new BoardImpl(ROWS, COLS, new BoardPopulatorImpl(), new MatchFinderImpl());
     }
 
     public static void main(String[] args) {
