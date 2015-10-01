@@ -2,7 +2,12 @@ package gameboard;
 import java.util.Scanner;
 
 /**
- * @author Mark Channer
+ * GameInitializer sets up the Board and passes it the necessary objects to populate the
+ * board and find matches after GamePiece objects are swapped. For playing the game, the
+ * BoardPopulatorImpl object is passed in, but when testing, a BoardPopulatorMock01 object
+ * is passed instead, which populates the board in a set way for the tests
+ *
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class GameInitializer {
 
