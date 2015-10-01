@@ -9,11 +9,19 @@ public class SadGamePiece extends AbstractGamePiece {
         super("SA");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GamePiece retrieveGamePiece() {
         return (this);
     }
 
+    /**
+     * Returns a String, giving the type of the game piece
+     *
+     * @return a String, giving the type of the game piece
+     */
     public String toString() {
         return "OH, IT'S A SAD FACE!!!!!";
     }

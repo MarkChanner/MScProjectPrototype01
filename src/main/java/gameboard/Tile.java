@@ -26,9 +26,9 @@ public interface Tile {
     int getColumn();
 
     /**
-     * Returns the Game Piece occupying the Tile
+     * Returns the GameInitializer Piece occupying the Tile
      *
-     * @return the Game Piece occupying the Tile
+     * @return the GameInitializer Piece occupying the Tile
      * @throws NullPointerException if the GamePiece has not been set
      */
     GamePiece getGamePiece();

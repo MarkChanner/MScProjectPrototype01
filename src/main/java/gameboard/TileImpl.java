@@ -72,7 +72,7 @@ public class TileImpl implements Tile {
         if (piece != null) {
             return piece.showType();
         } else {
-            throw new NullPointerException("Game Piece is not set");
+            throw new NullPointerException("GameInitializer Piece is not set");
         }
 
     }

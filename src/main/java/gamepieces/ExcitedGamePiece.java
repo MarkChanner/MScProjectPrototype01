@@ -9,11 +9,19 @@ public class ExcitedGamePiece extends AbstractGamePiece {
         super("EX");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GamePiece retrieveGamePiece() {
         return (this);
     }
 
+    /**
+     * Returns a String, giving the type of the game piece
+     *
+     * @return a String, giving the type of the game piece
+     */
     public String toString() {
         return "WEEEEEE! IT'S AN EXCITED FACE!!!!!";
     }

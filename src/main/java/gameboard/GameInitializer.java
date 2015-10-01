@@ -4,19 +4,19 @@ import java.util.Scanner;
 /**
  * @author Mark Channer
  */
-public class Game {
+public class GameInitializer {
 
     public static final int ROWS = 7;
     public static final int COLS = 7;
     private Board board;
 
-    public Game() {
+    public GameInitializer() {
         board = new BoardImpl(ROWS, COLS, new BoardPopulatorImpl(), new MatchFinderImpl());
     }
 
     public static void main(String[] args) {
-        Game game = new Game();
-        game.takeCommands();
+        GameInitializer gameInitializer = new GameInitializer();
+        gameInitializer.takeCommands();
     }
 
     private void takeCommands() {
