@@ -7,7 +7,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Mark Channer
+ * Uses a BoardPopulatorMock01 to populate the board with in a predictable way for testing.
+ *
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class BoardImplTest {
 
@@ -104,6 +106,7 @@ public class BoardImplTest {
         assertEquals("47", tiles[6][5].getPieceType());
         assertEquals("48", tiles[6][6].getPieceType());
 
+        // selects tiles that are know to lead to 2 matches
         board.selectTile(3, 0);
         board.selectTile(4, 0);
 
@@ -129,6 +132,7 @@ public class BoardImplTest {
         assertEquals("08", tiles[2][1].getPieceType());
         assertEquals("09", tiles[2][2].getPieceType());
 
+        // selects 2 more tiles that will lead to 2 matches
         board.selectTile(3, 3);
         board.selectTile(3, 4);
 

@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Mark Channer
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class HappyGamePieceTest {
 

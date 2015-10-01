@@ -4,7 +4,11 @@ import gamepieces.*;
 import java.util.Random;
 
 /**
- * @author Mark Channer
+ * Populates the board with numbers, starting with 0 and incrementing by 1. This is so
+ * that no matches can occur except for on the tiles that are set with GamePieces at
+ * strategic places for testing
+ *
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class BoardPopulatorMock01 implements BoardPopulator {
 
@@ -14,7 +18,8 @@ public class BoardPopulatorMock01 implements BoardPopulator {
         int cols = board.getCols();
         Tile[][] tiles = board.getTiles();
 
-        // Initialize board with numbers
+        // Populates the board with numbers that increment by 1 so that no
+        // matches are possible yet
         int counter = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
@@ -26,22 +31,23 @@ public class BoardPopulatorMock01 implements BoardPopulator {
             }
         }
 
-        /* First Test set up */
+        // Sets up tiles so that a match of HappyGamePieces in a row
+        // and a match of ExcitedGamePieces in a column can occur
+        // when tiles 3,0 and 4,0 are selected
         tiles[1][0] = new TileImpl(1, 0, new HappyGamePiece());
         tiles[2][0] = new TileImpl(2, 0, new HappyGamePiece());
         tiles[3][0] = new TileImpl(3, 0, new ExcitedGamePiece());
         tiles[4][0] = new TileImpl(4, 0, new HappyGamePiece());
-
-
         tiles[4][1] = new TileImpl(4, 1, new ExcitedGamePiece());
         tiles[4][2] = new TileImpl(4, 2, new ExcitedGamePiece());
 
-        /* Second test set up */
+        // Sets up tiles so that a match of AngryGamePieces in a row
+        // and amatchi of SadGamePieces in a column can occur
+        // when tiles 3,3 and 3,4 are selected
         tiles[3][3] = new TileImpl(3, 3, new SadGamePiece());
         tiles[3][4] = new TileImpl(3, 4, new AngryGamePiece());
         tiles[3][5] = new TileImpl(3, 5, new SadGamePiece());
         tiles[3][6] = new TileImpl(3, 6, new SadGamePiece());
-
         tiles[4][4] = new TileImpl(4, 4, new SadGamePiece());
         tiles[5][4] = new TileImpl(5, 4, new SadGamePiece());
     }
