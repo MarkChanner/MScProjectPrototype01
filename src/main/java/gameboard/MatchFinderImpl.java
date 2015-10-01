@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * @author Mark Channer
  */
-public class BoardControllerImpl implements BoardController {
+public class MatchFinderImpl implements MatchFinder {
 
     @Override
     public ArrayList<LinkedList<Tile>> findMatchingColumns(Board board) {

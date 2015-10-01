@@ -6,7 +6,7 @@ import java.util.LinkedList;
 /**
  * @author Mark Channer
  */
-public interface BoardController {
+public interface MatchFinder {
 
     ArrayList<LinkedList<Tile>> findMatchingRows(Board b);
 
