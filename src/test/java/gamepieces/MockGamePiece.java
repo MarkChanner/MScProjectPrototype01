@@ -1,7 +1,7 @@
 package gamepieces;
 
 /**
- * This game piece differs from the others in that it takes a constructor which allows
+ * This game piece differs from others in that it takes a constructor which allows
  * its type to be set. This is used in the BoardPopulatorMock to populate the board
  * with a series of numbers that will not lead to a match and cause difficulties with
  * running tests
