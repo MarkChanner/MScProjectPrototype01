@@ -14,8 +14,8 @@ import java.util.LinkedList;
  */
 public class BoardImpl implements Board {
 
-    private static final int X = 0;
-    private static final int Y = 1;
+    private static final int R = 0;
+    private static final int C = 1;
 
     private final int rows;
     private final int cols;
@@ -71,10 +71,10 @@ public class BoardImpl implements Board {
      */
     private void resetUserSelections() {
         firstSelectionMade = false;
-        userSelection01[X] = -1;
-        userSelection01[Y] = -1;
-        userSelection02[X] = -1;
-        userSelection02[Y] = -1;
+        userSelection01[R] = -1;
+        userSelection01[C] = -1;
+        userSelection02[R] = -1;
+        userSelection02[C] = -1;
     }
 
     /**
@@ -106,12 +106,12 @@ public class BoardImpl implements Board {
         } else if (!(firstSelectionMade)) {
             System.out.println("Selection 1: (" + tiles[row][column].getPieceType() + ")");
             firstSelectionMade = true;
-            userSelection01[X] = row;
-            userSelection01[Y] = column;
+            userSelection01[R] = row;
+            userSelection01[C] = column;
         } else {
             System.out.println("Selection 2: (" + tiles[row][column].getPieceType() + ")");
-            userSelection02[X] = row;
-            userSelection02[Y] = column;
+            userSelection02[R] = row;
+            userSelection02[C] = column;
             checkValidSelections();
         }
     }
@@ -125,10 +125,10 @@ public class BoardImpl implements Board {
                 compareTileContents();
             } else {
                 System.out.println("Selections are NOT adjacent. Last selection is now first selection");
-                userSelection01[X] = userSelection02[X];
-                userSelection01[Y] = userSelection02[Y];
-                userSelection02[X] = -1;
-                userSelection02[Y] = -1;
+                userSelection01[R] = userSelection02[R];
+                userSelection01[C] = userSelection02[C];
+                userSelection02[R] = -1;
+                userSelection02[C] = -1;
             }
         } else {
             System.out.println("Same selection made twice. Resetting.");
@@ -143,15 +143,15 @@ public class BoardImpl implements Board {
      * the same or not
      */
     private boolean sameTileSelectedTwice() {
-        return ((userSelection01[X] == userSelection02[X]) && (userSelection01[Y] == userSelection02[Y]));
+        return ((userSelection01[R] == userSelection02[R]) && (userSelection01[C] == userSelection02[C]));
     }
 
     private boolean selectedTilesAreAdjacent() {
-        if ((userSelection01[X] == userSelection02[X]) &&
-                (userSelection01[Y] == (userSelection02[Y] + 1) || userSelection01[Y] == (userSelection02[Y] - 1))) {
+        if ((userSelection01[R] == userSelection02[R]) &&
+                (userSelection01[C] == (userSelection02[C] + 1) || userSelection01[C] == (userSelection02[C] - 1))) {
             return true;
-        } else if ((userSelection01[Y] == userSelection02[Y]) &&
-                (userSelection01[X] == (userSelection02[X] + 1) || userSelection01[X] == (userSelection02[X] - 1))) {
+        } else if ((userSelection01[C] == userSelection02[C]) &&
+                (userSelection01[R] == (userSelection02[R] + 1) || userSelection01[R] == (userSelection02[R] - 1))) {
             return true;
         }
         return false;
@@ -178,16 +178,16 @@ public class BoardImpl implements Board {
      * @return A boolean which will state the result
      */
     private boolean differentPieceTypes() {
-        return (!(tiles[userSelection01[X]][userSelection01[Y]].getPieceType().equals(tiles[userSelection02[X]][userSelection02[Y]].getPieceType())));
+        return (!(tiles[userSelection01[R]][userSelection01[C]].getPieceType().equals(tiles[userSelection02[R]][userSelection02[C]].getPieceType())));
     }
 
     /**
      * Private method that simply switches the game pieces of the two icons selected
      */
     private void swapPieces() {
-        GamePiece tempPiece = tiles[userSelection01[X]][userSelection01[Y]].getGamePiece();
-        tiles[userSelection01[X]][userSelection01[Y]].setGamePiece(tiles[userSelection02[X]][userSelection02[Y]].getGamePiece());
-        tiles[userSelection02[X]][userSelection02[Y]].setGamePiece(tempPiece);
+        GamePiece tempPiece = tiles[userSelection01[R]][userSelection01[C]].getGamePiece();
+        tiles[userSelection01[R]][userSelection01[C]].setGamePiece(tiles[userSelection02[R]][userSelection02[C]].getGamePiece());
+        tiles[userSelection02[R]][userSelection02[C]].setGamePiece(tempPiece);
         displayBoard();
     }
 
