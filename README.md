@@ -1,5 +1,5 @@
 # MScProjectPrototype01
-Prototype 1 for MSc Project
+Prototype 1 for MSc Project (Java version)
 
 ##Introduction
 This is the first prototype of a tile matching game that I wil be working on until September 2016 for my 
