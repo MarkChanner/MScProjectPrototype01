@@ -1,7 +1,28 @@
 package model.gameboard;
 
 /**
- * Created by Mark on 25/08/2016.
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public interface Select {
+public interface Selections {
+
+    void reset();
+
+    int[] getSelection01();
+
+    void setSelection01(int x, int y);
+
+    boolean selection01AlreadyMade();
+
+    int[] getSelection02();
+
+    void setSelection02(int x, int y);
+
+    boolean sameSelectionMadeTwice();
+
+    boolean areNotAdjacent();
+
+    void secondSelectionBecomesFirstSelection();
+
 }
+
+
