@@ -1,5 +1,7 @@
-package model;
+package model.gamepieces;
 
+import model.gameboard.GamePiece;
+import model.gamepieces.HappyGamePiece;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

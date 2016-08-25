@@ -1,4 +1,4 @@
-package model;
+package model.gameboard;
 
 /**
  * Each Tile represents a square on the board. It provides methods for

@@ -1,4 +1,4 @@
-package model;
+package model.gameboard;
 import java.util.Scanner;
 
 /**

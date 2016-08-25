@@ -1,4 +1,4 @@
-package model;
+package model.gameboard;
 
 /**
  * The board on which the game will take place. This interface provides methods that all

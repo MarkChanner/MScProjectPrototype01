@@ -1,4 +1,7 @@
-package model;
+package model.gameboard;
+
+import model.gameboard.*;
+import model.gamepieces.*;
 
 import java.util.Random;
 

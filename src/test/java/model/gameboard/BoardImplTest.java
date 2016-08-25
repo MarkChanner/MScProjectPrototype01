@@ -1,4 +1,4 @@
-package model;
+package model.gameboard;
 
 import org.junit.After;
 import org.junit.Before;

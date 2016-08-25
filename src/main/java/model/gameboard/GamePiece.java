@@ -1,4 +1,4 @@
-package model;
+package model.gameboard;
 
 /**
  * A game piece, such as an emoticon for a tile matching game.

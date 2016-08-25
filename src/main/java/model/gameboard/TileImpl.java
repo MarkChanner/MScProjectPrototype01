@@ -1,4 +1,4 @@
-package model;
+package model.gameboard;
 
 /**
  * An implementation of the Tile interface. Implements all interface

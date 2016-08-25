@@ -1,4 +1,6 @@
-package model;
+package model.gameboard;
+
+import model.gamepieces.NoGamePiece;
 
 import java.util.List;
 import java.util.ArrayList;

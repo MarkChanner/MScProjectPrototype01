@@ -1,12 +1,14 @@
-package model;
+package model.gamepieces;
+
+import model.GamePiece;
 
 /**
  * @author Mark Channer
  */
-public class ConfusedGamePiece extends AbstractGamePiece {
+public class SadGamePiece extends AbstractGamePiece {
 
-    public ConfusedGamePiece() {
-        super("CO");
+    public SadGamePiece() {
+        super("SA");
     }
 
     /**
@@ -23,6 +25,6 @@ public class ConfusedGamePiece extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "WELL, WELL! IT'S A CONFUSED FACE!!!";
+        return "OH, IT'S A SAD FACE!!!!!";
     }
 }

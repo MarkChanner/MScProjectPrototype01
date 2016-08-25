@@ -1,4 +1,6 @@
-package model;
+package model.gamepieces;
+
+import model.GamePiece;
 
 /**
  * @author Mark Channer

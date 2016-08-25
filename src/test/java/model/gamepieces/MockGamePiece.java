@@ -1,4 +1,7 @@
-package model;
+package model.gamepieces;
+
+import model.gameboard.GamePiece;
+import model.gamepieces.AbstractGamePiece;
 
 /**
  * This game piece differs from others in that it takes a constructor which allows
