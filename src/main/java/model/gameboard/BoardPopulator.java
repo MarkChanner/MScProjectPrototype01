@@ -17,13 +17,13 @@ public interface BoardPopulator {
      *
      * @param board element to be populated with game pieces
      */
-    void populate(Board board);
+    void populate(GameBoard board);
 
     /**
      * Creates a game piece
      *
      * @return a game piece
      */
-    AbstractGamePiece generateGamePiece();
+    AbstractGamePiece generateGamePiece(int x, int y);
 
 }

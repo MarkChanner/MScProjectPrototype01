@@ -5,43 +5,51 @@ import model.gamepieces.*;
 import java.util.Random;
 
 /**
- * Implementation of the BoardPopulator interface that populates a Board with GamePieces
- * at random. However, as this class is used for a matching game where the objective is
+ * Implementation of the BoardPopulator interface that populates a GameBoard with GamePieces
+ * at random. As this class is used for a matching game where the objective is
  * to match 3 consecutive game pieces, it ensures that 3 consecutive pieces would not
  * be formed at the outset.
  *
- *  @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class BoardPopulatorImpl implements BoardPopulator {
 
+    private static final int ROW_START = 0;
+    private static final int COLUMN_TOP = 0;
 
     /**
-     * Populates the given Board object with game pieces that are allocated at random. If
+     * Populates the given GameBoard object with game pieces that are allocated at random. If
      * placing the game piece would result in a board that has 3 consecutive piece types at
      * the start of the game, another game piece is chosen until one that does not form a match is
      * found { @inheritDocs }
      */
     @Override
-    public void populate(Board board) {
-        int rows = board.getRows();
+    public void populate(GameBoard board) {
+        System.out.println("In populate(board)");
         int cols = board.getCols();
-        Tile[][] tiles = board.getTiles();
-        GamePiece newGamePiece;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
+        int rows = board.getRows();
+        AbstractGamePiece emoticon;
+        for (int x = ROW_START; x < cols; x++) {
+            for (int y = COLUMN_TOP; y < rows; y++) {
 
                 do {
-                    newGamePiece = generateGamePiece();
-                } while ((row >= 2 &&
-                        (newGamePiece.showType().equals(tiles[row - 1][col].getPieceType()) &&
-                                newGamePiece.showType().equals(tiles[row - 2][col].getPieceType()))) ||
-                        (col >= 2 &&
-                                (newGamePiece.showType().equals(tiles[row][col - 1].getPieceType()) &&
-                                        newGamePiece.showType().equals(tiles[row][col - 2].getPieceType()))));
+                    emoticon = generateGamePiece(x, y);
+                } while (gamePieceTypeCausesMatch(x, y, board, emoticon.showType()));
 
-                tiles[row][col] = new TileImpl(row, col, newGamePiece);
+                board.setGamePiece(x, y, emoticon);
             }
         }
+    }
+
+    private boolean gamePieceTypeCausesMatch(int x, int y, GameBoard board, String emoType) {
+        if (y >= 2 && emoType.equals(board.getGamePiece(x, y - 1).showType()) &&
+                emoType.equals(board.getGamePiece(x, y - 2).showType()))
+            return true;
+        else if (x >= 2 && emoType.equals(board.getGamePiece(x - 1, y).showType()) &&
+                emoType.equals(board.getGamePiece(x - 2, y).showType())) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -50,30 +58,30 @@ public class BoardPopulatorImpl implements BoardPopulator {
      * @return a subclass of AbstractGamePiece (AbstractGamePiece implements GamePiece interface)
      */
     @Override
-    public GamePiece generateGamePiece() {
-        GamePiece gp = null;
+    public AbstractGamePiece generateGamePiece(int x, int y) {
+        AbstractGamePiece emoticon = null;
         Random random = new Random();
         int value = random.nextInt(5);
         switch (value) {
             case 0:
-                gp = new AngryGamePiece();
+                emoticon = new AngryEmoticon(x, y);
                 break;
             case 1:
-                gp = new ConfusedGamePiece();
+                emoticon = new SurprisedEmoticon(x, y);
                 break;
             case 2:
-                gp = new ExcitedGamePiece();
+                emoticon = new EmbarrassedEmoticon(x, y);
                 break;
             case 3:
-                gp = new HappyGamePiece();
+                emoticon = new HappyEmoticon(x, y);
                 break;
             case 4:
-                gp = new SadGamePiece();
+                emoticon = new SadEmoticon(x, y);
                 break;
             default:
                 System.out.println("Error in BoardPopulatorImpl, generateGamePiece()");
                 break;
         }
-        return gp;
+        return emoticon;
     }
 }
