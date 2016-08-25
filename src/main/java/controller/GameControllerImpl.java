@@ -1,7 +1,7 @@
 package controller;
 
 import model.gameboard.*;
-import model.mockObjects.BoardPopulatorMock01;
+import model.mock_objects.BoardPopulatorMock01;
 import view.GameView;
 import view.GameViewImpl;
 

@@ -1,5 +1,7 @@
 package model.gameboard;
 
+import model.gamepieces.AbstractGamePiece;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -12,27 +14,23 @@ import java.util.LinkedList;
 public interface MatchFinder {
 
     /**
-     * Returns an ArrayList that contains a List/Lists of matching tiles on the board if
-     * they are present. If no matches are present, the returned ArrayList will hold
-     * an empty List.
+     * Returns an ArrayList that contains a List/Lists of matching GamePieces on the board if
+     * present. If no matches are present, the returned ArrayList will hold an empty List.
      *
-     * @param b the board to be checked for matching columns
-     * @return An ArrayList that holds either a List/Lists of matching columns, or an empty list
-     * if no matching columns are located on the board
+     * @param board the board to be checked for vertical matches
+     * @return An ArrayList that holds a List/Lists of vertical matches or an empty
+     * list if no vertical matches are located on the board
      */
-    ArrayList<LinkedList<Tile>> findMatchingColumns(Board b);
+    ArrayList<LinkedList<AbstractGamePiece>> findVerticalMatches(GameBoard board);
 
     /**
-     * Returns an ArrayList that contains a List/Lists of matching tiles on the board if
-     * they are present. If no matches are present, the returned ArrayList will hold
-     * an empty List.
+     * Returns an ArrayList that contains a List/Lists of matching GamePieces on the board if
+     * present. If no matches are present, the returned ArrayList will hold an empty List.
      *
-     * @param b the board to be checked for matching rows
-     * @return An ArrayList that holds either a List/Lists of matching rows, or an empty list
-     * if no matching rows are located on the board
+     * @param board the board to be checked for horizontal matches
+     * @return An ArrayList that holds either a List/Lists of horizontal matches or an empty
+     * list if no horizontal matches are located on the board
      */
-    ArrayList<LinkedList<Tile>> findMatchingRows(Board b);
-
-
+    ArrayList<LinkedList<AbstractGamePiece>> findHorizontalMatches(GameBoard board);
 
 }

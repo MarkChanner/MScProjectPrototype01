@@ -1,50 +1,44 @@
 package model.gameboard;
 
-import java.util.LinkedList;
+import model.gamepieces.AbstractGamePiece;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
- * Finds and returns an ArrayList that contains a List/Lists of rows or columns that has a
- * succession of tiles that contain a game piece of the same type.
+ * Finds and returns an ArrayList that contains a List/Lists of horizontal or vertical
+ * GamePiece matches
  *
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
 public class MatchFinderImpl implements MatchFinder {
 
+    private static final int ROW_START = 0;
+    private static final int COLUMN_TOP = 0;
+
     /**
-     * Starts at column 0, where a tile is added to the List, then proceeds up the column looking
-     * for matches, comparing each tile's game piece with the one on the tile last visited. Whilst
-     * the tile visited has the same type of game piece as the one on the previous tile, this tile
-     * is added to the list. When a tile is reached that has a different type game piece, or when
-     * the end of each column is reached, the List is checked. If the List contains 3 or more game pieces,
-     * this List is added to the ArrayList, which is returned after the entire board has been checked.
-     *
-     * @param board the board to be checked for matching columns
-     * @return An ArrayList that holds either a List/Lists of matching columns, or an empty list
-     * if no matching rows are located on the board
+     * {@inheritDoc}
      */
     @Override
-    public ArrayList<LinkedList<Tile>> findMatchingColumns(Board board) {
-        Tile[][] tiles = board.getTiles();
-        int rowSize = board.getRows();
-        int colSize = board.getCols();
+    public ArrayList<LinkedList<AbstractGamePiece>> findVerticalMatches(GameBoard board) {
+        int cols = board.getCols();
+        int columnBottom = (board.getRows() - 1);
+        LinkedList<AbstractGamePiece> consecutiveEmoticons = new LinkedList<>();
+        ArrayList<LinkedList<AbstractGamePiece>> bigList = new ArrayList<>();
+        AbstractGamePiece emo;
+        for (int x = ROW_START; x < cols; x++) {
+            consecutiveEmoticons.add(board.getGamePiece(x, columnBottom));
 
-        LinkedList<Tile> consecutivePieces = new LinkedList<>();
-        ArrayList<LinkedList<Tile>> bigList = new ArrayList<>();
-        Tile tile;
-        for (int col = 0; col < colSize; col++) {
-            consecutivePieces.add(tiles[colSize - 1][col]);
-
-            for (int row = (rowSize - 2); row >= 0; row--) {
-                tile = tiles[row][col];
-                if (!tile.getPieceType().equals(consecutivePieces.getLast().getPieceType())) {
-                    examineList(consecutivePieces, bigList);
-                    consecutivePieces = new LinkedList<>();
+            for (int y = (columnBottom - 1); y >= COLUMN_TOP; y--) {
+                emo = board.getGamePiece(x, y);
+                if (!emo.showType().equals(consecutiveEmoticons.getLast().showType())) {
+                    examineList(consecutiveEmoticons, bigList);
+                    consecutiveEmoticons = new LinkedList<>();
                 }
-                consecutivePieces.add(tile);
-                if (row == 0) {
-                    examineList(consecutivePieces, bigList);
-                    consecutivePieces = new LinkedList<>();
+                consecutiveEmoticons.add(emo);
+                if (y == COLUMN_TOP) {
+                    examineList(consecutiveEmoticons, bigList);
+                    consecutiveEmoticons = new LinkedList<>();
                 }
             }
         }
@@ -52,48 +46,52 @@ public class MatchFinderImpl implements MatchFinder {
     }
 
     /**
-     * Starts at the bottom of the board (rowSize - 1), where a tile is added to the List. Then travels across
-     * the row looking for matches, comparing each tile's game piece with the one on the tile last visited.
-     * Whilst the tile visited has the same type of game piece as the one on the previous tile, this tile
-     * is added to the list. When a tile is reached that has a different type game piece, or when
-     * the end of each row is reached, the List is checked. If the List contains 3 or more game pieces,
-     * this List is added to the ArrayList, which is returned after the entire board has been checked.
-     *
-     * @param board the board to be checked for matching rows
-     * @return An ArrayList that holds either a List/Lists of matching rows, or an empty list
-     * if no matching rows are located on the board
+     * {@inheritDoc}
      */
     @Override
-    public ArrayList<LinkedList<Tile>> findMatchingRows(Board board) {
-        Tile[][] tiles = board.getTiles();
-        int rowSize = board.getRows();
-        int colSize = board.getCols();
-        LinkedList<Tile> consecutiveTiles = new LinkedList<>();
-        ArrayList<LinkedList<Tile>> bigList = new ArrayList<>();
-        Tile tile;
+    public ArrayList<LinkedList<AbstractGamePiece>> findHorizontalMatches(GameBoard board) {
+        int cols = board.getCols();
+        int columnBottom = (board.getRows() - 1);
+        int rowEnd = cols - 1;
+        LinkedList<AbstractGamePiece> consecutiveEmoticons = new LinkedList<>();
+        ArrayList<LinkedList<AbstractGamePiece>> bigList = new ArrayList<>();
+        AbstractGamePiece emo;
+        for (int y = columnBottom; y >= COLUMN_TOP; y--) {
+            consecutiveEmoticons.add(board.getGamePiece(ROW_START, y));
 
-        for (int row = (rowSize - 1); row >= 0; row--) {
-            consecutiveTiles.add(tiles[row][0]);
-
-            for (int col = 1; col < colSize; col++) {
-                tile = tiles[row][col];
-                if (!tile.getPieceType().equals(consecutiveTiles.getLast().getPieceType())) {
-                    examineList(consecutiveTiles, bigList);
-                    consecutiveTiles = new LinkedList<>();
+            for (int x = (ROW_START + 1); x < cols; x++) {
+                emo = board.getGamePiece(x, y);
+                if (!(emo.showType().equals(consecutiveEmoticons.getLast().showType()))) {
+                    examineList(consecutiveEmoticons, bigList);
+                    consecutiveEmoticons = new LinkedList<>();
                 }
-                consecutiveTiles.add(tile);
-                if (col == colSize - 1) {
-                    examineList(consecutiveTiles, bigList);
-                    consecutiveTiles = new LinkedList<>();
+                consecutiveEmoticons.add(emo);
+                if (x == rowEnd) {
+                    examineList(consecutiveEmoticons, bigList);
+                    consecutiveEmoticons = new LinkedList<>();
                 }
             }
         }
         return bigList;
     }
 
-    private void examineList(LinkedList<Tile> consecutivePieces, ArrayList<LinkedList<Tile>> bigList) {
-        if (consecutivePieces.size() >= 3) {
-            bigList.add(consecutivePieces);
+    private void examineList(LinkedList<AbstractGamePiece> consecutiveEmotions, ArrayList<LinkedList<AbstractGamePiece>> bigList) {
+        if ((consecutiveEmotions.size() >= 3) && (allSameType(consecutiveEmotions))) {
+            bigList.add(consecutiveEmotions);
         }
+    }
+
+    private boolean allSameType(LinkedList<AbstractGamePiece> consecutiveEmoticons) {
+        String previousEmo = consecutiveEmoticons.getFirst().showType();
+        String nextEmo;
+        for (int i = 1; i < consecutiveEmoticons.size(); i++) {
+            nextEmo = consecutiveEmoticons.get(i).showType();
+            if (!nextEmo.equals(previousEmo)) {
+                return false;
+            } else {
+                previousEmo = nextEmo;
+            }
+        }
+        return true;
     }
 }
