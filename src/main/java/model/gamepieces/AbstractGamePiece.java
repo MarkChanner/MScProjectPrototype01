@@ -1,7 +1,5 @@
 package model.gamepieces;
 
-import model.GamePiece;
-
 /**
  * AbstractGamePiece to be subclassed by different game piece types. Implements the GamePiece interface.
  * Each GamePiece is passed as a String to the constructor (via super(type) which allows each method call to
@@ -9,38 +7,33 @@ import model.GamePiece;
  *
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public abstract class AbstractGamePiece implements GamePiece {
+public abstract class AbstractGamePiece {
 
     private String type;
-    private int[] coordinates;
+    private int x = -1;
+    private int y = -1;
 
-    public AbstractGamePiece(String t) {
-        type = t;
-        coordinates = new int[2];
-        coordinates[0] = -1;
-        coordinates[1] = -1;
+    public AbstractGamePiece(String type, int x, int y) {
+        this.type = type;
+        this.x = x;
+        this.y = y;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setCoordinates(int row, int column) {
-        coordinates[0] = row;
-        coordinates[1] = column;
+    public void setCoordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public abstract GamePiece retrieveGamePiece();
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String showType() {
         return type;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
 }

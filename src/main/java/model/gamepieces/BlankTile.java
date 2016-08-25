@@ -3,10 +3,10 @@ package model.gamepieces;
 /**
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public class SadEmoticon extends AbstractGamePiece {
+public class BlankTile extends AbstractGamePiece {
 
-    public SadEmoticon(int x, int y) {
-        super("SA", x, y);
+    public BlankTile(int x, int y) {
+        super("EMPTY", x, y);
     }
 
     /**
@@ -15,6 +15,7 @@ public class SadEmoticon extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "SAD";
+        return "EMPTY";
     }
+
 }

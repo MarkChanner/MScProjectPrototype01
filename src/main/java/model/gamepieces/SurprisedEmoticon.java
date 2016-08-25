@@ -3,10 +3,10 @@ package model.gamepieces;
 /**
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public class SadEmoticon extends AbstractGamePiece {
+public class SurprisedEmoticon extends AbstractGamePiece {
 
-    public SadEmoticon(int x, int y) {
-        super("SA", x, y);
+    public SurprisedEmoticon(int x, int y) {
+        super("SU", x, y);
     }
 
     /**
@@ -15,6 +15,6 @@ public class SadEmoticon extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "SAD";
+        return "SURPRISED";
     }
 }

@@ -1,22 +1,12 @@
 package model.gamepieces;
 
-import model.GamePiece;
-
 /**
- * @author Mark Channer
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public class AngryGamePiece extends AbstractGamePiece {
+public class AngryEmoticon extends AbstractGamePiece {
 
-    public AngryGamePiece() {
-        super("AN");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GamePiece retrieveGamePiece() {
-        return (this);
+    public AngryEmoticon(int x, int y) {
+        super("AN", x, y);
     }
 
     /**
@@ -25,7 +15,7 @@ public class AngryGamePiece extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "OOOOH, IT'S AN ANGRY FACE!";
+        return "ANGRY";
     }
 
 }

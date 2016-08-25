@@ -1,22 +1,12 @@
 package model.gamepieces;
 
-import model.GamePiece;
-
 /**
- * @author Mark Channer
+ * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public class HappyGamePiece extends AbstractGamePiece {
+public class HappyEmoticon extends AbstractGamePiece {
 
-    public HappyGamePiece() {
-        super("HA");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GamePiece retrieveGamePiece() {
-        return (this);
+    public HappyEmoticon(int x, int y) {
+        super("HA", x, y);
     }
 
     /**
@@ -25,7 +15,7 @@ public class HappyGamePiece extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "HEY HEY! IT'S A HAPPY FACE!!!!!!";
+        return "HAPPY";
     }
 
 }
