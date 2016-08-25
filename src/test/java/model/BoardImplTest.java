@@ -1,10 +1,10 @@
-package gameboard;
+package model;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Uses a BoardPopulatorMock01 to populate the board with in a predictable way for testing.

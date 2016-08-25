@@ -1,7 +1,5 @@
 package model;
 
-import gamepieces.GamePiece;
-
 /**
  * An implementation of the Tile interface. Implements all interface
  * methods. A GamePiece object

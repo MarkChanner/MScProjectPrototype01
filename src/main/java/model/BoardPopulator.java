@@ -1,7 +1,5 @@
 package model;
 
-import gamepieces.GamePiece;
-
 /**
  * Implementations of this interface are used to populate the Board with game pieces.
  * For testing purposes, an implementation can populate the board with a set layout,

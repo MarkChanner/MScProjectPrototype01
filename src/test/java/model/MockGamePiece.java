@@ -1,4 +1,4 @@
-package gamepieces;
+package model;
 
 /**
  * This game piece differs from others in that it takes a constructor which allows

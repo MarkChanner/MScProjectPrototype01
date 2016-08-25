@@ -1,4 +1,4 @@
-package gamepieces;
+package model;
 
 import org.junit.Test;
 

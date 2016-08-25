@@ -1,7 +1,5 @@
 package model;
 
-import gamepieces.GamePiece;
-
 /**
  * Each Tile represents a square on the board. It provides methods for
  * accessing the location of the Tile's position, and for retrieving
