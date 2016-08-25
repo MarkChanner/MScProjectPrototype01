@@ -1,4 +1,6 @@
-package model;
+package model.gameboard;
+
+import model.gamepieces.AbstractGamePiece;
 
 /**
  * Implementations of this interface are used to populate the Board with game pieces.
@@ -22,6 +24,6 @@ public interface BoardPopulator {
      *
      * @return a game piece
      */
-    GamePiece generateGamePiece();
+    AbstractGamePiece generateGamePiece();
 
 }
