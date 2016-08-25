@@ -1,22 +1,13 @@
 package model.gameboard;
 
+import model.gamepieces.AbstractGamePiece;
+
 /**
- * The board on which the game will take place. This interface provides methods that all
- * the user to know the board size by retrieving the number of columns and rows it has.
- * It can also retrieve the Tiles that make up the board and. The Tiles may hold GamePiece
- * references. The board's contenBts can be printed out with the displayBoard method, and
- * certain tiles can be selected by the user by way of the selectTile method.
+ * This interface provides methods to set and manipulate the game pieces
  *
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public interface Board {
-
-    /**
-     * Returns the number of rows in this board
-     *
-     * @return the number of rows that the board has
-     */
-    int getRows();
+public interface GameBoard {
 
     /**
      * Returns the number of columns in this board
@@ -26,26 +17,29 @@ public interface Board {
     int getCols();
 
     /**
-     * Returns the number of columns in this board
+     * Returns the number of rows in this board
      *
-     * @return the number of columns that the board has
-     * @throws null pointer exception if tiles not initialized
+     * @return the number of rows that the board has
      */
-    Tile[][] getTiles();
+    int getRows();
 
     /**
-     * Prints out the board
+     * Sets the given game piece at the position given by the x and y values
      */
-    void displayBoard();
+    void setGamePiece(int x, int y, AbstractGamePiece gamePiece);
+
 
     /**
-     * Chooses a Tile on the board. Based on if it is the
-     * first or second Tile to be selected, implemented
-     * results may differ
+     * Returns the game piece located at the given coordinates
      *
-     * @param row the location of the row in the array
-     * @param column the location of the column in the array
+     * @return a subclass of AbstractGamePiece
      */
-    void selectTile(int row, int column);
+    AbstractGamePiece getGamePiece(int x, int y);
+
+    /**
+     * swaps the game pieces in the given selection
+     *
+     */
+    void swap(Selections selections);
 
 }
