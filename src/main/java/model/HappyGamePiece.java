@@ -1,4 +1,4 @@
-package gamepieces;
+package model;
 
 /**
  * @author Mark Channer

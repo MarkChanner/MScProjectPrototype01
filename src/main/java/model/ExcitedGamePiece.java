@@ -1,12 +1,12 @@
-package gamepieces;
+package model;
 
 /**
  * @author Mark Channer
  */
-public class NoGamePiece extends AbstractGamePiece {
+public class ExcitedGamePiece extends AbstractGamePiece {
 
-    public NoGamePiece() {
-        super("XX");
+    public ExcitedGamePiece() {
+        super("EX");
     }
 
     /**
@@ -23,7 +23,7 @@ public class NoGamePiece extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "THERE IS NO GAME PIECE HERE";
+        return "WEEEEEE! IT'S AN EXCITED FACE!!!!!";
     }
 
 }

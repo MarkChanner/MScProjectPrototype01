@@ -1,10 +1,10 @@
-package gameboard;
+package model;
 
 /**
  * The board on which the game will take place. This interface provides methods that all
  * the user to know the board size by retrieving the number of columns and rows it has.
  * It can also retrieve the Tiles that make up the board and. The Tiles may hold GamePiece
- * references. The board's contents can be printed out with the displayBoard method, and
+ * references. The board's contenBts can be printed out with the displayBoard method, and
  * certain tiles can be selected by the user by way of the selectTile method.
  *
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project

@@ -1,12 +1,12 @@
-package gamepieces;
+package model;
 
 /**
  * @author Mark Channer
  */
-public class ExcitedGamePiece extends AbstractGamePiece {
+public class SadGamePiece extends AbstractGamePiece {
 
-    public ExcitedGamePiece() {
-        super("EX");
+    public SadGamePiece() {
+        super("SA");
     }
 
     /**
@@ -23,7 +23,6 @@ public class ExcitedGamePiece extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "WEEEEEE! IT'S AN EXCITED FACE!!!!!";
+        return "OH, IT'S A SAD FACE!!!!!";
     }
-
 }

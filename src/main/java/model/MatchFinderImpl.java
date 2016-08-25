@@ -1,4 +1,4 @@
-package gameboard;
+package model;
 
 import java.util.LinkedList;
 import java.util.ArrayList;

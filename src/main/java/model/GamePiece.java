@@ -1,4 +1,4 @@
-package gamepieces;
+package model;
 
 /**
  * A game piece, such as an emoticon for a tile matching game.
@@ -29,3 +29,4 @@ public interface GamePiece {
     String showType();
 
 }
+

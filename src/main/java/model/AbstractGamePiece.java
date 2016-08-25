@@ -1,4 +1,4 @@
-package gamepieces;
+package model;
 
 /**
  * AbstractGamePiece to be subclassed by different game piece types. Implements the GamePiece interface.
