@@ -25,7 +25,6 @@ public class BoardPopulatorImpl implements BoardPopulator {
      */
     @Override
     public void populate(GameBoard board) {
-        System.out.println("In populate(board)");
         int cols = board.getCols();
         int rows = board.getRows();
         AbstractGamePiece emoticon;
