@@ -5,6 +5,13 @@ package model.gameboard;
  */
 public interface GameModel {
 
-    void handleSelection(int row, int column);
+    /**
+     * Receives the x and y coordinates of the user selection.
+     *
+     * @param x the x value of user selection
+     * @param y the y value of user selection
+     */
+    void handleSelection(int x, int y);
 
 }
+

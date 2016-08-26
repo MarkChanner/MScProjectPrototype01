@@ -2,7 +2,6 @@ package model.gameboard;
 
 import controller.GameController;
 import model.gamepieces.AbstractGamePiece;
-import model.gamepieces.BlankTile;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,20 +12,19 @@ import java.util.List;
  */
 public class GameModelImpl implements GameModel {
 
-    private static final int ROW_START = 0;
-    private static final int COLUMN_TOP = 0;
-
     private GameController controller;
     private GameBoard board;
-    private MatchFinder matchHandler;
+    private MatchFinder matchFinder;
     private BoardPopulator populator;
+    private SwapHandler swapHandler;
     private Selections selections;
 
-    public GameModelImpl(GameController controller, GameBoard board, MatchFinder matchHandler, BoardPopulator populator) {
+    public GameModelImpl(GameController controller, GameBoard board, MatchFinder matchFinder, BoardPopulator populator) {
         this.controller = controller;
         this.board = board;
-        this.matchHandler = matchHandler;
+        this.matchFinder = matchFinder;
         this.populator = populator;
+        this.swapHandler = new SwapHandlerImpl(board);
         this.selections = new SelectionsImpl();
     }
 
@@ -45,6 +43,13 @@ public class GameModelImpl implements GameModel {
         }
     }
 
+    /**
+     * A private method that is called from handleSelection(int, int) if the user has already
+     * made a first selection. The method checks that the second selection is valid in relation
+     * to the first selection (it cannot be the same as the first selection, but must be horizontally
+     * or vertically adjacent to it.) If valid, it will swap the selected emoticons and then check the
+     * board for matches.
+     */
     private void handleSecondSelection(int x, int y) {
         controller.notify("Selection 2: (" + board.getGamePiece(x, y).showType() + ")");
         selections.setSelection02(x, y);
@@ -55,7 +60,7 @@ public class GameModelImpl implements GameModel {
             controller.notify("Selections are not adjacent. Last selection is now first selection.");
             selections.secondSelectionBecomesFirstSelection();
         } else {
-            board.swap(selections);
+            swapHandler.swap(selections);
             controller.notify("Selections swapped.");
             controller.displayBoard();
             checkForMatches();
@@ -64,24 +69,25 @@ public class GameModelImpl implements GameModel {
     }
 
     /**
-     * A private method that examines the board and returns any matches.
-     * It does this by calling methods within the MatchFinder class
+     * A private method that uses a MatchFinder object to locate matches on the board.
+     * If matches on the board are present, the handleMatches method is called. If no
+     * matches are present, the previously swapped emoticons are swapped back.
      */
     private void checkForMatches() {
-        ArrayList<LinkedList<AbstractGamePiece>> matchingX = matchHandler.findVerticalMatches(board);
-        ArrayList<LinkedList<AbstractGamePiece>> matchingY = matchHandler.findHorizontalMatches(board);
+        ArrayList<LinkedList<AbstractGamePiece>> matchingX = matchFinder.findVerticalMatches(board);
+        ArrayList<LinkedList<AbstractGamePiece>> matchingY = matchFinder.findHorizontalMatches(board);
         if (matchesFound(matchingX, matchingY)) {
             handleMatches(matchingX, matchingY);
         } else {
             controller.notify("No matching Lines. Swapping pieces back to previous position");
-            board.swap(selections);
+            swapHandler.swap(selections);
             controller.displayBoard();
         }
     }
 
     /**
      * This method handles the bulk of the requirements for handling a match on the board. It
-     * does this within a loop until the manipulated board no longer contains matches.
+     * does this within a loop until no more matches are present on the board.
      *
      * @param matchingX An ArrayList containing a LinkedList of matching vertical GamePieces
      * @param matchingY An ArrayList containing a LinkedList of matching horizontal GamePieces
@@ -89,14 +95,14 @@ public class GameModelImpl implements GameModel {
     private void handleMatches(ArrayList<LinkedList<AbstractGamePiece>> matchingX, ArrayList<LinkedList<AbstractGamePiece>> matchingY) {
         do {
             giveReward(matchingX, matchingY);
-            removeFromBoard(matchingX);
-            removeFromBoard(matchingY);
-            shiftIconsDown();
-            insertNewIcons();
+            swapHandler.removeFromBoard(matchingX);
+            swapHandler.removeFromBoard(matchingY);
+            swapHandler.shiftIconsDown();
+            swapHandler.insertNewIcons(populator);
             controller.notify("Board updated.");
             controller.displayBoard();
-            matchingX = matchHandler.findVerticalMatches(board);
-            matchingY = matchHandler.findHorizontalMatches(board);
+            matchingX = matchFinder.findVerticalMatches(board);
+            matchingY = matchFinder.findHorizontalMatches(board);
         } while (matchesFound(matchingX, matchingY));
     }
 
@@ -115,23 +121,6 @@ public class GameModelImpl implements GameModel {
     }
 
     /**
-     * A private method to remove matches from that board
-     *
-     * @param matches an ArrayList containing a LinkedList of matches
-     */
-    private void removeFromBoard(ArrayList<LinkedList<AbstractGamePiece>> matches) {
-        for (List<AbstractGamePiece> gamePieces : matches) {
-            for (AbstractGamePiece gp : gamePieces) {
-                int x = gp.getX();
-                int y = gp.getY();
-                if (!(board.getGamePiece(x, y).showType().equals("EMPTY"))) {
-                    board.setGamePiece(x, y, new BlankTile(x, y));
-                }
-            }
-        }
-    }
-
-    /**
      * A private method that indicates if the board has matches or not
      *
      * @param matchingX An ArrayList containing a LinkedList of matching vertical GamePieces
@@ -146,50 +135,12 @@ public class GameModelImpl implements GameModel {
      * A private method that brings game pieces down from above rows to fill
      * any empty spaces on the board
      */
-    private void shiftIconsDown() {
-        int cols = board.getCols();
-        int rows = board.getRows();
 
-        for (int x = 0; x < cols; x++) {
-            for (int y = (rows - 1); y >= 0; y--) {
-                if (board.getGamePiece(x, y).showType().equals("EMPTY")) {
-                    /* get any pieces higher up the column and, if found, plug hole with it */
-                    int tempRow = y;
-                    while ((tempRow >= 0) && (board.getGamePiece(x, tempRow).showType().equals("EMPTY"))) {
-                        tempRow--;
-                    }
-                    if (tempRow >= 0) {
-                        AbstractGamePiece gp = board.getGamePiece(x, tempRow);
-                        board.setGamePiece(x, y, gp);
-                        /* sets previous tile to be empty */
-                        board.setGamePiece(x, tempRow, new BlankTile(x, y));
-                    }
-                }
-            }
-        }
-    }
 
     /**
-     * A private method that generates new game pieces and places them
-     * in vacant places on the board
-     */
-    private void insertNewIcons() {
-        int cols = board.getCols();
-        int columnBottom = board.getRows() - 1;
-        for (int x = ROW_START; x < cols; x++) {
-            for (int y = columnBottom; y >= COLUMN_TOP; y--) {
-                if (board.getGamePiece(x, y).showType().equals("EMPTY")) {
-                    AbstractGamePiece gp = populator.generateGamePiece(x, y);
-                    board.setGamePiece(x, y, gp);
-                }
-            }
-        }
-    }
-
-    /**
-     * temporary method for printing output of matching rows and matching columns
-     * @param str message to print
-     * @param matches matches to print coordinates of
+     * A temporary method for printing output of matching rows and matching columns
+     * @param str the message to print
+     * @param matches the matches to print the coordinates of
      */
     private void printList(String str, ArrayList<LinkedList<AbstractGamePiece>> matches) {
         if (!(matches.isEmpty())) {

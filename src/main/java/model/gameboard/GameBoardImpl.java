@@ -7,8 +7,6 @@ import model.gamepieces.AbstractGamePiece;
  */
 public class GameBoardImpl implements GameBoard {
 
-    private static final int X = 0;
-    private static final int Y = 1;
     private int cols;
     private int rows;
     private AbstractGamePiece[][] emoticons;
@@ -25,14 +23,26 @@ public class GameBoardImpl implements GameBoard {
         emoticons = new AbstractGamePiece[cols][rows];
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getCols() {
         return cols;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getRows() {
         return rows;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setGamePiece(int x, int y, AbstractGamePiece gamePiece) {
         if (x >= cols || y >= rows) {
             throw new ArrayIndexOutOfBoundsException("setGamePiece arg larger than board");
@@ -42,20 +52,14 @@ public class GameBoardImpl implements GameBoard {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public AbstractGamePiece getGamePiece(int x, int y) {
         if (x >= cols || y >= rows) {
             throw new ArrayIndexOutOfBoundsException("getGamePiece arg larger than board");
         }
         return emoticons[x][y];
     }
-
-    @Override
-    public void swap(Selections selections) {
-        int[] sel1 = selections.getSelection01();
-        int[] sel2 = selections.getSelection02();
-        AbstractGamePiece tempPiece = getGamePiece(sel1[X], sel1[Y]);
-        setGamePiece(sel1[X], sel1[Y], getGamePiece(sel2[X], sel2[Y]));
-        setGamePiece(sel2[X], sel2[Y], tempPiece);
-    }
-
 }

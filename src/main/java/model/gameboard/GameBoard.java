@@ -36,10 +36,4 @@ public interface GameBoard {
      */
     AbstractGamePiece getGamePiece(int x, int y);
 
-    /**
-     * swaps the game pieces in the given selection
-     *
-     */
-    void swap(Selections selections);
-
 }
