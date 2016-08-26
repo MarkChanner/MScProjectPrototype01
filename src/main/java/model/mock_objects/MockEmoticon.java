@@ -17,6 +17,6 @@ public class MockEmoticon extends AbstractGamePiece {
      * @return a String, giving the type of the game piece
      */
     public String toString() {
-        return "Mock Faces";
+        return "MOCK";
     }
 }
