@@ -20,7 +20,7 @@ public class GameControllerImpl implements GameController {
     }
 
     public void initialize() {
-        GameBoard board = new GameBoardImpl(10,10);
+        GameBoard board = new GameBoardImpl();
         BoardPopulator populator = new BoardPopulatorMock01();
         populator.populate(board);
         this.gameView = new GameViewImpl(board);
@@ -40,7 +40,7 @@ public class GameControllerImpl implements GameController {
             gameView.displayWithoutNewLine("Coordinates: ");
             userInput = input.nextLine();
 
-            if (hasNotQuit(userInput)) {
+            if (!hasQuit(userInput)) {
                 coordinates = userInput.split(",");
 
                 if (isValidInput(coordinates)) {
@@ -52,8 +52,7 @@ public class GameControllerImpl implements GameController {
                 }
 
             }
-        } while (hasNotQuit(userInput));
-
+        } while (!hasQuit(userInput));
     }
 
     @Override
@@ -76,8 +75,8 @@ public class GameControllerImpl implements GameController {
         return true;
     }
 
-    private boolean hasNotQuit(String userInput) {
-        return (!userInput.equals("q"));
+    private boolean hasQuit(String userInput) {
+        return (userInput.toLowerCase().equals("q"));
     }
 
 }

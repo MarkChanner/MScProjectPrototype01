@@ -75,12 +75,26 @@ public class MatchFinderImpl implements MatchFinder {
         return bigList;
     }
 
-    private void examineList(LinkedList<AbstractGamePiece> consecutiveEmotions, ArrayList<LinkedList<AbstractGamePiece>> bigList) {
-        if ((consecutiveEmotions.size() >= 3) && (allSameType(consecutiveEmotions))) {
-            bigList.add(consecutiveEmotions);
+    /**
+     * A private method to check that the consecutiveEmoticons list contains
+     * more than 3 matching emoticons that are all of the same type
+     *
+     * @param consecutiveEmoticons the list of emoticons to be checked
+     * @param bigList to add any non-empty consecutiveEmoticons lists to
+     */
+    private void examineList(LinkedList<AbstractGamePiece> consecutiveEmoticons, ArrayList<LinkedList<AbstractGamePiece>> bigList) {
+        if ((consecutiveEmoticons.size() >= 3) && (allSameType(consecutiveEmoticons))) {
+            bigList.add(consecutiveEmoticons);
         }
     }
 
+    /**
+     * A private metohd to check that the given consecutiveEmoticons list contains
+     * only emoticons of the same type
+     *
+     * @param consecutiveEmoticons the list of emoticons to be checked
+     * @return true if the consecutiveEmoticons list are all of the same type
+     */
     private boolean allSameType(LinkedList<AbstractGamePiece> consecutiveEmoticons) {
         String previousEmo = consecutiveEmoticons.getFirst().showType();
         String nextEmo;

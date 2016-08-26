@@ -17,7 +17,7 @@ public interface MatchFinder {
      * Returns an ArrayList that contains a List/Lists of matching GamePieces on the board if
      * present. If no matches are present, the returned ArrayList will hold an empty List.
      *
-     * @param board the board to be checked for vertical matches
+     * @param board the GameBoard implementation to be checked for vertical matches
      * @return An ArrayList that holds a List/Lists of vertical matches or an empty
      * list if no vertical matches are located on the board
      */
@@ -27,7 +27,7 @@ public interface MatchFinder {
      * Returns an ArrayList that contains a List/Lists of matching GamePieces on the board if
      * present. If no matches are present, the returned ArrayList will hold an empty List.
      *
-     * @param board the board to be checked for horizontal matches
+     * @param board the GameBoard implementation to be checked for horizontal matches
      * @return An ArrayList that holds either a List/Lists of horizontal matches or an empty
      * list if no horizontal matches are located on the board
      */
