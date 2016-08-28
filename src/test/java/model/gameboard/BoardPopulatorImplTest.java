@@ -33,7 +33,7 @@ public class BoardPopulatorImplTest {
     @Test
     public void testGenerateGamePiece() throws Exception {
         String EMPTY = "EMPTY";
-        AbstractGamePiece gamePiece = populator.generateGamePiece(0, 3);
+        AbstractGamePiece gamePiece = populator.createRandomGamePiece(0, 3);
         assertThat(gamePiece, instanceOf(AbstractGamePiece.class));
         assertNotEquals(EMPTY, gamePiece.showType());
     }

@@ -24,6 +24,6 @@ public interface BoardPopulator {
      *
      * @return a game piece
      */
-    AbstractGamePiece generateGamePiece(int x, int y);
+    AbstractGamePiece createRandomGamePiece(int x, int y);
 
 }

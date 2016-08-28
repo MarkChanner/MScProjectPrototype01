@@ -32,7 +32,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
             for (int y = COLUMN_TOP; y < rows; y++) {
 
                 do {
-                    emoticon = generateGamePiece(x, y);
+                    emoticon = createRandomGamePiece(x, y);
                 } while (gamePieceTypeCausesMatch(x, y, board, emoticon.showType()));
 
                 board.setGamePiece(x, y, emoticon);
@@ -57,7 +57,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
      * @return a subclass of AbstractGamePiece (AbstractGamePiece implements GamePiece interface)
      */
     @Override
-    public AbstractGamePiece generateGamePiece(int x, int y) {
+    public AbstractGamePiece createRandomGamePiece(int x, int y) {
         AbstractGamePiece emoticon = null;
         Random random = new Random();
         int value = random.nextInt(5);
@@ -78,7 +78,7 @@ public class BoardPopulatorImpl implements BoardPopulator {
                 emoticon = new SadEmoticon(x, y);
                 break;
             default:
-                System.out.println("Error in BoardPopulatorImpl, generateGamePiece()");
+                System.out.println("Error in BoardPopulatorImpl, createRandomGamePiece()");
                 break;
         }
         return emoticon;
