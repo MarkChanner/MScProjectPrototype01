@@ -87,7 +87,7 @@ public class SwapHandlerImpl implements SwapHandler {
         for (int x = ROW_START; x < cols; x++) {
             for (int y = columnBottom; y >= COLUMN_TOP; y--) {
                 if (board.getGamePiece(x, y).showType().equals("EMPTY")) {
-                    AbstractGamePiece gp = populator.generateGamePiece(x, y);
+                    AbstractGamePiece gp = populator.createRandomGamePiece(x, y);
                     board.setGamePiece(x, y, gp);
                 }
             }
