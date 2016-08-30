@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
 /**
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public class SwapHandlerImplTest {
+public class BoardManipulatorTest {
 
     private GameBoard defaultSizedBoard;
     private BoardPopulator populator;
-    private SwapHandler swapHandler;
+    private BoardManipulator swapHandler;
     private String EMPTY = "EMPTY";
 
     @Before
@@ -29,7 +29,7 @@ public class SwapHandlerImplTest {
         defaultSizedBoard = new GameBoardImpl();
         populator = new BoardPopulatorMock01();
         populator.populate(defaultSizedBoard);
-        swapHandler = new SwapHandlerImpl(defaultSizedBoard);
+        swapHandler = new BoardManipulatorImpl(defaultSizedBoard);
     }
 
     @After
@@ -156,7 +156,7 @@ public class SwapHandlerImplTest {
 
         // Tests that when the BlankTile at (0,4) is found,
         // emoticons above are shifted down to fill the BlankTile.
-        swapHandler.shiftIconsDown();
+        swapHandler.lowerGamePieces();
         assertEquals("00", defaultSizedBoard.getGamePiece(0, 1).showType());
         assertEquals("HA", defaultSizedBoard.getGamePiece(0, 2).showType());
         assertEquals("HA", defaultSizedBoard.getGamePiece(0, 3).showType());

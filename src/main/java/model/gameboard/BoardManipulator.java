@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public interface SwapHandler {
+public interface BoardManipulator {
 
     /**
      * swaps the game pieces in the given selection
@@ -27,7 +27,7 @@ public interface SwapHandler {
     /**
      * Shifts game pieces down the board
      */
-    void shiftIconsDown();
+    void lowerGamePieces();
 
     /**
      * Generates new game pieces and places them

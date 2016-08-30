@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Mark Channer for first prototype of Birkbeck MSc Computer Science final project
  */
-public class SwapHandlerImpl implements SwapHandler {
+public class BoardManipulatorImpl implements BoardManipulator {
 
     private static final int ROW_START = 0;
     private static final int COLUMN_TOP = 0;
@@ -18,7 +18,7 @@ public class SwapHandlerImpl implements SwapHandler {
     private static final int Y = 1;
     private GameBoard board;
 
-    public SwapHandlerImpl(GameBoard board) {
+    public BoardManipulatorImpl(GameBoard board) {
         this.board = board;
     }
 
@@ -54,23 +54,23 @@ public class SwapHandlerImpl implements SwapHandler {
      * {@inheritDoc}
      */
     @Override
-    public void shiftIconsDown() {
+    public void lowerGamePieces() {
         int cols = board.getCols();
         int rows = board.getRows();
-
+        int runnerY;
         for (int x = 0; x < cols; x++) {
             for (int y = (rows - 1); y >= 0; y--) {
                 if (board.getGamePiece(x, y).showType().equals("EMPTY")) {
                     /* get any pieces higher up the column and, if found, plug hole with it */
-                    int tempRow = y;
-                    while ((tempRow >= 0) && (board.getGamePiece(x, tempRow).showType().equals("EMPTY"))) {
-                        tempRow--;
+                    runnerY = y;
+                    while ((runnerY >= 0) && (board.getGamePiece(x, runnerY).showType().equals("EMPTY"))) {
+                        runnerY--;
                     }
-                    if (tempRow >= 0) {
-                        AbstractGamePiece gp = board.getGamePiece(x, tempRow);
+                    if (runnerY >= 0) {
+                        AbstractGamePiece gp = board.getGamePiece(x, runnerY);
                         board.setGamePiece(x, y, gp);
                         /* sets previous tile to be empty */
-                        board.setGamePiece(x, tempRow, new BlankTile(x, y));
+                        board.setGamePiece(x, runnerY, new BlankTile(x, y));
                     }
                 }
             }

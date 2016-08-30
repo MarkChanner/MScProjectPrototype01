@@ -16,7 +16,7 @@ public class GameModelImpl implements GameModel {
     private GameBoard board;
     private MatchFinder matchFinder;
     private BoardPopulator populator;
-    private SwapHandler swapHandler;
+    private BoardManipulator swapHandler;
     private Selections selections;
 
     public GameModelImpl(GameController controller, GameBoard board, MatchFinder matchFinder, BoardPopulator populator) {
@@ -24,7 +24,7 @@ public class GameModelImpl implements GameModel {
         this.board = board;
         this.matchFinder = matchFinder;
         this.populator = populator;
-        this.swapHandler = new SwapHandlerImpl(board);
+        this.swapHandler = new BoardManipulatorImpl(board);
         this.selections = new SelectionsImpl();
     }
 
@@ -97,7 +97,7 @@ public class GameModelImpl implements GameModel {
             giveReward(matchingX, matchingY);
             swapHandler.removeFromBoard(matchingX);
             swapHandler.removeFromBoard(matchingY);
-            swapHandler.shiftIconsDown();
+            swapHandler.lowerGamePieces();
             swapHandler.insertNewIcons(populator);
             controller.notify("Board updated.");
             controller.displayBoard();
